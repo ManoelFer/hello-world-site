@@ -8,9 +8,11 @@ Landing page do **Hello World** — estúdio de software (web, mobile, desktop e
 
 Página estática de arquivo único: todo o site (React, fontes JetBrains Mono/Inter, estilos e conteúdo) está embutido no próprio `index.html`. Não há build, dependências nem chamadas de rede em runtime — basta abrir o arquivo ou servi-lo por HTTP.
 
+Layout responsivo: um breakpoint em `max-width: 800px` empilha o hero, os stats e os cards, e reduz a navegação ao toggle PT/EN + CTA. Também respeita `prefers-reduced-motion`.
+
 ```
 hello-world-site/
-├── index.html   # site completo (self-contained, ~311 KB)
+├── index.html   # site completo (self-contained)
 ├── .nojekyll    # desativa o Jekyll no GitHub Pages
 └── README.md
 ```
