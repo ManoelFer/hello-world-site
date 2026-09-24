@@ -12,7 +12,6 @@
   },
   "workers_dev": true,
   "preview_urls": true,
-  // Descomentar SÓ depois da zona helloworldestudio.com.br ficar "Active" na Cloudflare
-  // (ver o passo a passo do cutover de DNS no README):
-  // "routes": [{ "pattern": "helloworldestudio.com.br", "custom_domain": true }]
+  // Domínio próprio. A zona helloworldestudio.com.br está ativa na Cloudflare.
+  "routes": [{ "pattern": "helloworldestudio.com.br", "custom_domain": true }],
 }
