@@ -10,7 +10,7 @@
     // Rota inexistente serve o 404.html com status 404.
     "not_found_handling": "404-page",
   },
-  "workers_dev": true,
+  "workers_dev": false,
   "preview_urls": true,
   // Domínio próprio. A zona helloworldestudio.com.br está ativa na Cloudflare.
   "routes": [{ "pattern": "helloworldestudio.com.br", "custom_domain": true }],
