@@ -1,0 +1,107 @@
+---
+import LegalArticle from "@components/common/LegalArticle.astro"
+import { site } from "@data/site"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { waLink } from "@lib/whatsapp"
+
+// Mesmo conteúdo de /privacidade/, em inglês. Manter os dois em sincronia.
+const analytics = Boolean(site.umamiWebsiteId)
+const controller = site.legalName
+  ? `${site.name} (${site.legalName})`
+  : site.name
+const dataRequest = waLink(
+  "Hi! I have a request about my personal data (LGPD).",
+)
+---
+
+<BaseLayout
+  lang="en"
+  routeKey="privacy"
+  title="Privacy Policy | Hello World Estúdio"
+  description="How the Hello World Estúdio website handles personal data: WhatsApp contact, cookieless usage metrics and your rights under Brazil's LGPD."
+>
+  <LegalArticle
+    title="Privacy Policy"
+    updated="Last updated: September 22, 2026"
+  >
+    <h2>Who we are</h2>
+    <p>
+      <strong>{controller}</strong>, Brazilian company registration (CNPJ){" "}
+      {site.cnpj}, based in {site.address.locality} ({site.address.region}),
+      Brazil, is the controller of the personal data processed through this
+      website. Contact us on WhatsApp at{" "}
+      <a href={dataRequest} target="_blank" rel="noopener">
+        {site.whatsapp.display}
+      </a>
+      .
+    </p>
+
+    <h2>What data we process and why</h2>
+    <ul>
+      <li>
+        <strong>WhatsApp contact.</strong> When you reach out, we receive the
+        data you choose to send, such as your name, phone number and a
+        description of your project. We use it to reply, prepare proposals and,
+        if we work together, deliver the service. Legal basis: pre-contractual
+        steps and performance of a contract (LGPD, art. 7, V). WhatsApp is a
+        Meta service, which processes conversation data under its own privacy
+        policy.
+      </li>
+      {analytics ? (
+        <li>
+          <strong>Usage metrics.</strong> We use Umami, a metrics tool that does
+          not use cookies or identify you individually. It records aggregated
+          data such as pages visited, referrer, device type and clicks on
+          contact buttons, so we can understand what works on the website. Legal
+          basis: legitimate interest (LGPD, art. 7, IX).
+        </li>
+      ) : (
+        <li>
+          <strong>Usage metrics.</strong> This website does not use analytics or
+          visitor tracking tools.
+        </li>
+      )}
+      <li>
+        <strong>Hosting.</strong> The website is hosted on Cloudflare, which
+        processes technical request data (such as IP address and browser) to
+        deliver pages and protect the site against attacks. Legal basis:
+        legitimate interest (LGPD, art. 7, IX).
+      </li>
+    </ul>
+
+    <h2>Cookies</h2>
+    <p>
+      This website does not use advertising or tracking cookies. Cloudflare may
+      set strictly necessary cookies for security.
+    </p>
+
+    <h2>Sharing</h2>
+    <p>
+      We do not sell or share your data for marketing purposes. It only goes
+      through the providers listed above, as far as each service requires.
+    </p>
+
+    <h2>How long we keep it</h2>
+    <p>
+      We keep conversations and proposals for as long as needed for negotiation
+      and service delivery, and for the period required by legal obligations.
+    </p>
+
+    <h2>Your rights</h2>
+    <p>
+      Under the LGPD (art. 18), you may request confirmation of processing,
+      access, correction, anonymization, portability and deletion of your data,
+      as well as information about sharing and withdrawal of consent. Just
+      message us on WhatsApp at{" "}
+      <a href={dataRequest} target="_blank" rel="noopener">
+        {site.whatsapp.display}
+      </a>
+      .
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      This policy may be updated. The date at the top shows the current version.
+    </p>
+  </LegalArticle>
+</BaseLayout>

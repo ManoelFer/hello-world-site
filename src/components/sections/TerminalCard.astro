@@ -1,0 +1,70 @@
+---
+import type { Lang } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+---
+
+<!-- Decorativo: escondido de leitores de tela. -->
+<div
+  class="relative overflow-hidden rounded-2xl border border-line bg-surface-2 shadow-[0_34px_90px_-34px_rgba(0,0,0,.85)]"
+  aria-hidden="true"
+>
+  <div class="flex items-center gap-[7px] border-b border-line-soft bg-surface-3 px-4 py-[13px]">
+    <span class="size-[11px] rounded-full bg-danger"></span>
+    <span class="size-[11px] rounded-full bg-warn"></span>
+    <span class="size-[11px] rounded-full bg-accent"></span>
+    <span class="ml-2 font-mono text-xs text-subtle">hello-world · zsh</span>
+  </div>
+  <div class="px-[22px] py-6 font-mono text-[12.5px] leading-[2] text-term desk:text-[13.5px]">
+    {lang === "pt" ? (
+      <>
+        <div>
+          <span class="text-accent">$</span> whoami
+        </div>
+        <div class="text-label">› hello world estúdio · desde 2020</div>
+        <div>
+          <span class="text-accent">$</span> ./criar-site --para{" "}
+          <span class="text-warn">"seu negócio"</span>
+        </div>
+        <div class="text-label">
+          layout sob medida ········ <span class="text-accent">ok</span>
+        </div>
+        <div class="text-label">
+          google + whatsapp ········ <span class="text-accent">ok</span>
+        </div>
+        <div>
+          <span class="text-accent">$</span> deploy{" "}
+          <span class="text-accent">✓</span>{" "}
+          <span class="text-text">no ar</span>
+          <span class="ml-1.5 inline-block h-4 w-[9px] bg-accent align-[-3px] motion-safe:animate-blink"></span>
+        </div>
+      </>
+    ) : (
+      <>
+        <div>
+          <span class="text-accent">$</span> whoami
+        </div>
+        <div class="text-label">› software studio · since 2020</div>
+        <div>
+          <span class="text-accent">$</span> ./ship --idea{" "}
+          <span class="text-warn">"your product"</span>
+        </div>
+        <div class="text-label">
+          building ················ <span class="text-accent">done</span>
+        </div>
+        <div class="text-label">
+          running tests ··········· <span class="text-accent">32 passed</span>
+        </div>
+        <div>
+          <span class="text-accent">$</span> deploy{" "}
+          <span class="text-accent">✓</span> <span class="text-text">live</span>
+          <span class="ml-1.5 inline-block h-4 w-[9px] bg-accent align-[-3px] motion-safe:animate-blink"></span>
+        </div>
+      </>
+    )}
+  </div>
+</div>

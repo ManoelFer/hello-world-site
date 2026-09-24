@@ -1,0 +1,29 @@
+---
+import AreaAtendimento from "@components/sections/AreaAtendimento.astro"
+import ComoFunciona from "@components/sections/ComoFunciona.astro"
+import CtaFinal from "@components/sections/CtaFinal.astro"
+import Diferenciais from "@components/sections/Diferenciais.astro"
+import Faq from "@components/sections/Faq.astro"
+import Hero from "@components/sections/Hero.astro"
+import Pacotes from "@components/sections/Pacotes.astro"
+import Sobre from "@components/sections/Sobre.astro"
+import SoftwareTeaser from "@components/sections/SoftwareTeaser.astro"
+import BaseLayout from "@layouts/BaseLayout.astro"
+---
+
+<BaseLayout
+  lang="pt"
+  routeKey="home"
+  title="Criação de Sites em Goiânia e Região | Hello World Estúdio"
+  description="Sites profissionais e software sob medida para empresas de Goiânia, Aparecida de Goiânia e Trindade. Preço fechado e orçamento pelo WhatsApp."
+>
+  <Hero lang="pt" />
+  <Diferenciais />
+  <Pacotes />
+  <ComoFunciona lang="pt" />
+  <AreaAtendimento />
+  <SoftwareTeaser />
+  <Sobre lang="pt" />
+  <Faq />
+  <CtaFinal lang="pt" />
+</BaseLayout>

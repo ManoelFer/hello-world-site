@@ -1,0 +1,46 @@
+---
+import { type RouteKey, switchPath } from "@i18n/routes"
+import { type Lang, t } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+  routeKey?: RouteKey
+}
+
+const { lang, routeKey } = Astro.props
+// Página com par vai para o par; página só-PT vai para a home EN (e vice-versa). Sem redirect automático por idioma.
+const options = [
+  { code: "pt" as const, label: "PT", hreflang: "pt-BR" },
+  { code: "en" as const, label: "EN", hreflang: "en" },
+]
+---
+
+<div
+  role="group"
+  aria-label={t(lang).langLabel}
+  class="inline-flex items-center gap-[5px] rounded-[9px] border border-line bg-surface px-[11px] py-[7px] font-mono text-xs"
+>
+  {options.map((o, i) => (
+    <>
+      {i > 0 && (
+        <span class="opacity-30" aria-hidden="true">
+          /
+        </span>
+      )}
+      {o.code === lang ? (
+        <span class="font-bold text-accent" aria-current="true">
+          {o.label}
+        </span>
+      ) : (
+        <a
+          href={switchPath(routeKey, o.code)}
+          hreflang={o.hreflang}
+          lang={o.hreflang}
+          class="text-muted no-underline hover:text-text"
+        >
+          {o.label}
+        </a>
+      )}
+    </>
+  ))}
+</div>

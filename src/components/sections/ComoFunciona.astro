@@ -1,0 +1,44 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import { steps } from "@data/process"
+import type { Lang } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const pt = {
+  id: "como-funciona",
+  kicker: "como funciona",
+  title: "Do primeiro contato ao site no ar",
+  sub: "Um processo simples, com você por dentro de cada etapa.",
+}
+const en: typeof pt = {
+  id: "process",
+  kicker: "how we work",
+  title: "From first call to production",
+  sub: "A simple process, with you in the loop at every step.",
+}
+const c = { pt, en }[lang]
+---
+
+<Section id={c.id} border>
+  <SectionHeading kicker={c.kicker} title={c.title} sub={c.sub} />
+  <ol class="grid gap-[18px] sm:grid-cols-2 desk:grid-cols-4">
+    {steps.map((s, i) => (
+      <li
+        data-reveal
+        class="rounded-[14px] border border-line bg-surface-2 px-[26px] py-7"
+      >
+        <div class="mb-[18px] font-mono text-[13px] text-accent">
+          {String(i + 1).padStart(2, "0")} {i < steps.length - 1 ? "->" : "✓"}
+        </div>
+        <h3 class="mb-2.5 text-[19px] font-semibold">{s.t[lang]}</h3>
+        <p class="text-[14.5px] leading-relaxed text-muted">{s.d[lang]}</p>
+      </li>
+    ))}
+  </ol>
+</Section>

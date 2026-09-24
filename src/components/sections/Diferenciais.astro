@@ -1,0 +1,52 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+
+const items = [
+  {
+    icon: "»",
+    t: "Rápido de verdade",
+    d: "Processo enxuto e comunicação direta: sem burocracia entre a ideia e o site no ar.",
+  },
+  {
+    icon: "R$",
+    t: "Preço fechado",
+    d: "Você sabe quanto vai pagar antes de começar. Sem cobrança por hora nem surpresa no fim.",
+  },
+  {
+    icon: "⌖",
+    t: "Suporte local",
+    d: "Estúdio em Aparecida de Goiânia, colado em Goiânia e perto de Trindade. Atendimento presencial ou online.",
+  },
+  {
+    icon: "{ }",
+    t: "Feito sob medida",
+    d: "Nada de template genérico: layout e textos pensados para o seu negócio e o seu cliente.",
+  },
+]
+---
+
+<Section id="diferenciais" border>
+  <SectionHeading
+    kicker="diferenciais"
+    title="Um site que trabalha pelo seu negócio"
+    sub="Nada de template genérico nem orçamento que muda no meio do caminho."
+  />
+  <ul class="grid gap-[18px] sm:grid-cols-2 desk:grid-cols-4">
+    {items.map((item) => (
+      <li
+        data-reveal
+        class="rounded-[14px] border border-line bg-surface-2 px-[26px] py-7 transition-colors hover:border-accent/45"
+      >
+        <div
+          class="mb-[18px] font-mono text-lg font-bold text-accent"
+          aria-hidden="true"
+        >
+          {item.icon}
+        </div>
+        <h3 class="mb-2.5 text-[19px] font-semibold">{item.t}</h3>
+        <p class="text-[14.5px] leading-relaxed text-muted">{item.d}</p>
+      </li>
+    ))}
+  </ul>
+</Section>

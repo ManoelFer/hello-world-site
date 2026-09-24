@@ -1,0 +1,102 @@
+---
+import Logo from "@components/common/Logo.astro"
+import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+import LangSwitch from "@components/layout/LangSwitch.astro"
+import { homePath, type RouteKey } from "@i18n/routes"
+import { type Lang, t } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+  routeKey?: RouteKey
+  waMessage: string
+}
+
+const { lang, routeKey, waMessage } = Astro.props
+const s = t(lang)
+const home = homePath[lang]
+---
+
+<header class="sticky top-0 z-20 border-b border-line bg-bg/85 backdrop-blur-md">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-[18px] py-[13px] desk:px-10 desk:py-[18px]">
+    <Logo href={home} />
+
+    <nav
+      aria-label={s.navLabel}
+      class="hidden items-center gap-[26px] text-sm text-muted desk:flex"
+    >
+      {s.nav.map((n) => (
+        <a
+          href={`${home}#${n.hash}`}
+          class="no-underline transition-colors hover:text-accent"
+        >
+          {n.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3.5">
+      <LangSwitch lang={lang} routeKey={routeKey} />
+      <!-- Wrapper: `hidden` direto no botão perde para o `inline-flex` base do ButtonLink. -->
+      <div class="hidden desk:block">
+        <WhatsAppButton
+          message={waMessage}
+          placement="header"
+          label={s.ctaHeader}
+        />
+      </div>
+      <button
+        type="button"
+        popovertarget="menu"
+        class="inline-flex size-10 items-center justify-center rounded-[10px] border border-line bg-surface text-text desk:hidden"
+        aria-label={s.menu}
+      >
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menu mobile: Popover API (fecha com clique fora e Esc, sem JS). -->
+  <nav
+    id="menu"
+    popover
+    aria-label={s.navLabel}
+    class="inset-auto top-[70px] right-3 left-3 m-0 w-auto rounded-2xl border border-line-strong bg-surface-2 p-2 text-text shadow-2xl backdrop:bg-black/50"
+  >
+    <ul class="flex flex-col">
+      {s.nav.map((n) => (
+        <li>
+          <a
+            href={`${home}#${n.hash}`}
+            class="block rounded-xl px-4 py-3 text-base no-underline hover:bg-surface"
+          >
+            {n.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="p-2">
+      <WhatsAppButton
+        class="w-full"
+        message={waMessage}
+        placement="menu"
+        label={s.ctaWhatsApp}
+      />
+    </div>
+  </nav>
+  <script is:inline>
+    document.getElementById("menu")?.addEventListener("click", (e) => {
+      if (e.target instanceof Element && e.target.closest("a"))
+        e.currentTarget.hidePopover()
+    })
+  </script>
+</header>

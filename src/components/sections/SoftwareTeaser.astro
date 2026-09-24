@@ -1,0 +1,36 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+import { services } from "@data/services"
+// Fase 2: link para /software-sob-medida/.
+
+const items = services.filter((s) => s.id !== "web")
+---
+
+<Section id="software" border>
+  <SectionHeading
+    kicker="além de sites"
+    title="Software sob medida, apps e consultoria"
+    sub="Quando o projeto vai além de um site, a Hello World também desenvolve sistemas, aplicativos, APIs e integrações com IA."
+  />
+  <ul class="grid gap-3.5 sm:grid-cols-2 desk:grid-cols-3">
+    {items.map((s) => (
+      <li
+        data-reveal
+        class="rounded-[14px] border border-line bg-surface-2 px-6 py-5"
+      >
+        <h3 class="mb-1.5 text-[17px] font-semibold">{s.t.pt}</h3>
+        <p class="text-sm leading-relaxed text-muted">{s.d.pt}</p>
+      </li>
+    ))}
+  </ul>
+  <div class="mt-8">
+    <WhatsAppButton
+      variant="ghost"
+      message="Olá! Quero conversar sobre um software sob medida."
+      placement="software"
+      label="Conversar sobre um software"
+    />
+  </div>
+</Section>

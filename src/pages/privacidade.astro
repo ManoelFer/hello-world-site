@@ -1,0 +1,110 @@
+---
+import LegalArticle from "@components/common/LegalArticle.astro"
+import { site } from "@data/site"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { waLink } from "@lib/whatsapp"
+
+// O texto se ajusta sozinho ao que o site realmente usa (ex.: Umami só aparece se estiver configurado).
+const analytics = Boolean(site.umamiWebsiteId)
+const controller = site.legalName
+  ? `${site.name} (${site.legalName})`
+  : site.name
+// Canal para pedidos do titular (LGPD): WhatsApp, o único canal de contato do site.
+const dataRequest = waLink(
+  "Olá! Tenho uma solicitação sobre os meus dados pessoais (LGPD).",
+)
+---
+
+<BaseLayout
+  lang="pt"
+  routeKey="privacy"
+  title="Política de Privacidade | Hello World Estúdio"
+  description="Como o site da Hello World Estúdio trata dados pessoais: contato por WhatsApp, métricas de acesso sem cookies e os seus direitos pela LGPD."
+>
+  <LegalArticle
+    title="Política de Privacidade"
+    updated="Última atualização: 22 de setembro de 2026"
+  >
+    <h2>Quem somos</h2>
+    <p>
+      <strong>{controller}</strong>, CNPJ {site.cnpj}, com sede em{" "}
+      {site.address.locality} ({site.address.region}), é a controladora dos
+      dados pessoais tratados por meio deste site. Contato pelo WhatsApp{" "}
+      <a href={dataRequest} target="_blank" rel="noopener">
+        {site.whatsapp.display}
+      </a>
+      .
+    </p>
+
+    <h2>Quais dados tratamos e por quê</h2>
+    <ul>
+      <li>
+        <strong>Contato por WhatsApp.</strong> Quando você fala com a gente,
+        recebemos os dados que você decide enviar, como nome, telefone e a
+        descrição do seu projeto. Usamos esses dados para responder, preparar
+        propostas e, se fecharmos negócio, prestar o serviço. Base legal:
+        procedimentos preliminares e execução de contrato (art. 7º, V, da LGPD).
+        O WhatsApp é um serviço da Meta, que trata os dados das conversas
+        conforme a política de privacidade dela.
+      </li>
+      {analytics ? (
+        <li>
+          <strong>Métricas de acesso.</strong> Usamos o Umami, uma ferramenta de
+          métricas que não usa cookies nem identifica você individualmente. Ela
+          registra dados agregados, como páginas visitadas, origem da visita,
+          tipo de dispositivo e cliques nos botões de contato, para entendermos
+          o que funciona no site. Base legal: legítimo interesse (art. 7º, IX).
+        </li>
+      ) : (
+        <li>
+          <strong>Métricas de acesso.</strong> Este site não usa ferramentas de
+          métricas nem de rastreamento de visitantes.
+        </li>
+      )}
+      <li>
+        <strong>Hospedagem.</strong> O site é hospedado na Cloudflare, que
+        processa dados técnicos das requisições (como endereço IP e navegador)
+        para entregar as páginas e proteger o site contra ataques. Base legal:
+        legítimo interesse (art. 7º, IX).
+      </li>
+    </ul>
+
+    <h2>Cookies</h2>
+    <p>
+      Este site não usa cookies de publicidade nem de rastreamento. A Cloudflare
+      pode usar cookies estritamente necessários para a segurança do site.
+    </p>
+
+    <h2>Compartilhamento</h2>
+    <p>
+      Não vendemos nem compartilhamos os seus dados para fins de marketing. Eles
+      só passam pelos fornecedores citados acima, na medida necessária para cada
+      serviço.
+    </p>
+
+    <h2>Por quanto tempo guardamos</h2>
+    <p>
+      Mantemos conversas e propostas enquanto forem necessárias para a
+      negociação e para a prestação do serviço, e pelo prazo exigido por
+      obrigações legais.
+    </p>
+
+    <h2>Seus direitos</h2>
+    <p>
+      Pela LGPD (art. 18), você pode pedir a confirmação do tratamento, o
+      acesso, a correção, a anonimização, a portabilidade e a eliminação dos
+      seus dados, além de informações sobre compartilhamento e a revogação de
+      consentimentos. Basta enviar uma mensagem pelo WhatsApp{" "}
+      <a href={dataRequest} target="_blank" rel="noopener">
+        {site.whatsapp.display}
+      </a>
+      .
+    </p>
+
+    <h2>Alterações</h2>
+    <p>
+      Esta política pode ser atualizada. A data no topo indica a versão em
+      vigor.
+    </p>
+  </LegalArticle>
+</BaseLayout>

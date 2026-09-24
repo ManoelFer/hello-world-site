@@ -1,0 +1,32 @@
+---
+import Section from "@components/common/Section.astro"
+import { tech } from "@data/tech"
+import type { Lang } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const c = {
+  pt: { kicker: "ferramentas", title: "Tecnologias que usamos no dia a dia" },
+  en: { kicker: "tools", title: "Technologies we use every day" },
+}[lang]
+---
+
+<Section border innerClass="py-14 desk:py-[66px]">
+  <p class="mb-3 font-mono text-[13px] text-accent">// {c.kicker}</p>
+  <h2
+    data-reveal
+    class="mb-[26px] text-[22px] font-bold tracking-[-0.02em] desk:text-[26px]"
+  >
+    {c.title}
+  </h2>
+  <ul data-reveal class="flex flex-wrap gap-2.5">
+    {tech.map((tk) => (
+      <li class="rounded-[9px] border border-line bg-surface-2 px-[15px] py-[9px] font-mono text-[13px] text-term">
+        {tk}
+      </li>
+    ))}
+  </ul>
+</Section>

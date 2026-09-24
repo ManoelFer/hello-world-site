@@ -1,0 +1,53 @@
+---
+import { site } from "@data/site"
+import { alternates, type RouteKey } from "@i18n/routes"
+import { type Lang, ogLocale } from "@i18n/ui"
+import { absoluteUrl } from "@lib/seo"
+
+interface Props {
+  title: string
+  description: string
+  lang: Lang
+  routeKey?: RouteKey
+  ogImage?: string
+  ogImageAlt?: string
+  noindex?: boolean
+}
+
+const { title, description, lang, routeKey, noindex = false } = Astro.props
+const ogImage =
+  Astro.props.ogImage ?? (lang === "en" ? "/og/en.jpg" : "/og/default.jpg")
+const ogImageAlt = Astro.props.ogImageAlt ?? title
+
+// Canonical sempre absoluto e com barra final (trailingSlash: 'always').
+const canonical = absoluteUrl(Astro.url.pathname)
+const alts = alternates(routeKey)
+const otherLang: Lang = lang === "pt" ? "en" : "pt"
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{noindex ? (
+  <meta name="robots" content="noindex" />
+) : (
+  <link rel="canonical" href={canonical} />
+)}
+{alts.map((a) => (
+  <link rel="alternate" hreflang={a.hreflang} href={absoluteUrl(a.path)} />
+))}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={ogLocale[lang]} />
+{alts.length > 0 && (
+  <meta property="og:locale:alternate" content={ogLocale[otherLang]} />
+)}
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={absoluteUrl(ogImage)} />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogImageAlt} />
+<meta name="twitter:card" content="summary_large_image" />

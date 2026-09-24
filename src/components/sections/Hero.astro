@@ -1,0 +1,82 @@
+---
+import ButtonLink from "@components/common/ButtonLink.astro"
+import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+import TerminalCard from "@components/sections/TerminalCard.astro"
+import { type Lang, t } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const pt = {
+  id: "topo",
+  kicker: "Estúdio de software em Aparecida de Goiânia, desde 2020",
+  sub: "Criação de sites e software sob medida para pequenas e médias empresas, com preço fechado e atendimento de perto. Do primeiro rascunho ao site no ar.",
+  primary: "Pedir orçamento no WhatsApp",
+  secondary: "Ver pacotes",
+  secondaryHref: "#pacotes",
+  note: "Atendemos Goiânia, Aparecida de Goiânia, Trindade e região",
+}
+const en: typeof pt = {
+  id: "top",
+  kicker: "Software studio from Brazil, since 2020",
+  sub: "We design and build web, mobile, desktop and backend systems, with AI where it makes sense. From the first sketch to deploy, right beside you.",
+  primary: "Start a project",
+  secondary: "See what we do",
+  secondaryHref: "#services",
+  note: "Working remotely with clients anywhere · GMT-3",
+}
+const c = { pt, en }[lang]
+---
+
+<!-- Hero é o LCP: nada aqui leva data-reveal. -->
+<section id={c.id} class="relative overflow-hidden">
+  <div
+    class="dot-grid pointer-events-none absolute inset-0"
+    aria-hidden="true"
+  ></div>
+  <div class="relative mx-auto grid max-w-6xl items-center gap-[30px] px-5 pt-9 pb-[52px] desk:grid-cols-[1.05fr_.95fr] desk:gap-14 desk:px-10 desk:pt-[88px] desk:pb-[78px]">
+    <div>
+      <p class="mb-[26px] inline-flex items-center gap-[9px] rounded-full border border-accent/20 bg-accent/8 px-[13px] py-[7px] font-mono text-[12.5px] text-accent">
+        <span
+          class="size-[7px] rounded-full bg-accent shadow-[0_0_9px_var(--color-accent)]"
+          aria-hidden="true"
+        ></span>
+        {c.kicker}
+      </p>
+      <h1 class="mb-[22px] text-[34px] leading-[1.08] font-bold tracking-[-0.025em] desk:text-[55px] desk:leading-[1.05]">
+        {lang === "pt" ? (
+          <>
+            Sites profissionais para o seu negócio{" "}
+            <span class="font-mono text-accent">decolar</span> em Goiânia e
+            região
+          </>
+        ) : (
+          <>
+            From <span class="font-mono text-accent">“Hello, World”</span> to
+            your product, live.
+          </>
+        )}
+      </h1>
+      <p class="mb-[34px] max-w-[40ch] text-[17px] leading-[1.62] text-soft desk:text-lg">
+        {c.sub}
+      </p>
+      <div class="flex flex-wrap gap-3.5">
+        <WhatsAppButton
+          size="lg"
+          arrow
+          message={t(lang).waDefault}
+          placement="hero"
+          label={c.primary}
+        />
+        <ButtonLink variant="ghost" size="lg" href={c.secondaryHref}>
+          {c.secondary}
+        </ButtonLink>
+      </div>
+      <p class="mt-6 font-mono text-[12.5px] text-label">› {c.note}</p>
+    </div>
+    <TerminalCard lang={lang} />
+  </div>
+</section>
