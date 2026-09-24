@@ -1,3 +1,4 @@
+import { credentials } from "@data/credenciais"
 import { cities, site } from "@data/site"
 
 const ORG_ID = `${site.url}/#empresa`
@@ -37,6 +38,27 @@ export function organizationNode(): Node {
       "@type": "Person",
       name: site.founder.name,
       sameAs: [site.founder.linkedin],
+      alumniOf: credentials
+        .filter((c) => c.category === "degree")
+        .map((c) => ({
+          "@type": "CollegeOrUniversity",
+          name: c.issuer.name,
+          url: c.issuer.url,
+          ...(c.issuer.wikipedia ? { sameAs: c.issuer.wikipedia } : {}),
+        })),
+      hasCredential: credentials.map((c) => ({
+        "@type": "EducationalOccupationalCredential",
+        name: c.name.pt,
+        credentialCategory: c.category,
+        recognizedBy: {
+          "@type":
+            c.category === "degree" ? "CollegeOrUniversity" : "Organization",
+          name: c.issuer.name,
+          url: c.issuer.url,
+        },
+        ...(c.verifyUrl ? { url: c.verifyUrl } : {}),
+        ...(c.expires ? { expires: c.expires } : {}),
+      })),
     },
     ...(site.sameAs.length ? { sameAs: site.sameAs } : {}),
     knowsLanguage: ["pt-BR", "en"],

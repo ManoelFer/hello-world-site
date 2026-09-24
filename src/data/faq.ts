@@ -29,6 +29,6 @@ export const faq: FaqItem[] = [
   },
   {
     q: "Vocês atendem só em Goiânia?",
-    a: "Atendemos Goiânia, Aparecida de Goiânia, Trindade e toda a região metropolitana, presencialmente ou online. Projetos de outras cidades também são bem-vindos, de forma remota.",
+    a: "Atendemos Goiânia, Aparecida de Goiânia, Trindade e toda a região metropolitana. Todo o atendimento é online, pelo WhatsApp e por videochamada, então projetos de outras cidades são atendidos do mesmo jeito.",
   },
 ]

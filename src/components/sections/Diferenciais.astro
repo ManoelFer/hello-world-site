@@ -1,25 +1,31 @@
 ---
+import { Image } from "astro:assets"
+
+import daquiDeGoias from "@assets/diferenciais/daqui-de-goias.svg"
+import feitoSobMedida from "@assets/diferenciais/feito-sob-medida.svg"
+import precoFechado from "@assets/diferenciais/preco-fechado.svg"
+import rapidoDeVerdade from "@assets/diferenciais/rapido-de-verdade.svg"
 import Section from "@components/common/Section.astro"
 import SectionHeading from "@components/common/SectionHeading.astro"
 
 const items = [
   {
-    icon: "»",
+    image: rapidoDeVerdade,
     t: "Rápido de verdade",
     d: "Processo enxuto e comunicação direta: sem burocracia entre a ideia e o site no ar.",
   },
   {
-    icon: "R$",
+    image: precoFechado,
     t: "Preço fechado",
     d: "Você sabe quanto vai pagar antes de começar. Sem cobrança por hora nem surpresa no fim.",
   },
   {
-    icon: "⌖",
-    t: "Suporte local",
-    d: "Estúdio em Aparecida de Goiânia, colado em Goiânia e perto de Trindade. Atendimento presencial ou online.",
+    image: daquiDeGoias,
+    t: "Daqui de Goiás",
+    d: "Estúdio de Aparecida de Goiânia, colado em Goiânia e perto de Trindade. Atendimento 100% online, pelo WhatsApp e por videochamada.",
   },
   {
-    icon: "{ }",
+    image: feitoSobMedida,
     t: "Feito sob medida",
     d: "Nada de template genérico: layout e textos pensados para o seu negócio e o seu cliente.",
   },
@@ -36,16 +42,21 @@ const items = [
     {items.map((item) => (
       <li
         data-reveal
-        class="rounded-[14px] border border-line bg-surface-2 px-[26px] py-7 transition-colors hover:border-accent/45"
+        class="group overflow-hidden rounded-[14px] border border-line bg-surface-2 transition-colors hover:border-accent/45"
       >
-        <div
-          class="mb-[18px] font-mono text-lg font-bold text-accent"
-          aria-hidden="true"
-        >
-          {item.icon}
+        <!-- Ilustração decorativa: o título já diz do que se trata -->
+        <div class="overflow-hidden border-b border-line">
+          <Image
+            src={item.image}
+            alt=""
+            format="svg"
+            class="aspect-16/10 h-auto w-full object-cover transition duration-700 motion-safe:group-hover:scale-105"
+          />
         </div>
-        <h3 class="mb-2.5 text-[19px] font-semibold">{item.t}</h3>
-        <p class="text-[14.5px] leading-relaxed text-muted">{item.d}</p>
+        <div class="px-[26px] pt-6 pb-7">
+          <h3 class="mb-2.5 text-[19px] font-semibold">{item.t}</h3>
+          <p class="text-[14.5px] leading-relaxed text-muted">{item.d}</p>
+        </div>
       </li>
     ))}
   </ul>

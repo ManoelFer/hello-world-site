@@ -66,7 +66,7 @@ Cada página principal deve mirar 1-2 dessas variações, sem repetir a mesma co
 | # | Seção | Conteúdo / Copy-guia | CTA |
 |---|---|---|---|
 | 1 | **Hero** | Headline: "Sites profissionais para o seu negócio decolar em Goiânia e região". Subheadline: "Prontos em até 10 dias, com preço justo para pequenas e médias empresas." | Botão WhatsApp fixo |
-| 2 | **Diferenciais** | 3-4 ícones: Rápido, Preço fechado, Suporte local, Feito sob medida (não template genérico) | — |
+| 2 | **Diferenciais** | 3-4 ícones: Rápido, Preço fechado, Daqui de Goiás (atendimento 100% online), Feito sob medida (não template genérico) | — |
 | 3 | **Pacotes** | Cards resumidos: Landing Page / Institucional / Loja Virtual, com preço a partir de e link para `/pacotes` | "Ver todos os pacotes" |
 | 4 | **Portfólio** | 3-6 cases (prints ou mockups), com nome do negócio e cidade (reforça sinal local) | "Ver mais projetos" |
 | 5 | **Depoimentos** | Prova social — mesmo 2-3 depoimentos reais já ajudam muito | — |

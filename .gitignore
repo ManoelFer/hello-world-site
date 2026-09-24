@@ -13,6 +13,7 @@ dist/
 
 # logs
 npm-debug.log*
+yarn-error.log
 
 # relatórios locais do Lighthouse CI
 .lighthouseci/

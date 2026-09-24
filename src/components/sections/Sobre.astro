@@ -1,5 +1,7 @@
 ---
 import Section from "@components/common/Section.astro"
+import { credentials } from "@data/credenciais"
+import { site } from "@data/site"
 import type { Lang } from "@i18n/ui"
 
 interface Props {
@@ -12,23 +14,29 @@ const pt = {
   id: "sobre",
   kicker: "sobre",
   title: "Gente que gosta de resolver problemas com código.",
-  body: "A Hello World nasceu em 2020 com uma ideia simples: transformar boas ideias em software que funciona. Hoje, de Aparecida de Goiânia (GO), trabalhamos perto do cliente, do primeiro rascunho ao que vai pro ar, com clareza, qualidade e prazos honestos.",
+  body: "A Hello World nasceu em 2020 com uma ideia simples: transformar boas ideias em software que funciona. Hoje, de Aparecida de Goiânia (GO), trabalhamos 100% online e lado a lado com o cliente, do primeiro rascunho ao que vai pro ar, com clareza, qualidade e prazos honestos.",
   points: [
     "Comunicação direta, sem juridiquês nem enrolação",
     "Código limpo, testado e sustentável",
     "Entregas em prazos honestos e previsíveis",
   ],
+  credentialsTitle: `Formação e certificações de ${site.founder.name}, fundador`,
+  verify: "Verificar no Credly",
+  newTab: "(abre em nova aba)",
 }
 const en: typeof pt = {
   id: "about",
   kicker: "about",
   title: "People who like solving problems with code.",
-  body: "Hello World started in 2020 with a simple idea: turn good ideas into software that works. Based in Aparecida de Goiânia, Brazil, we work close to our clients, from the first sketch to production, with clarity, quality and honest deadlines.",
+  body: "Hello World started in 2020 with a simple idea: turn good ideas into software that works. Based in Aparecida de Goiânia, Brazil, we work fully online and side by side with our clients, from the first sketch to production, with clarity, quality and honest deadlines.",
   points: [
     "Direct communication, no jargon, no runaround",
     "Clean, tested, maintainable code",
     "Honest, predictable delivery dates",
   ],
+  credentialsTitle: `Education and certifications of ${site.founder.name}, founder`,
+  verify: "Verify on Credly",
+  newTab: "(opens in a new tab)",
 }
 const c = { pt, en }[lang]
 ---
@@ -47,6 +55,35 @@ const c = { pt, en }[lang]
       {c.title}
     </h2>
     <p class="text-[16.5px] leading-[1.72] text-soft">{c.body}</p>
+    <h3 class="mt-9 mb-4 font-mono text-[13px] text-label">
+      {c.credentialsTitle}
+    </h3>
+    <ul class="grid gap-3">
+      {credentials.map((cred) => (
+        <li class="rounded-[14px] border border-line bg-surface-2 px-5 py-4">
+          <p class="text-[15.5px] leading-snug font-semibold text-point">
+            {cred.name[lang]}
+          </p>
+          <p class="mt-1 text-sm text-muted">
+            {`${cred.issuer.name} · ${cred.year}`}
+          </p>
+          {cred.verifyUrl && (
+            <a
+              href={cred.verifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-11 items-center gap-1.5 text-[15px] font-semibold text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              <span>
+                {c.verify}
+                <span class="sr-only">{`: ${cred.name[lang]} ${c.newTab}`}</span>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
   </div>
   <ul
     data-reveal

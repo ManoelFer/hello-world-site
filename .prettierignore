@@ -3,6 +3,6 @@ dist/
 .wrangler/
 node_modules/
 public/
-package-lock.json
+yarn.lock
 docs/
 .lighthouseci/

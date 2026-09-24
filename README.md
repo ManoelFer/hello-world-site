@@ -15,17 +15,17 @@ Site do **Hello World Estúdio**: criação de sites e software sob medida em Go
 
 Requer Node 24.16+ (o `.node-version` fixa a versão exata usada no Workers Builds e no CI).
 
-> Use o servidor do Astro (`npm run dev` → http://localhost:4321). O Live Server do VS Code (porta 5500) não entende o Astro: ele só serve arquivos estáticos da raiz.
+> Use o servidor do Astro (`yarn dev` → http://localhost:4321). O Live Server do VS Code (porta 5500) não entende o Astro: ele só serve arquivos estáticos da raiz.
 
 ```bash
-npm install
-npm run dev       # http://localhost:4321
-npm run build     # checagem de tipos + build em dist/
-npm run preview   # serve dist/ com as mesmas regras da produção (http://localhost:8787)
-npm run lint      # ESLint (lint:fix corrige)
-npm run format    # Prettier (format:check só confere)
-npm run knip      # código e dependências não usados
-npm run seo       # confere o dist/ contra as regras de SEO (depois do build)
+yarn
+yarn dev          # http://localhost:4321
+yarn build        # checagem de tipos + build em dist/
+yarn preview      # serve dist/ com as mesmas regras da produção (http://localhost:8787)
+yarn lint         # ESLint (lint:fix corrige)
+yarn format       # Prettier (format:check só confere)
+yarn knip         # código e dependências não usados
+yarn seo          # confere o dist/ contra as regras de SEO (depois do build)
 ```
 
 ## Onde editar
@@ -46,7 +46,7 @@ A configuração é feita uma vez no painel da Cloudflare:
 
 1. **Workers & Pages → Create → Import a repository** e escolha este repositório.
 2. O nome do Worker precisa ser `helloworldestudio`, igual ao `name` do `wrangler.jsonc`.
-3. Comando de build: `npm run build`. Comando de deploy: `npx wrangler deploy`.
+3. Comando de build: `yarn build`. Comando de deploy: `yarn wrangler deploy`.
 4. Ative os builds de branches que não são de produção. Cada PR ganha uma URL de preview. As URLs `*.workers.dev` saem com `noindex`, pelo `public/_headers`.
 
 Depois disso, cada push na `main` publica o site.

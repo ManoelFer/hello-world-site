@@ -1,6 +1,6 @@
 // @ts-check
 // Confere o build (./dist) contra as regras de .claude/rules/seo.md.
-// Uso: npm run build && npm run seo. Sai com código 1 se alguma regra falhar.
+// Uso: yarn build && yarn seo. Sai com código 1 se alguma regra falhar.
 import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { join, relative } from "node:path"
 
