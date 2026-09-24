@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content"
+
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+
+// Lista os artigos publicados. Sem nenhum publicado, a seção não aparece
+// (e cada artigo novo já nasce com link de entrada, sem virar página órfã).
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+)
+---
+
+{posts.length > 0 && (
+  <Section id="artigos" border>
+    <SectionHeading kicker="artigos" title="Para ler antes de começar" />
+    <ul class="grid gap-[18px] desk:grid-cols-2">
+      {posts.map((post) => (
+        <li
+          data-reveal
+          class="rounded-[14px] border border-line bg-surface-2 px-[26px] py-7 transition-colors hover:border-accent/45"
+        >
+          <h3 class="mb-2.5 text-[19px] font-semibold">
+            <a
+              href={`/blog/${post.id}/`}
+              class="hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              {post.data.title}
+            </a>
+          </h3>
+          <p class="text-[14.5px] leading-relaxed text-muted">
+            {post.data.description}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </Section>
+)}

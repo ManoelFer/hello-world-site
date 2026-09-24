@@ -1,9 +1,10 @@
 ---
+import ButtonLink from "@components/common/ButtonLink.astro"
 import Section from "@components/common/Section.astro"
 import SectionHeading from "@components/common/SectionHeading.astro"
 import WhatsAppButton from "@components/common/WhatsAppButton.astro"
 import { services } from "@data/services"
-// Fase 2: link para /software-sob-medida/.
+import { softwarePath } from "@data/software"
 
 const items = services.filter((s) => s.id !== "web")
 ---
@@ -25,7 +26,10 @@ const items = services.filter((s) => s.id !== "web")
       </li>
     ))}
   </ul>
-  <div class="mt-8">
+  <div class="mt-8 flex flex-wrap gap-3.5">
+    <ButtonLink href={softwarePath}>
+      Desenvolvimento de software em Goiânia
+    </ButtonLink>
     <WhatsAppButton
       variant="ghost"
       message="Olá! Quero conversar sobre um software sob medida."

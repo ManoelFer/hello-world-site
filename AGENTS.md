@@ -42,6 +42,8 @@ Passo a passo completo em [`organizacao-do-claude-md.md`](.claude/rules/organiza
 - **Identidade visual:** tokens da marca no `@theme` de `src/styles/global.css` (`bg-bg`, `text-muted`, `border-line`, `text-accent`...). Fontes Space Grotesk e JetBrains Mono pela Fonts API do Astro (`astro.config.mjs`), baixadas no build e mapeadas para `--font-sans`/`--font-mono` via `@theme inline`.
 - **Imagens de compartilhamento:** JPGs estáticos em `public/og/` (1200×630, menos de 300 KB, para a prévia do WhatsApp).
 - **Portfólio e depoimentos:** só com casos reais e autorizados. Os cases ficam em `src/data/portfolio.ts` (seção `Portfolio`, nas duas homes). Os exemplos "ilustrativos" antigos foram retirados de propósito.
+- **Foco de palavra-chave por página:** a home mira "criação de sites em Goiânia" e `/desenvolvimento-de-software-goiania/` mira "desenvolvimento de software em Goiânia". Não repita um termo na outra página (canibalização). A página de software é só PT e aparece no menu, no teaser da home e no rodapé.
+- **Blog:** content collection em `src/content/blog/`, só PT, sem página `/blog/` por enquanto. Os posts publicados aparecem na seção "Artigos" da página de software, que é o link de entrada deles. Rascunho de IA fica com `draft: true` até o autor revisar.
 - **Páginas por cidade (fase 2):** seguem a regra de doorway pages do [`seo.md`](.claude/rules/seo.md). As páginas só em PT (cidades, pacotes, blog) não têm par em `routes.ts` e não emitem hreflang.
 - **Hospedagem:** Cloudflare Workers (Static Assets), com deploy pelo Workers Builds a cada push na `main`. Node fixado em `.node-version` (versão exata). Cabeçalhos de segurança e cache em `public/_headers`. Guia genérico de DNS/Umami em `docs/deploy-site-estatico-cloudflare-umami.md`.
 

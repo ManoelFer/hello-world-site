@@ -10,6 +10,14 @@ export function absoluteUrl(path: string): string {
 
 type Node = Record<string, unknown>
 
+function areaServed(): Node[] {
+  return cities.map((c) => ({
+    "@type": "City",
+    name: c.name,
+    sameAs: c.wikipedia,
+  }))
+}
+
 /** LocalBusiness (não ProfessionalService, obsoleto no schema.org). Sem AggregateRating: avaliação do próprio site não gera estrela. */
 export function organizationNode(): Node {
   return {
@@ -29,11 +37,7 @@ export function organizationNode(): Node {
       addressRegion: site.address.region,
       addressCountry: site.address.country,
     },
-    areaServed: cities.map((c) => ({
-      "@type": "City",
-      name: c.name,
-      sameAs: c.wikipedia,
-    })),
+    areaServed: areaServed(),
     founder: {
       "@type": "Person",
       name: site.founder.name,
@@ -76,7 +80,53 @@ export function websiteNode(): Node {
   }
 }
 
-/** @public Para as páginas internas da fase 2 (cidades, pacotes, blog). */
+/** Serviço oferecido pela empresa, numa página dedicada a ele. */
+export function serviceNode(service: {
+  path: string
+  name: string
+  serviceType: string
+  description: string
+}): Node {
+  return {
+    "@type": "Service",
+    "@id": `${absoluteUrl(service.path)}#servico`,
+    name: service.name,
+    serviceType: service.serviceType,
+    description: service.description,
+    url: absoluteUrl(service.path),
+    provider: { "@id": ORG_ID },
+    areaServed: areaServed(),
+  }
+}
+
+/** Artigo do blog, com o fundador como autor (E-E-A-T). */
+export function articleNode(article: {
+  path: string
+  title: string
+  description: string
+  date: Date
+  updated?: Date
+  image: string
+}): Node {
+  return {
+    "@type": "Article",
+    headline: article.title,
+    description: article.description,
+    url: absoluteUrl(article.path),
+    mainEntityOfPage: absoluteUrl(article.path),
+    image: absoluteUrl(article.image),
+    datePublished: article.date.toISOString(),
+    dateModified: (article.updated ?? article.date).toISOString(),
+    inLanguage: "pt-BR",
+    author: {
+      "@type": "Person",
+      name: site.founder.name,
+      url: site.founder.linkedin,
+    },
+    publisher: { "@id": ORG_ID },
+  }
+}
+
 export function breadcrumbNode(items: { name: string; path: string }[]): Node {
   return {
     "@type": "BreadcrumbList",

@@ -1,17 +1,22 @@
 ---
 import Section from "@components/common/Section.astro"
 import SectionHeading from "@components/common/SectionHeading.astro"
-import { faq } from "@data/faq"
+import { faq, type FaqItem } from "@data/faq"
+
+interface Props {
+  /** Perguntas desta página; por padrão, as da home. */
+  items?: FaqItem[]
+  title?: string
+}
+
+const { items = faq, title = "Dúvidas comuns antes de começar" } = Astro.props
 ---
 
 <!-- <details name="faq">: acordeão exclusivo sem JS. -->
 <Section id="faq" border>
-  <SectionHeading
-    kicker="perguntas frequentes"
-    title="Dúvidas comuns antes de começar"
-  />
+  <SectionHeading kicker="perguntas frequentes" title={title} />
   <div class="flex max-w-3xl flex-col gap-3">
-    {faq.map((item) => (
+    {items.map((item) => (
       <details
         name="faq"
         data-reveal

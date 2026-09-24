@@ -1,14 +1,18 @@
 ---
 import Section from "@components/common/Section.astro"
 import SectionHeading from "@components/common/SectionHeading.astro"
-import { steps } from "@data/process"
+import { type Step, steps as defaultSteps } from "@data/process"
 import type { Lang } from "@i18n/ui"
 
 interface Props {
   lang: Lang
+  /** Etapas desta página; por padrão, as da home. */
+  steps?: Step[]
+  title?: string
+  sub?: string
 }
 
-const { lang } = Astro.props
+const { lang, steps = defaultSteps } = Astro.props
 
 const pt = {
   id: "como-funciona",
@@ -22,7 +26,11 @@ const en: typeof pt = {
   title: "From first call to production",
   sub: "A simple process, with you in the loop at every step.",
 }
-const c = { pt, en }[lang]
+const c = {
+  ...{ pt, en }[lang],
+  ...(Astro.props.title && { title: Astro.props.title }),
+  ...(Astro.props.sub && { sub: Astro.props.sub }),
+}
 ---
 
 <Section id={c.id} border>

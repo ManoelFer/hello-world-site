@@ -23,13 +23,27 @@ const dataRequest = waLink(
 >
   <LegalArticle
     title="Política de Privacidade"
-    updated="Última atualização: 22 de setembro de 2026"
+    updated="Última atualização: 24 de setembro de 2026"
   >
+    <p>
+      Esta política explica, em linguagem simples, quais dados pessoais este
+      site trata, para quê, por quanto tempo e como você exerce os seus direitos
+      pela Lei Geral de Proteção de Dados (Lei nº 13.709/2018, a LGPD).
+    </p>
+
     <h2>Quem somos</h2>
     <p>
-      <strong>{controller}</strong>, CNPJ {site.cnpj}, com sede em{" "}
-      {site.address.locality} ({site.address.region}), é a controladora dos
-      dados pessoais tratados por meio deste site. Contato pelo WhatsApp{" "}
+      <strong>{controller}</strong>, CNPJ {site.cnpj}, estúdio de software de{" "}
+      {site.address.locality} ({site.address.region}) com atendimento 100%
+      online, é a controladora dos dados pessoais tratados por meio deste site.
+    </p>
+
+    <h2>Canal do titular e encarregado</h2>
+    <p>
+      Como agente de tratamento de pequeno porte, estamos dispensados de indicar
+      um encarregado (Resolução CD/ANPD nº 2/2022). Mesmo assim, qualquer dúvida
+      ou pedido sobre os seus dados é atendido diretamente por{" "}
+      {site.founder.name}, fundador, pelo WhatsApp{" "}
       <a href={dataRequest} target="_blank" rel="noopener">
         {site.whatsapp.display}
       </a>
@@ -68,43 +82,127 @@ const dataRequest = waLink(
         legítimo interesse (art. 7º, IX).
       </li>
     </ul>
+    <p>
+      O site não tem formulário, cadastro nem área de login, e não pedimos dados
+      sensíveis (saúde, religião, biometria etc.) em nenhum momento. Também não
+      tomamos decisões automatizadas sobre você com base nos seus dados.
+    </p>
+
+    <h2>Dados dos projetos de clientes</h2>
+    <p>
+      Quando desenvolvemos um sistema para a sua empresa, podemos ter acesso a
+      dados dos seus clientes ou funcionários. Nesses casos, a sua empresa é a
+      controladora e nós atuamos como operadora: tratamos esses dados só para
+      executar o projeto, conforme as suas instruções e o contrato, e não os
+      usamos para nenhuma outra finalidade.
+    </p>
 
     <h2>Cookies</h2>
     <p>
-      Este site não usa cookies de publicidade nem de rastreamento. A Cloudflare
-      pode usar cookies estritamente necessários para a segurança do site.
+      Este site não usa cookies de publicidade nem de rastreamento, por isso não
+      exibe banner de consentimento. A Cloudflare pode usar cookies estritamente
+      necessários para a segurança do site.
     </p>
 
     <h2>Compartilhamento</h2>
     <p>
       Não vendemos nem compartilhamos os seus dados para fins de marketing. Eles
       só passam pelos fornecedores citados acima, na medida necessária para cada
-      serviço.
+      serviço, ou por autoridades, quando houver obrigação legal ou ordem
+      judicial.
+    </p>
+
+    <h2>Transferência internacional</h2>
+    <p>
+      Alguns desses fornecedores (Cloudflare e Meta
+      {analytics && ", além do Umami"}) podem processar dados em servidores fora
+      do Brasil. Essas transferências seguem o art. 33 da LGPD e contam com as
+      garantias contratuais que cada fornecedor oferece para a proteção de
+      dados.
     </p>
 
     <h2>Por quanto tempo guardamos</h2>
+    <ul>
+      <li>
+        <strong>Conversas que não viraram projeto:</strong> até 2 anos após o
+        último contato, para retomarmos a conversa se você voltar. Depois disso,
+        apagamos.
+      </li>
+      <li>
+        <strong>Clientes:</strong> enquanto durar o contrato e, depois dele,
+        pelo prazo exigido por obrigações legais e fiscais (em geral, 5 anos).
+      </li>
+      <li>
+        <strong>Dados técnicos de acesso:</strong> pelo prazo de retenção de
+        cada fornecedor, sem ligação com a sua identidade.
+      </li>
+    </ul>
     <p>
-      Mantemos conversas e propostas enquanto forem necessárias para a
-      negociação e para a prestação do serviço, e pelo prazo exigido por
-      obrigações legais.
+      Se você pedir a eliminação antes disso, apagamos o que não precisamos
+      guardar por lei.
+    </p>
+
+    <h2>Segurança</h2>
+    <p>
+      O site só funciona com conexão criptografada (HTTPS) e envia cabeçalhos de
+      segurança em todas as páginas. O acesso às conversas e aos dados de
+      clientes fica restrito a quem trabalha no projeto, em contas protegidas
+      com autenticação em duas etapas. Se acontecer um incidente de segurança
+      que possa trazer risco a você, avisaremos você e a ANPD, como manda a lei.
     </p>
 
     <h2>Seus direitos</h2>
+    <p>Pela LGPD (art. 18), você pode pedir a qualquer momento, sem custo:</p>
+    <ul>
+      <li>confirmação de que tratamos os seus dados e acesso a eles;</li>
+      <li>correção de dados incompletos, errados ou desatualizados;</li>
+      <li>
+        anonimização, bloqueio ou eliminação de dados desnecessários ou tratados
+        em desconformidade com a lei;
+      </li>
+      <li>portabilidade dos dados a outro fornecedor;</li>
+      <li>informação sobre com quem compartilhamos os seus dados;</li>
+      <li>
+        oposição a um tratamento baseado em legítimo interesse e revogação de
+        consentimento, quando for o caso.
+      </li>
+    </ul>
     <p>
-      Pela LGPD (art. 18), você pode pedir a confirmação do tratamento, o
-      acesso, a correção, a anonimização, a portabilidade e a eliminação dos
-      seus dados, além de informações sobre compartilhamento e a revogação de
-      consentimentos. Basta enviar uma mensagem pelo WhatsApp{" "}
+      Basta enviar uma mensagem pelo WhatsApp{" "}
       <a href={dataRequest} target="_blank" rel="noopener">
         {site.whatsapp.display}
+      </a>
+      . Podemos pedir uma confirmação de identidade antes de atender, para
+      proteger os seus dados, e respondemos em até 15 dias. Se não ficar
+      satisfeito, você também pode reclamar à{" "}
+      <a
+        href="https://www.gov.br/anpd/pt-br"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Autoridade Nacional de Proteção de Dados (ANPD)
+        <span class="sr-only"> (abre em nova aba)</span>
       </a>
       .
     </p>
 
+    <h2>Crianças e adolescentes</h2>
+    <p>
+      O site e os nossos serviços são voltados a empresas e adultos. Não
+      coletamos, de propósito, dados de menores de 18 anos.
+    </p>
+
+    <h2>Links para outros sites</h2>
+    <p>
+      Algumas páginas têm links para sites de terceiros (como LinkedIn e
+      WhatsApp). Ao clicar, você passa a seguir a política de privacidade
+      daquele site.
+    </p>
+
     <h2>Alterações</h2>
     <p>
-      Esta política pode ser atualizada. A data no topo indica a versão em
-      vigor.
+      Esta política pode ser atualizada quando o site ou a lei mudar. A data no
+      topo indica a versão em vigor.
     </p>
   </LegalArticle>
 </BaseLayout>

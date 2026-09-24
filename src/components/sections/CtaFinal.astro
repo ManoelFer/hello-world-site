@@ -8,6 +8,8 @@ interface Props {
   lang: Lang
   /** Mensagem do WhatsApp; por padrão, a mensagem padrão do idioma. */
   message?: string
+  title?: string
+  sub?: string
 }
 
 const { lang } = Astro.props
@@ -30,7 +32,11 @@ const en: typeof pt = {
   whatsapp: "Message us on WhatsApp",
   linkedin: "View LinkedIn",
 }
-const c = { pt, en }[lang]
+const c = {
+  ...{ pt, en }[lang],
+  ...(Astro.props.title && { title: Astro.props.title }),
+  ...(Astro.props.sub && { sub: Astro.props.sub }),
+}
 ---
 
 <section

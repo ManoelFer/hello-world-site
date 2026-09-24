@@ -29,6 +29,20 @@ const location =
       <p class="mt-4 max-w-[48ch] text-sm leading-relaxed text-muted">
         {s.footerServes}
       </p>
+      {s.footerLinks.length > 0 && (
+        <ul class="mt-3 flex flex-wrap gap-x-5 text-sm">
+          {s.footerLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="inline-flex min-h-11 items-center text-accent underline-offset-4 hover:text-accent-hover hover:underline"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
 
     <address class="text-sm leading-7 text-muted not-italic">

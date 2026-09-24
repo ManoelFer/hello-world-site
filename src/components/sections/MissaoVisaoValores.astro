@@ -1,0 +1,99 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import type { Lang } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const pt = {
+  id: "missao-visao-valores",
+  kicker: "missão, visão e valores",
+  title: "O que guia o nosso trabalho",
+  sub: "Os princípios por trás de cada site e sistema que a gente entrega.",
+  mission: {
+    t: "Missão",
+    d: "Transformar boas ideias em sites e sistemas que funcionam de verdade, para que pequenas e médias empresas cresçam com tecnologia sem dor de cabeça.",
+  },
+  vision: {
+    t: "Visão",
+    d: "Ser o estúdio de software de confiança das empresas de Goiás: aquele que o cliente indica porque o projeto saiu como combinado.",
+  },
+  valuesTitle: "Valores",
+  values: [
+    {
+      t: "Transparência",
+      d: "preço fechado, escopo por escrito e nada escondido.",
+    },
+    { t: "Qualidade", d: "código limpo, testado e feito para durar." },
+    { t: "Compromisso", d: "prazo combinado é prazo cumprido." },
+    { t: "Parceria", d: "lado a lado com o cliente, do rascunho ao suporte." },
+    { t: "Aprendizado", d: "estudar sempre para entregar melhor." },
+  ],
+}
+const en: typeof pt = {
+  id: "mission-vision-values",
+  kicker: "mission, vision & values",
+  title: "What guides our work",
+  sub: "The principles behind every website and system we ship.",
+  mission: {
+    t: "Mission",
+    d: "Turn good ideas into websites and systems that actually work, so businesses can grow with technology without the headaches.",
+  },
+  vision: {
+    t: "Vision",
+    d: "To be the software studio businesses trust, in Brazil and abroad: the one clients recommend because projects ship as promised.",
+  },
+  valuesTitle: "Values",
+  values: [
+    {
+      t: "Transparency",
+      d: "fixed price, written scope, nothing hidden.",
+    },
+    { t: "Quality", d: "clean, tested code built to last." },
+    { t: "Commitment", d: "an agreed deadline is a kept deadline." },
+    {
+      t: "Partnership",
+      d: "side by side with clients, from sketch to support.",
+    },
+    { t: "Learning", d: "always studying to deliver better." },
+  ],
+}
+const c = { pt, en }[lang]
+---
+
+<Section id={c.id} border>
+  <SectionHeading kicker={c.kicker} title={c.title} sub={c.sub} />
+  <div class="grid gap-[18px] desk:grid-cols-3">
+    {[c.mission, c.vision].map((item) => (
+      <article
+        data-reveal
+        class="rounded-[14px] border border-line bg-surface-2 px-[26px] py-7"
+      >
+        <h3 class="mb-2.5 text-[19px] font-semibold">{item.t}</h3>
+        <p class="text-base leading-relaxed text-muted">{item.d}</p>
+      </article>
+    ))}
+    <article
+      data-reveal
+      class="rounded-[14px] border border-line bg-surface-2 px-[26px] py-7"
+    >
+      <h3 class="mb-2.5 text-[19px] font-semibold">{c.valuesTitle}</h3>
+      <ul class="grid gap-2.5">
+        {c.values.map((v) => (
+          <li class="flex items-start gap-3 text-base leading-relaxed text-muted">
+            <span class="font-mono text-accent" aria-hidden="true">
+              ✓
+            </span>
+            <span>
+              <strong class="font-semibold text-point">{v.t}:</strong> {v.d}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  </div>
+</Section>
