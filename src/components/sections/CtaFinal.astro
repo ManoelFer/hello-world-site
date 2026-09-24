@@ -1,0 +1,86 @@
+---
+import ButtonLink from "@components/common/ButtonLink.astro"
+import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+import { site } from "@data/site"
+import { type Lang, t } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+  /** Mensagem do WhatsApp; por padrão, a mensagem padrão do idioma. */
+  message?: string
+  title?: string
+  sub?: string
+}
+
+const { lang } = Astro.props
+const message = Astro.props.message ?? t(lang).waDefault
+
+// "Fale conosco": canal único é o WhatsApp (sem e-mail, a pedido do usuário).
+const pt = {
+  id: "contato",
+  kicker: "fale conosco",
+  title: "Vamos tirar o seu site do papel?",
+  sub: "Conte sua ideia pelo WhatsApp. Respondo pessoalmente, geralmente no mesmo dia.",
+  whatsapp: "Chamar no WhatsApp",
+  linkedin: "",
+}
+const en: typeof pt = {
+  id: "contact",
+  kicker: "get in touch",
+  title: "Let’s build something together?",
+  sub: "Tell me about your idea on WhatsApp. I answer personally, usually the same day.",
+  whatsapp: "Message us on WhatsApp",
+  linkedin: "View LinkedIn",
+}
+const c = {
+  ...{ pt, en }[lang],
+  ...(Astro.props.title && { title: Astro.props.title }),
+  ...(Astro.props.sub && { sub: Astro.props.sub }),
+}
+---
+
+<section
+  id={c.id}
+  class="mx-auto max-w-6xl px-5 py-[72px] desk:px-10 desk:py-24"
+>
+  <div
+    data-reveal
+    class="relative overflow-hidden rounded-[22px] border border-accent/22 bg-linear-135 from-[#10201a] to-[#0d1210] px-[22px] py-10 text-center desk:px-12 desk:py-[58px]"
+  >
+    <div
+      class="dot-grid pointer-events-none absolute inset-0 [background-size:24px_24px]"
+      aria-hidden="true"
+    ></div>
+    <div class="relative">
+      <p class="mb-4 font-mono text-[13px] text-accent">$ {c.kicker}</p>
+      <h2 class="mx-auto mb-4 max-w-[20ch] text-[26px] font-bold tracking-[-0.02em] desk:text-[40px]">
+        {c.title}
+      </h2>
+      <p class="mx-auto max-w-[46ch] text-[17px] leading-relaxed text-soft">
+        {c.sub}
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3.5">
+        <WhatsAppButton
+          size="lg"
+          message={message}
+          placement="cta-final"
+          label={c.whatsapp}
+        />
+        {c.linkedin && (
+          <ButtonLink
+            variant="ghost"
+            size="lg"
+            href={site.founder.linkedin}
+            target="_blank"
+            rel="noopener"
+          >
+            {c.linkedin}
+          </ButtonLink>
+        )}
+      </div>
+      <p class="mt-[22px] font-mono text-[13.5px] leading-relaxed text-label">
+        WhatsApp {site.whatsapp.display}
+      </p>
+    </div>
+  </div>
+</section>

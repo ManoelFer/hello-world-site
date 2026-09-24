@@ -1,0 +1,44 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import { services } from "@data/services"
+import type { Lang } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const pt = {
+  id: "servicos",
+  kicker: "o que fazemos",
+  title: "Serviços de ponta a ponta",
+  sub: "Uma casa só para tirar a ideia do papel e mantê-la no ar.",
+}
+const en: typeof pt = {
+  id: "services",
+  kicker: "what we do",
+  title: "End-to-end product work",
+  sub: "One place to take an idea from paper to production.",
+}
+const c = { pt, en }[lang]
+---
+
+<Section id={c.id} border>
+  <SectionHeading kicker={c.kicker} title={c.title} sub={c.sub} />
+  <ul class="grid gap-[18px] sm:grid-cols-2 desk:grid-cols-3">
+    {services.map((s, i) => (
+      <li
+        data-reveal
+        class="rounded-[14px] border border-line bg-surface-2 px-[26px] py-7 transition-colors hover:border-accent/45"
+      >
+        <div class="mb-[18px] font-mono text-[13px] text-accent">
+          // {String(i + 1).padStart(2, "0")}
+        </div>
+        <h3 class="mb-2.5 text-[19px] font-semibold">{s.t[lang]}</h3>
+        <p class="text-[14.5px] leading-relaxed text-muted">{s.d[lang]}</p>
+      </li>
+    ))}
+  </ul>
+</Section>

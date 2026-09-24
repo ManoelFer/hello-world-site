@@ -1,0 +1,47 @@
+---
+import ButtonLink from "@components/common/ButtonLink.astro"
+import WhatsAppIcon from "@components/common/WhatsAppIcon.astro"
+import { waLink } from "@lib/whatsapp"
+
+interface Props {
+  /** Mensagem pré-preenchida: identifica a página/pacote de origem do lead. */
+  message: string
+  /** Onde o botão está (hero, header, menu, cta-final...). Vai para o evento do Umami. */
+  placement: string
+  label: string
+  variant?: "primary" | "ghost"
+  size?: "md" | "lg"
+  arrow?: boolean
+  class?: string
+}
+
+const {
+  message,
+  placement,
+  label,
+  variant,
+  size,
+  arrow = false,
+  class: className,
+} = Astro.props
+---
+
+<ButtonLink
+  href={waLink(message)}
+  target="_blank"
+  rel="noopener"
+  variant={variant}
+  size={size}
+  class={className}
+  data-umami-event="whatsapp_click"
+  data-umami-event-placement={placement}
+  data-umami-event-page={Astro.url.pathname}
+>
+  <WhatsAppIcon class="size-[1.15em] shrink-0" />
+  <span>{label}</span>
+  {arrow && (
+    <span class="font-mono" aria-hidden="true">
+      -&gt;
+    </span>
+  )}
+</ButtonLink>

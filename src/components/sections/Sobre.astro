@@ -1,0 +1,104 @@
+---
+import Section from "@components/common/Section.astro"
+import { credentials } from "@data/credenciais"
+import { site } from "@data/site"
+import type { Lang } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const pt = {
+  id: "sobre",
+  kicker: "sobre",
+  title: "Gente que gosta de resolver problemas com código.",
+  body: "A Hello World nasceu em 2020 com uma ideia simples: transformar boas ideias em software que funciona. Hoje, de Aparecida de Goiânia (GO), trabalhamos 100% online e lado a lado com o cliente, do primeiro rascunho ao que vai pro ar, com clareza, qualidade e prazos honestos.",
+  points: [
+    "Comunicação direta, sem juridiquês nem enrolação",
+    "Código limpo, testado e sustentável",
+    "Entregas em prazos honestos e previsíveis",
+  ],
+  credentialsTitle: `Formação e certificações de ${site.founder.name}, fundador`,
+  verify: "Verificar no Credly",
+  newTab: "(abre em nova aba)",
+}
+const en: typeof pt = {
+  id: "about",
+  kicker: "about",
+  title: "People who like solving problems with code.",
+  body: "Hello World started in 2020 with a simple idea: turn good ideas into software that works. Based in Aparecida de Goiânia, Brazil, we work fully online and side by side with our clients, from the first sketch to production, with clarity, quality and honest deadlines.",
+  points: [
+    "Direct communication, no jargon, no runaround",
+    "Clean, tested, maintainable code",
+    "Honest, predictable delivery dates",
+  ],
+  credentialsTitle: `Education and certifications of ${site.founder.name}, founder`,
+  verify: "Verify on Credly",
+  newTab: "(opens in a new tab)",
+}
+const c = { pt, en }[lang]
+---
+
+<Section
+  id={c.id}
+  border
+  innerClass="grid gap-[30px] py-14 desk:grid-cols-2 desk:gap-14 desk:py-[82px]"
+>
+  <div>
+    <p class="mb-3.5 font-mono text-[13px] text-accent">// {c.kicker}</p>
+    <h2
+      data-reveal
+      class="mb-[22px] text-[26px] leading-[1.15] font-bold tracking-[-0.02em] desk:text-[33px]"
+    >
+      {c.title}
+    </h2>
+    <p class="text-[16.5px] leading-[1.72] text-soft">{c.body}</p>
+    <h3 class="mt-9 mb-4 font-mono text-[13px] text-label">
+      {c.credentialsTitle}
+    </h3>
+    <ul class="grid gap-3">
+      {credentials.map((cred) => (
+        <li class="rounded-[14px] border border-line bg-surface-2 px-5 py-4">
+          <p class="text-[15.5px] leading-snug font-semibold text-point">
+            {cred.name[lang]}
+          </p>
+          <p class="mt-1 text-sm text-muted">
+            {`${cred.issuer.name} · ${cred.year}`}
+          </p>
+          {cred.verifyUrl && (
+            <a
+              href={cred.verifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-11 items-center gap-1.5 text-[15px] font-semibold text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              <span>
+                {c.verify}
+                <span class="sr-only">{`: ${cred.name[lang]} ${c.newTab}`}</span>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+  <ul
+    data-reveal
+    class="self-center rounded-2xl border border-line bg-surface-2 px-[30px] py-8"
+  >
+    {c.points.map((point) => (
+      <li class="flex items-start gap-3.5 border-b border-line-soft py-3.5 last:border-b-0">
+        <span
+          class="font-mono text-[15px] leading-normal text-accent"
+          aria-hidden="true"
+        >
+          ✓
+        </span>
+        <span class="text-[15.5px] leading-normal text-point">{point}</span>
+      </li>
+    ))}
+  </ul>
+</Section>

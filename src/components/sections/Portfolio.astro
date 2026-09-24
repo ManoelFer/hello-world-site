@@ -1,0 +1,69 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import { cases } from "@data/portfolio"
+import type { Lang } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const pt = {
+  id: "portfolio",
+  kicker: "portfólio",
+  title: "Trabalhos que já estão no ar",
+  sub: "Projetos reais, de sites a aplicativos, feitos do começo ao fim pelo estúdio.",
+  newTab: "(abre em nova aba)",
+}
+const en: typeof pt = {
+  id: "work",
+  kicker: "our work",
+  title: "Work that's live today",
+  sub: "Real projects, from websites to mobile apps, built end to end by the studio.",
+  newTab: "(opens in a new tab)",
+}
+const c = { pt, en }[lang]
+---
+
+<Section id={c.id} border>
+  <SectionHeading kicker={c.kicker} title={c.title} sub={c.sub} />
+  <ul class="grid gap-[18px] desk:grid-cols-2">
+    {cases.map((item) => (
+      <li
+        data-reveal
+        class="flex flex-col rounded-[14px] border border-line bg-surface-2 px-[26px] py-7 transition-colors hover:border-accent/45"
+      >
+        <p class="mb-3 font-mono text-[13px] text-accent">{item.kind[lang]}</p>
+        <h3 class="mb-2.5 text-[21px] font-semibold">{item.name}</h3>
+        <p class="mb-5 text-[14.5px] leading-relaxed text-muted">
+          {item.d[lang]}
+        </p>
+        <ul class="mb-6 flex flex-wrap gap-2">
+          {item.tags.map((tag) => (
+            <li class="rounded-[9px] border border-line px-3 py-1.5 font-mono text-xs text-term">
+              {tag}
+            </li>
+          ))}
+        </ul>
+        <div class="mt-auto flex flex-wrap gap-x-6 gap-y-1">
+          {item.links.map((link) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-11 items-center gap-1.5 text-[15px] font-semibold text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              <span>
+                {link.label[lang]}
+                <span class="sr-only">{`: ${item.name} ${c.newTab}`}</span>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      </li>
+    ))}
+  </ul>
+</Section>

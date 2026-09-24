@@ -1,0 +1,32 @@
+---
+interface Props {
+  href: string
+  small?: boolean
+}
+
+const { href, small = false } = Astro.props
+---
+
+<!-- Nome acessível = texto visível ("hello.world"); a versão pequena só tem o ícone, então leva aria-label. -->
+<a
+  href={href}
+  class="flex items-center gap-3 text-text no-underline"
+  aria-label={small ? "Hello World Estúdio" : undefined}
+>
+  <span
+    class:list={[
+      "inline-flex items-center justify-center border bg-surface font-mono font-extrabold text-accent",
+      small
+        ? "size-[30px] rounded-[9px] border-line-strong text-xs"
+        : "size-[38px] rounded-[11px] border-line-strong text-[15px]",
+    ]}
+    aria-hidden="true"
+  >
+    &gt;_
+  </span>
+  {!small && (
+    <span class="font-mono text-base font-bold tracking-[-0.01em]">
+      hello<span class="text-accent">.world</span>
+    </span>
+  )}
+</a>

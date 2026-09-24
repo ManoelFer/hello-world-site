@@ -1,0 +1,74 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+import { packages } from "@data/packages"
+import { brl } from "@lib/format"
+---
+
+<Section id="pacotes" border>
+  <SectionHeading
+    kicker="pacotes"
+    title="Escolha o ponto de partida"
+    sub="Três formatos para começar. Cada proposta é ajustada ao que o seu negócio precisa, com preço fechado."
+  />
+  <ul class="grid gap-[18px] desk:grid-cols-3">
+    {packages.map((p) => (
+      <li
+        data-reveal
+        class:list={[
+          "flex flex-col rounded-2xl border bg-surface-2 p-7",
+          p.destaque
+            ? "border-accent/45 shadow-[0_24px_70px_-40px_rgba(110,231,160,.45)]"
+            : "border-line",
+        ]}
+      >
+        <h3 class="text-[21px] font-bold">{p.nome}</h3>
+        <p class="mt-2 text-[14.5px] leading-relaxed text-muted">
+          {p.idealPara}
+        </p>
+        <div class="mt-6 border-t border-line-soft pt-5">
+          {p.precoAPartirDe !== null ? (
+            <p>
+              <span class="block font-mono text-xs text-label uppercase">
+                a partir de
+              </span>
+              <span class="font-mono text-[26px] font-bold">
+                {brl(p.precoAPartirDe)}
+              </span>
+            </p>
+          ) : (
+            <p>
+              <span class="block font-mono text-xs text-label uppercase">
+                investimento
+              </span>
+              <span class="font-mono text-[22px] font-bold">Sob consulta</span>
+            </p>
+          )}
+          {p.prazoDias !== null && (
+            <p class="mt-1 font-mono text-xs text-label">
+              pronto em até {p.prazoDias} dias
+            </p>
+          )}
+        </div>
+        <ul class="mt-5 mb-7 flex flex-col gap-2.5 text-[14.5px] leading-snug text-point">
+          {p.inclui.map((item) => (
+            <li class="flex gap-3">
+              <span class="font-mono text-accent" aria-hidden="true">
+                ✓
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <WhatsAppButton
+          class="mt-auto w-full"
+          variant={p.destaque ? "primary" : "ghost"}
+          message={p.msgWhatsApp}
+          placement={`pacote-${p.id}`}
+          label="Quero este pacote"
+        />
+      </li>
+    ))}
+  </ul>
+</Section>

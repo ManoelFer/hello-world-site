@@ -1,0 +1,36 @@
+---
+import ComoFunciona from "@components/sections/ComoFunciona.astro"
+import CtaFinal from "@components/sections/CtaFinal.astro"
+import Hero from "@components/sections/Hero.astro"
+import MissaoVisaoValores from "@components/sections/MissaoVisaoValores.astro"
+import Portfolio from "@components/sections/Portfolio.astro"
+import Servicos from "@components/sections/Servicos.astro"
+import Sobre from "@components/sections/Sobre.astro"
+import Stats from "@components/sections/Stats.astro"
+import Tech from "@components/sections/Tech.astro"
+import BaseLayout from "@layouts/BaseLayout.astro"
+
+// EN é a porta para clientes internacionais: foco em software sob medida e desenvolvimento remoto, não em SEO local.
+const stats = [
+  { v: "2020", l: "Founded in" },
+  { v: "Web · Mobile · Backend", l: "Focus areas" },
+  { v: "Brazil · GMT-3", l: "Where we build" },
+]
+---
+
+<BaseLayout
+  lang="en"
+  routeKey="home"
+  title="Custom Software & Web Development from Brazil | Hello World"
+  description="Hello World is a software studio from Brazil building custom web, mobile, desktop and backend systems, with AI where it fits. Remote-friendly, GMT-3."
+>
+  <Hero lang="en" />
+  <Stats items={stats} />
+  <Servicos lang="en" />
+  <Portfolio lang="en" />
+  <ComoFunciona lang="en" />
+  <Sobre lang="en" />
+  <MissaoVisaoValores lang="en" />
+  <Tech lang="en" />
+  <CtaFinal lang="en" />
+</BaseLayout>

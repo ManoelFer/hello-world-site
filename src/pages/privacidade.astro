@@ -1,0 +1,208 @@
+---
+import LegalArticle from "@components/common/LegalArticle.astro"
+import { site } from "@data/site"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { waLink } from "@lib/whatsapp"
+
+// O texto se ajusta sozinho ao que o site realmente usa (ex.: Umami só aparece se estiver configurado).
+const analytics = Boolean(site.umamiWebsiteId)
+const controller = site.legalName
+  ? `${site.name} (${site.legalName})`
+  : site.name
+// Canal para pedidos do titular (LGPD): WhatsApp, o único canal de contato do site.
+const dataRequest = waLink(
+  "Olá! Tenho uma solicitação sobre os meus dados pessoais (LGPD).",
+)
+---
+
+<BaseLayout
+  lang="pt"
+  routeKey="privacy"
+  title="Política de Privacidade | Hello World Estúdio"
+  description="Como o site da Hello World Estúdio trata dados pessoais: contato por WhatsApp, métricas de acesso sem cookies e os seus direitos pela LGPD."
+>
+  <LegalArticle
+    title="Política de Privacidade"
+    updated="Última atualização: 24 de setembro de 2026"
+  >
+    <p>
+      Esta política explica, em linguagem simples, quais dados pessoais este
+      site trata, para quê, por quanto tempo e como você exerce os seus direitos
+      pela Lei Geral de Proteção de Dados (Lei nº 13.709/2018, a LGPD).
+    </p>
+
+    <h2>Quem somos</h2>
+    <p>
+      <strong>{controller}</strong>, CNPJ {site.cnpj}, estúdio de software de{" "}
+      {site.address.locality} ({site.address.region}) com atendimento 100%
+      online, é a controladora dos dados pessoais tratados por meio deste site.
+    </p>
+
+    <h2>Canal do titular e encarregado</h2>
+    <p>
+      Como agente de tratamento de pequeno porte, estamos dispensados de indicar
+      um encarregado (Resolução CD/ANPD nº 2/2022). Mesmo assim, qualquer dúvida
+      ou pedido sobre os seus dados é atendido diretamente por{" "}
+      {site.founder.name}, fundador, pelo WhatsApp{" "}
+      <a href={dataRequest} target="_blank" rel="noopener">
+        {site.whatsapp.display}
+      </a>
+      .
+    </p>
+
+    <h2>Quais dados tratamos e por quê</h2>
+    <ul>
+      <li>
+        <strong>Contato por WhatsApp.</strong> Quando você fala com a gente,
+        recebemos os dados que você decide enviar, como nome, telefone e a
+        descrição do seu projeto. Usamos esses dados para responder, preparar
+        propostas e, se fecharmos negócio, prestar o serviço. Base legal:
+        procedimentos preliminares e execução de contrato (art. 7º, V, da LGPD).
+        O WhatsApp é um serviço da Meta, que trata os dados das conversas
+        conforme a política de privacidade dela.
+      </li>
+      {analytics ? (
+        <li>
+          <strong>Métricas de acesso.</strong> Usamos o Umami, uma ferramenta de
+          métricas que não usa cookies nem identifica você individualmente. Ela
+          registra dados agregados, como páginas visitadas, origem da visita,
+          tipo de dispositivo e cliques nos botões de contato, para entendermos
+          o que funciona no site. Base legal: legítimo interesse (art. 7º, IX).
+        </li>
+      ) : (
+        <li>
+          <strong>Métricas de acesso.</strong> Este site não usa ferramentas de
+          métricas nem de rastreamento de visitantes.
+        </li>
+      )}
+      <li>
+        <strong>Hospedagem.</strong> O site é hospedado na Cloudflare, que
+        processa dados técnicos das requisições (como endereço IP e navegador)
+        para entregar as páginas e proteger o site contra ataques. Base legal:
+        legítimo interesse (art. 7º, IX).
+      </li>
+    </ul>
+    <p>
+      O site não tem formulário, cadastro nem área de login, e não pedimos dados
+      sensíveis (saúde, religião, biometria etc.) em nenhum momento. Também não
+      tomamos decisões automatizadas sobre você com base nos seus dados.
+    </p>
+
+    <h2>Dados dos projetos de clientes</h2>
+    <p>
+      Quando desenvolvemos um sistema para a sua empresa, podemos ter acesso a
+      dados dos seus clientes ou funcionários. Nesses casos, a sua empresa é a
+      controladora e nós atuamos como operadora: tratamos esses dados só para
+      executar o projeto, conforme as suas instruções e o contrato, e não os
+      usamos para nenhuma outra finalidade.
+    </p>
+
+    <h2>Cookies</h2>
+    <p>
+      Este site não usa cookies de publicidade nem de rastreamento, por isso não
+      exibe banner de consentimento. A Cloudflare pode usar cookies estritamente
+      necessários para a segurança do site.
+    </p>
+
+    <h2>Compartilhamento</h2>
+    <p>
+      Não vendemos nem compartilhamos os seus dados para fins de marketing. Eles
+      só passam pelos fornecedores citados acima, na medida necessária para cada
+      serviço, ou por autoridades, quando houver obrigação legal ou ordem
+      judicial.
+    </p>
+
+    <h2>Transferência internacional</h2>
+    <p>
+      Alguns desses fornecedores (Cloudflare e Meta
+      {analytics && ", além do Umami"}) podem processar dados em servidores fora
+      do Brasil. Essas transferências seguem o art. 33 da LGPD e contam com as
+      garantias contratuais que cada fornecedor oferece para a proteção de
+      dados.
+    </p>
+
+    <h2>Por quanto tempo guardamos</h2>
+    <ul>
+      <li>
+        <strong>Conversas que não viraram projeto:</strong> até 2 anos após o
+        último contato, para retomarmos a conversa se você voltar. Depois disso,
+        apagamos.
+      </li>
+      <li>
+        <strong>Clientes:</strong> enquanto durar o contrato e, depois dele,
+        pelo prazo exigido por obrigações legais e fiscais (em geral, 5 anos).
+      </li>
+      <li>
+        <strong>Dados técnicos de acesso:</strong> pelo prazo de retenção de
+        cada fornecedor, sem ligação com a sua identidade.
+      </li>
+    </ul>
+    <p>
+      Se você pedir a eliminação antes disso, apagamos o que não precisamos
+      guardar por lei.
+    </p>
+
+    <h2>Segurança</h2>
+    <p>
+      O site só funciona com conexão criptografada (HTTPS) e envia cabeçalhos de
+      segurança em todas as páginas. O acesso às conversas e aos dados de
+      clientes fica restrito a quem trabalha no projeto, em contas protegidas
+      com autenticação em duas etapas. Se acontecer um incidente de segurança
+      que possa trazer risco a você, avisaremos você e a ANPD, como manda a lei.
+    </p>
+
+    <h2>Seus direitos</h2>
+    <p>Pela LGPD (art. 18), você pode pedir a qualquer momento, sem custo:</p>
+    <ul>
+      <li>confirmação de que tratamos os seus dados e acesso a eles;</li>
+      <li>correção de dados incompletos, errados ou desatualizados;</li>
+      <li>
+        anonimização, bloqueio ou eliminação de dados desnecessários ou tratados
+        em desconformidade com a lei;
+      </li>
+      <li>portabilidade dos dados a outro fornecedor;</li>
+      <li>informação sobre com quem compartilhamos os seus dados;</li>
+      <li>
+        oposição a um tratamento baseado em legítimo interesse e revogação de
+        consentimento, quando for o caso.
+      </li>
+    </ul>
+    <p>
+      Basta enviar uma mensagem pelo WhatsApp{" "}
+      <a href={dataRequest} target="_blank" rel="noopener">
+        {site.whatsapp.display}
+      </a>
+      . Podemos pedir uma confirmação de identidade antes de atender, para
+      proteger os seus dados, e respondemos em até 15 dias. Se não ficar
+      satisfeito, você também pode reclamar à{" "}
+      <a
+        href="https://www.gov.br/anpd/pt-br"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Autoridade Nacional de Proteção de Dados (ANPD)
+        <span class="sr-only"> (abre em nova aba)</span>
+      </a>
+      .
+    </p>
+
+    <h2>Crianças e adolescentes</h2>
+    <p>
+      O site e os nossos serviços são voltados a empresas e adultos. Não
+      coletamos, de propósito, dados de menores de 18 anos.
+    </p>
+
+    <h2>Links para outros sites</h2>
+    <p>
+      Algumas páginas têm links para sites de terceiros (como LinkedIn e
+      WhatsApp). Ao clicar, você passa a seguir a política de privacidade
+      daquele site.
+    </p>
+
+    <h2>Alterações</h2>
+    <p>
+      Esta política pode ser atualizada quando o site ou a lei mudar. A data no
+      topo indica a versão em vigor.
+    </p>
+  </LegalArticle>
+</BaseLayout>

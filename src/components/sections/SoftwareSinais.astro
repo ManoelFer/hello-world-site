@@ -1,0 +1,29 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import { softwareSignals } from "@data/software"
+---
+
+<Section id="quando-vale" border>
+  <SectionHeading
+    kicker="quando vale a pena"
+    title="Sinais de que a sua empresa precisa de um software sob medida"
+    sub="Se algum destes parece familiar, vale uma conversa. Se um sistema pronto resolver, a gente também fala."
+  />
+  <ul class="grid max-w-3xl gap-3">
+    {softwareSignals.map((signal) => (
+      <li
+        data-reveal
+        class="flex items-start gap-3.5 rounded-[14px] border border-line bg-surface-2 px-6 py-5"
+      >
+        <span
+          class="font-mono text-[15px] leading-normal text-accent"
+          aria-hidden="true"
+        >
+          ›
+        </span>
+        <span class="text-base leading-relaxed text-point">{signal}</span>
+      </li>
+    ))}
+  </ul>
+</Section>

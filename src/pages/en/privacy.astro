@@ -1,0 +1,208 @@
+---
+import LegalArticle from "@components/common/LegalArticle.astro"
+import { site } from "@data/site"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { waLink } from "@lib/whatsapp"
+
+// Mesmo conteúdo de /privacidade/, em inglês. Manter os dois em sincronia.
+const analytics = Boolean(site.umamiWebsiteId)
+const controller = site.legalName
+  ? `${site.name} (${site.legalName})`
+  : site.name
+const dataRequest = waLink(
+  "Hi! I have a request about my personal data (LGPD).",
+)
+---
+
+<BaseLayout
+  lang="en"
+  routeKey="privacy"
+  title="Privacy Policy | Hello World Estúdio"
+  description="How the Hello World Estúdio website handles personal data: WhatsApp contact, cookieless usage metrics and your rights under Brazil's LGPD."
+>
+  <LegalArticle
+    title="Privacy Policy"
+    updated="Last updated: September 24, 2026"
+  >
+    <p>
+      This policy explains, in plain language, what personal data this website
+      processes, why, for how long and how you can exercise your rights under
+      Brazil's General Data Protection Law (Law No. 13,709/2018, the LGPD).
+    </p>
+
+    <h2>Who we are</h2>
+    <p>
+      <strong>{controller}</strong>, Brazilian company registration (CNPJ){" "}
+      {site.cnpj}, is a software studio from{" "}
+      {`${site.address.locality} (${site.address.region})`}, Brazil, that works
+      fully online, and is the controller of the personal data processed through
+      this website.
+    </p>
+
+    <h2>Data subject channel and DPO</h2>
+    <p>
+      As a small-sized processing agent, we are exempt from appointing a data
+      protection officer (ANPD Resolution CD/ANPD No. 2/2022). Even so, any
+      question or request about your data is handled directly by{" "}
+      {site.founder.name}, founder, on WhatsApp at{" "}
+      <a href={dataRequest} target="_blank" rel="noopener">
+        {site.whatsapp.display}
+      </a>
+      .
+    </p>
+
+    <h2>What data we process and why</h2>
+    <ul>
+      <li>
+        <strong>WhatsApp contact.</strong> When you reach out, we receive the
+        data you choose to send, such as your name, phone number and a
+        description of your project. We use it to reply, prepare proposals and,
+        if we work together, deliver the service. Legal basis: pre-contractual
+        steps and performance of a contract (LGPD, art. 7, V). WhatsApp is a
+        Meta service, which processes conversation data under its own privacy
+        policy.
+      </li>
+      {analytics ? (
+        <li>
+          <strong>Usage metrics.</strong> We use Umami, a metrics tool that does
+          not use cookies or identify you individually. It records aggregated
+          data such as pages visited, referrer, device type and clicks on
+          contact buttons, so we can understand what works on the website. Legal
+          basis: legitimate interest (LGPD, art. 7, IX).
+        </li>
+      ) : (
+        <li>
+          <strong>Usage metrics.</strong> This website does not use analytics or
+          visitor tracking tools.
+        </li>
+      )}
+      <li>
+        <strong>Hosting.</strong> The website is hosted on Cloudflare, which
+        processes technical request data (such as IP address and browser) to
+        deliver pages and protect the site against attacks. Legal basis:
+        legitimate interest (LGPD, art. 7, IX).
+      </li>
+    </ul>
+    <p>
+      The website has no forms, sign-up or login area, and we never ask for
+      sensitive data (health, religion, biometrics, etc.). We also do not make
+      automated decisions about you based on your data.
+    </p>
+
+    <h2>Data in client projects</h2>
+    <p>
+      When we build a system for your company, we may access data about your
+      customers or employees. In those cases your company is the controller and
+      we act as the processor: we handle that data only to deliver the project,
+      following your instructions and the contract, and never use it for any
+      other purpose.
+    </p>
+
+    <h2>Cookies</h2>
+    <p>
+      This website does not use advertising or tracking cookies, so it shows no
+      consent banner. Cloudflare may set strictly necessary cookies for
+      security.
+    </p>
+
+    <h2>Sharing</h2>
+    <p>
+      We do not sell or share your data for marketing purposes. It only goes
+      through the providers listed above, as far as each service requires, or to
+      authorities when required by law or court order.
+    </p>
+
+    <h2>International transfers</h2>
+    <p>
+      Some of these providers (Cloudflare and Meta
+      {analytics && ", as well as Umami"}) may process data on servers outside
+      Brazil. These transfers follow article 33 of the LGPD and rely on the
+      contractual data protection safeguards each provider offers.
+    </p>
+
+    <h2>How long we keep it</h2>
+    <ul>
+      <li>
+        <strong>Conversations that did not become a project:</strong> up to 2
+        years after the last contact, so we can pick up where we left off if you
+        come back. After that, we delete them.
+      </li>
+      <li>
+        <strong>Clients:</strong> for the length of the contract and, after it,
+        for the period required by legal and tax obligations (usually 5 years).
+      </li>
+      <li>
+        <strong>Technical access data:</strong> for each provider's retention
+        period, with no link to your identity.
+      </li>
+    </ul>
+    <p>
+      If you ask for deletion before that, we delete everything we are not
+      legally required to keep.
+    </p>
+
+    <h2>Security</h2>
+    <p>
+      The website only works over an encrypted connection (HTTPS) and sends
+      security headers on every page. Access to conversations and client data is
+      limited to the people working on the project, on accounts protected by
+      two-factor authentication. If a security incident could put you at risk,
+      we will notify you and the ANPD, as the law requires.
+    </p>
+
+    <h2>Your rights</h2>
+    <p>
+      Under the LGPD (art. 18), you may request at any time, free of charge:
+    </p>
+    <ul>
+      <li>confirmation that we process your data, and access to it;</li>
+      <li>correction of incomplete, inaccurate or outdated data;</li>
+      <li>
+        anonymization, blocking or deletion of unnecessary data or data
+        processed in breach of the law;
+      </li>
+      <li>portability of your data to another provider;</li>
+      <li>information about who we share your data with;</li>
+      <li>
+        objection to processing based on legitimate interest, and withdrawal of
+        consent where applicable.
+      </li>
+    </ul>
+    <p>
+      Just message us on WhatsApp at{" "}
+      <a href={dataRequest} target="_blank" rel="noopener">
+        {site.whatsapp.display}
+      </a>
+      . We may ask you to confirm your identity first, to protect your data, and
+      we reply within 15 days. If you are not satisfied, you may also file a
+      complaint with Brazil's{" "}
+      <a
+        href="https://www.gov.br/anpd/pt-br"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        National Data Protection Authority (ANPD)
+        <span class="sr-only"> (opens in a new tab)</span>
+      </a>
+      .
+    </p>
+
+    <h2>Children and teenagers</h2>
+    <p>
+      This website and our services are aimed at businesses and adults. We do
+      not knowingly collect data from anyone under 18.
+    </p>
+
+    <h2>Links to other websites</h2>
+    <p>
+      Some pages link to third-party websites (such as LinkedIn and WhatsApp).
+      Once you click, that website's privacy policy applies.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      This policy may be updated when the website or the law changes. The date
+      at the top shows the current version.
+    </p>
+  </LegalArticle>
+</BaseLayout>

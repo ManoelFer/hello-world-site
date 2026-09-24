@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // Precisa ser igual ao nome do Worker no dashboard (exigência do Workers Builds).
+  "name": "helloworldestudio",
+  "compatibility_date": "2026-09-22",
+  "assets": {
+    "directory": "./dist",
+    // /x/index.html é servido em /x/; /x e /x/index.html redirecionam para /x/.
+    "html_handling": "auto-trailing-slash",
+    // Rota inexistente serve o 404.html com status 404.
+    "not_found_handling": "404-page",
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  // Descomentar SÓ depois da zona helloworldestudio.com.br ficar "Active" na Cloudflare
+  // (ver o passo a passo do cutover de DNS no README):
+  // "routes": [{ "pattern": "helloworldestudio.com.br", "custom_domain": true }]
+}

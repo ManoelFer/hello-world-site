@@ -1,0 +1,25 @@
+---
+interface Props {
+  id?: string
+  /** Linha no topo separando da seção anterior. */
+  border?: boolean
+  class?: string
+  innerClass?: string
+}
+
+const {
+  id,
+  border = false,
+  class: className,
+  innerClass = "py-[72px] desk:py-[92px]",
+} = Astro.props
+---
+
+<section
+  id={id}
+  class:list={[border && "border-t border-line-soft", className]}
+>
+  <div class:list={["mx-auto max-w-6xl px-5 desk:px-10", innerClass]}>
+    <slot />
+  </div>
+</section>

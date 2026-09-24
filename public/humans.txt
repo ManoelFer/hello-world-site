@@ -1,0 +1,8 @@
+/* SITE */
+Site: https://helloworldestudio.com.br/
+Idiomas: Português (Brasil), English
+Tecnologia: Astro, TypeScript, Tailwind CSS, Cloudflare Workers
+
+/* DESENVOLVIMENTO */
+Estúdio: Hello World, estúdio de software
+Contato: https://wa.me/5564999690099

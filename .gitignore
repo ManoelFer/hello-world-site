@@ -1,1 +1,19 @@
 .DS_Store
+
+# dependências e build
+node_modules/
+dist/
+.astro/
+.wrangler/
+
+# variáveis de ambiente
+.env
+.env.*
+.dev.vars*
+
+# logs
+npm-debug.log*
+yarn-error.log
+
+# relatórios locais do Lighthouse CI
+.lighthouseci/

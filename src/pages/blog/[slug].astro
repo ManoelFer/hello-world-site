@@ -1,0 +1,61 @@
+---
+import { getCollection, render } from "astro:content"
+
+import LegalArticle from "@components/common/LegalArticle.astro"
+import CtaFinal from "@components/sections/CtaFinal.astro"
+import { site } from "@data/site"
+import { softwarePath } from "@data/software"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { formatDate } from "@lib/format"
+import { articleNode } from "@lib/seo"
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft)
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }))
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+const { title, description, date, updated } = post.data
+const path = `/blog/${post.id}/`
+// O nome do site só entra no <title> se couber nos 60 caracteres (seo.md).
+const withSite = `${title} | ${site.name}`
+const pageTitle = withSite.length <= 60 ? withSite : title
+const meta = [
+  `Por ${site.founder.name}, fundador`,
+  `publicado em ${formatDate(date)}`,
+  ...(updated ? [`atualizado em ${formatDate(updated)}`] : []),
+].join(" · ")
+---
+
+<BaseLayout
+  lang="pt"
+  title={pageTitle}
+  description={description}
+  waMessage={`Olá! Li o artigo "${title}" e quero conversar sobre um projeto.`}
+  jsonLd={[
+    articleNode({
+      path,
+      title,
+      description,
+      date,
+      updated,
+      image: "/og/default.jpg",
+    }),
+  ]}
+>
+  <LegalArticle title={title} updated={meta}>
+    <Content />
+    <p>
+      <a href={softwarePath}>
+        Conheça o desenvolvimento de software sob medida da Hello World
+      </a>
+      .
+    </p>
+  </LegalArticle>
+  <CtaFinal
+    lang="pt"
+    title="Tem um projeto em mente?"
+    message={`Olá! Li o artigo "${title}" e quero conversar sobre um projeto.`}
+  />
+</BaseLayout>

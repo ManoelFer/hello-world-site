@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets"
+
+import daquiDeGoias from "@assets/diferenciais/daqui-de-goias.svg"
+import feitoSobMedida from "@assets/diferenciais/feito-sob-medida.svg"
+import precoFechado from "@assets/diferenciais/preco-fechado.svg"
+import rapidoDeVerdade from "@assets/diferenciais/rapido-de-verdade.svg"
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+
+const items = [
+  {
+    image: rapidoDeVerdade,
+    t: "Rápido de verdade",
+    d: "Processo enxuto e comunicação direta: sem burocracia entre a ideia e o site no ar.",
+  },
+  {
+    image: precoFechado,
+    t: "Preço fechado",
+    d: "Você sabe quanto vai pagar antes de começar. Sem cobrança por hora nem surpresa no fim.",
+  },
+  {
+    image: daquiDeGoias,
+    t: "Daqui de Goiás",
+    d: "Estúdio de Aparecida de Goiânia, colado em Goiânia e perto de Trindade. Atendimento 100% online, pelo WhatsApp e por videochamada.",
+  },
+  {
+    image: feitoSobMedida,
+    t: "Feito sob medida",
+    d: "Nada de template genérico: layout e textos pensados para o seu negócio e o seu cliente.",
+  },
+]
+---
+
+<Section id="diferenciais" border>
+  <SectionHeading
+    kicker="diferenciais"
+    title="Um site que trabalha pelo seu negócio"
+    sub="Nada de template genérico nem orçamento que muda no meio do caminho."
+  />
+  <ul class="grid gap-[18px] sm:grid-cols-2 desk:grid-cols-4">
+    {items.map((item) => (
+      <li
+        data-reveal
+        class="group overflow-hidden rounded-[14px] border border-line bg-surface-2 transition-colors hover:border-accent/45"
+      >
+        <!-- Ilustração decorativa: o título já diz do que se trata -->
+        <div class="overflow-hidden border-b border-line">
+          <Image
+            src={item.image}
+            alt=""
+            format="svg"
+            class="aspect-16/10 h-auto w-full object-cover transition duration-700 motion-safe:group-hover:scale-105"
+          />
+        </div>
+        <div class="px-[26px] pt-6 pb-7">
+          <h3 class="mb-2.5 text-[19px] font-semibold">{item.t}</h3>
+          <p class="text-[14.5px] leading-relaxed text-muted">{item.d}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+</Section>

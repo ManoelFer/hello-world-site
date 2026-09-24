@@ -1,0 +1,25 @@
+---
+interface Props {
+  items: { v: string; l: string }[]
+}
+
+const { items } = Astro.props
+---
+
+<section class="border-y border-line">
+  <dl class="mx-auto flex max-w-6xl flex-wrap">
+    {items.map((st) => (
+      <div
+        data-reveal
+        class="flex flex-[1_1_45%] flex-col px-5 py-[22px] desk:flex-1 desk:border-r desk:border-line-soft desk:px-10 desk:py-[34px] desk:last:border-r-0"
+      >
+        <dt class="order-2 text-xs tracking-[0.13em] text-label uppercase">
+          {st.l}
+        </dt>
+        <dd class="mb-[7px] font-mono text-base font-bold text-text desk:text-[25px]">
+          {st.v}
+        </dd>
+      </div>
+    ))}
+  </dl>
+</section>

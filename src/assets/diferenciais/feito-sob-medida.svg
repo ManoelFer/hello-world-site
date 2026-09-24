@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600">
+<defs>
+<linearGradient id="fundo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#111614"/><stop offset="1" stop-color="#0a0d0c"/></linearGradient>
+<radialGradient id="brilho" cx="45%" cy="45%" r="75%"><stop offset="0" stop-color="#6ee7a0" stop-opacity=".2"/><stop offset=".62" stop-color="#6ee7a0" stop-opacity="0"/></radialGradient>
+<pattern id="pontos" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#e7efea" fill-opacity=".07"/></pattern>
+</defs>
+<rect width="960" height="600" fill="url(#fundo)"/>
+<rect width="960" height="600" fill="url(#pontos)"/>
+<rect width="960" height="600" fill="url(#brilho)"/>
+
+<g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M180 88h420M180 76v24M600 76v24" stroke="#6ee7a0" stroke-opacity=".7"/>
+<path d="M632 120v320M620 120h24M620 440h24" stroke="#6ee7a0" stroke-opacity=".7"/>
+<rect x="180" y="120" width="420" height="320" rx="14" stroke="#e7efea" stroke-opacity=".38" fill="#111614"/>
+<path d="M180 158h420" stroke="#e7efea" stroke-opacity=".24"/>
+<circle cx="204" cy="139" r="5" fill="#e7efea" fill-opacity=".3" stroke="none"/><circle cx="222" cy="139" r="5" fill="#e7efea" fill-opacity=".3" stroke="none"/><circle cx="240" cy="139" r="5" fill="#6ee7a0" fill-opacity=".7" stroke="none"/>
+<rect x="206" y="184" width="368" height="92" rx="10" stroke="#6ee7a0" stroke-opacity=".6" fill="#6ee7a0" fill-opacity=".1"/>
+<path d="M232 216h170" stroke="#6ee7a0" stroke-width="8"/>
+<path d="M232 246h120" stroke="#e7efea" stroke-opacity=".3"/>
+<rect x="206" y="296" width="112" height="118" rx="10" stroke="#e7efea" stroke-opacity=".3"/>
+<rect x="334" y="296" width="112" height="118" rx="10" stroke="#e7efea" stroke-opacity=".3"/>
+<rect x="462" y="296" width="112" height="118" rx="10" stroke="#6ee7a0" fill="#6ee7a0" fill-opacity=".3" stroke-dasharray="6 8"/>
+<path d="M226 324h60M226 346h40M354 324h60M354 346h40" stroke="#e7efea" stroke-opacity=".26"/>
+<g transform="rotate(35 770 290)">
+<rect x="750" y="150" width="40" height="220" rx="6" stroke="#6ee7a0" fill="#6ee7a0" fill-opacity=".12"/>
+<path d="M750 196h40" stroke="#6ee7a0"/>
+<path d="M750 370l20 46 20-46" stroke="#6ee7a0" fill="#6ee7a0" fill-opacity=".35"/>
+<path d="M764 402l6 14 6-14z" fill="#6ee7a0" stroke="none"/>
+</g>
+<path d="M660 470c20-18 50-18 70 0s50 18 70 0" stroke="#6ee7a0" stroke-opacity=".6"/>
+</g>
+</svg>

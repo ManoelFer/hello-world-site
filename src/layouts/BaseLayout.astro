@@ -1,0 +1,121 @@
+---
+import { Font } from "astro:assets"
+
+import FloatingWhatsApp from "@components/layout/FloatingWhatsApp.astro"
+import Footer from "@components/layout/Footer.astro"
+import Header from "@components/layout/Header.astro"
+import JsonLd from "@components/layout/JsonLd.astro"
+import Seo from "@components/layout/Seo.astro"
+import { site } from "@data/site"
+import type { RouteKey } from "@i18n/routes"
+import { htmlLang, type Lang, t } from "@i18n/ui"
+import { graph, organizationNode, websiteNode } from "@lib/seo"
+
+import "@styles/global.css"
+
+interface Props {
+  lang: Lang
+  title: string
+  description: string
+  /** Chave em src/i18n/routes.ts: define hreflang e o destino do seletor de idioma. */
+  routeKey?: RouteKey
+  /** Mensagem padrão do WhatsApp nesta página (header, menu, botão flutuante e footer). */
+  waMessage?: string
+  ogImage?: string
+  noindex?: boolean
+  /** Nós JSON-LD extras desta página (BreadcrumbList, Service...). Empresa e WebSite já entram sempre. */
+  jsonLd?: Record<string, unknown>[]
+}
+
+const {
+  lang,
+  title,
+  description,
+  routeKey,
+  ogImage,
+  noindex = false,
+  jsonLd = [],
+} = Astro.props
+const waMessage = Astro.props.waMessage ?? t(lang).waDefault
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      document.documentElement.classList.add("js")
+    </script>
+    <Seo
+      title={title}
+      description={description}
+      lang={lang}
+      routeKey={routeKey}
+      ogImage={ogImage}
+      noindex={noindex}
+    />
+    <meta name="theme-color" content="#0A0D0C" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="author" href="/humans.txt" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <Font cssVariable="--font-space-grotesk" preload />
+    <Font cssVariable="--font-jetbrains-mono" preload />
+    <JsonLd data={graph([organizationNode(), websiteNode(), ...jsonLd])} />
+    {site.umamiWebsiteId && (
+      <script
+        is:inline
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id={site.umamiWebsiteId}
+        data-domains="helloworldestudio.com.br"
+      ></script>
+    )}
+  </head>
+  <!-- padding-bottom: espaço para o botão flutuante do WhatsApp não cobrir o fim do footer. -->
+  <body class="min-h-dvh overflow-x-clip bg-bg pb-[calc(5.5rem+env(safe-area-inset-bottom))] text-text">
+    <a
+      href="#conteudo"
+      class="sr-only z-50 rounded-lg bg-accent px-4 py-2 font-bold text-on-accent focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+    >
+      {t(lang).skip}
+    </a>
+    <Header lang={lang} routeKey={routeKey} waMessage={waMessage} />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <Footer lang={lang} waMessage={waMessage} />
+    <FloatingWhatsApp lang={lang} message={waMessage} />
+
+    <!-- Scroll-reveal (<1 KB). Sem JS ou com prefers-reduced-motion, o CSS já mostra tudo. -->
+    <script is:inline>
+      ;(() => {
+        const els = document.querySelectorAll("[data-reveal]")
+        const show = (el) => el.classList.add("hw-in")
+        if (!("IntersectionObserver" in window)) return els.forEach(show)
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (!e.isIntersecting) continue
+              const el = e.target
+              const sibs = el.parentElement
+                ? [...el.parentElement.children].filter((c) =>
+                    c.hasAttribute("data-reveal"),
+                  )
+                : [el]
+              el.style.transitionDelay =
+                Math.max(0, sibs.indexOf(el)) * 80 + "ms"
+              show(el)
+              io.unobserve(el)
+            }
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+        )
+        els.forEach((el) => io.observe(el))
+        setTimeout(() => els.forEach(show), 4500)
+      })()
+    </script>
+  </body>
+</html>
