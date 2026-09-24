@@ -27,7 +27,7 @@ export const site = {
   /** Perfis DA EMPRESA (Perfil da Empresa no Google, Instagram, LinkedIn da empresa). O LinkedIn pessoal fica em `founder`. */
   sameAs: [] as string[],
   /** ID do site no Umami Cloud. Vazio = analytics desligado. */
-  umamiWebsiteId: "",
+  umamiWebsiteId: "c85a969f-109a-4de3-ba48-155639ffe528",
 } as const
 
 export const cities = [
