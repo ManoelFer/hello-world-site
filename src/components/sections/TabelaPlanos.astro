@@ -1,0 +1,100 @@
+---
+import PrecoPlano from "@components/common/PrecoPlano.astro"
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+import { comparativo, packages, planoSobMedida } from "@data/packages"
+import { softwarePath } from "@data/software"
+---
+
+<!-- Tabela larga: rola na horizontal dentro do wrapper, nunca a página. -->
+<Section id="comparativo">
+  <SectionHeading
+    kicker="compare os planos"
+    title="O que vem em cada plano"
+    sub="Preço, prazo e o que está incluso, lado a lado. No celular, arraste a tabela para o lado."
+  />
+  <div
+    data-reveal
+    class="overflow-x-auto rounded-2xl border border-line"
+    tabindex="0"
+    role="region"
+    aria-label="Tabela comparativa dos planos"
+  >
+    <table class="w-full min-w-[600px] border-collapse text-left text-[14.5px]">
+      <caption class="sr-only">
+        Comparação de preço, prazo e itens inclusos em cada plano de site
+      </caption>
+      <thead>
+        <tr class="bg-surface-2">
+          <th
+            scope="col"
+            class="w-[25%] p-4 font-mono text-xs font-normal text-label uppercase"
+          >
+            Plano
+          </th>
+          {packages.map((p) => (
+            <th scope="col" class="p-4 align-top">
+              <span
+                class:list={[
+                  "text-base font-bold",
+                  p.destaque && "text-accent",
+                ]}
+              >
+                {p.nome}
+              </span>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-t border-line-soft">
+          <th scope="row" class="p-4 font-semibold">
+            Investimento
+          </th>
+          {packages.map((p) => (
+            <td class="p-4 align-top">
+              <PrecoPlano plano={p} />
+            </td>
+          ))}
+        </tr>
+        {comparativo.map((linha) => (
+          <tr class="border-t border-line-soft">
+            <th scope="row" class="p-4 font-semibold">
+              {linha.item}
+            </th>
+            {packages.map((p) => (
+              <td class="p-4 align-top text-soft">{linha.valores[p.id]}</td>
+            ))}
+          </tr>
+        ))}
+        <tr class="border-t border-line-soft">
+          <td class="p-4"></td>
+          {packages.map((p) => (
+            <td class="p-4">
+              <WhatsAppButton
+                class="w-full"
+                variant={p.destaque ? "primary" : "ghost"}
+                message={p.msgWhatsApp}
+                placement={`precos-tabela-${p.id}`}
+                label="Quero este plano"
+              />
+            </td>
+          ))}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p data-reveal class="mt-6 text-[15px] leading-relaxed text-soft">
+    <span class="font-mono text-accent" aria-hidden="true">
+      ›
+    </span>{" "}
+    {`Precisa de um app, uma API ou um sistema para a sua empresa? O ${planoSobMedida.nome} é ${planoSobMedida.selo}, com preço fechado depois do diagnóstico.`}{" "}
+    <a
+      href={softwarePath}
+      class="text-accent underline underline-offset-4 hover:text-accent-hover"
+    >
+      Veja como funciona o software sob medida
+    </a>
+  </p>
+</Section>

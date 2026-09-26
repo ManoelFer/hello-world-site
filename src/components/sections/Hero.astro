@@ -2,7 +2,9 @@
 import ButtonLink from "@components/common/ButtonLink.astro"
 import WhatsAppButton from "@components/common/WhatsAppButton.astro"
 import TerminalCard from "@components/sections/TerminalCard.astro"
+import { garantiaDias, planoEntrada } from "@data/packages"
 import { type Lang, t } from "@i18n/ui"
+import { brl } from "@lib/format"
 
 interface Props {
   lang: Lang
@@ -15,8 +17,10 @@ const pt = {
   kicker: "Estúdio de software em Aparecida de Goiânia, desde 2020",
   sub: "Criação de sites e software sob medida para pequenas e médias empresas, com preço fechado e atendimento direto, 100% online. Do primeiro rascunho ao site no ar.",
   primary: "Pedir orçamento no WhatsApp",
-  secondary: "Ver pacotes",
+  secondary: "Ver planos e preços",
   secondaryHref: "#pacotes",
+  /** Preço no hero: quem vê "sob consulta" desiste antes de chamar. */
+  offer: `a partir de ${brl(planoEntrada.preco)} · pronto em ${planoEntrada.prazoDiasUteis} dias úteis · garantia de ${garantiaDias} dias`,
   note: "Atendemos Goiânia, Aparecida de Goiânia, Trindade e região",
 }
 const en: typeof pt = {
@@ -26,6 +30,7 @@ const en: typeof pt = {
   primary: "Start a project",
   secondary: "See what we do",
   secondaryHref: "#services",
+  offer: "",
   note: "Working remotely with clients anywhere · GMT-3",
 }
 const c = { pt, en }[lang]
@@ -60,9 +65,19 @@ const c = { pt, en }[lang]
           </>
         )}
       </h1>
-      <p class="mb-[34px] max-w-[40ch] text-[17px] leading-[1.62] text-soft desk:text-lg">
+      <p
+        class:list={[
+          "max-w-[40ch] text-[17px] leading-[1.62] text-soft desk:text-lg",
+          c.offer ? "mb-5" : "mb-[34px]",
+        ]}
+      >
         {c.sub}
       </p>
+      {c.offer && (
+        <p class="mb-[34px] font-mono text-sm font-semibold text-accent">
+          {c.offer}
+        </p>
+      )}
       <div class="flex flex-wrap gap-3.5">
         <WhatsAppButton
           size="lg"

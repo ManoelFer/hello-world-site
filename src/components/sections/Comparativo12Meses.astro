@@ -1,0 +1,86 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import { parcelasSemJuros, plano } from "@data/packages"
+import { brl } from "@lib/format"
+
+// Referências de mercado pesquisadas em setembro de 2026 (plano de ação em docs/).
+// Sem nome de concorrente: só o modelo de contratação.
+const institucional = plano("institucional")
+
+const linhas = [
+  {
+    opcao: `Hello World · ${institucional.nome} (à vista ou ${parcelasSemJuros}x sem juros)`,
+    custo: brl(institucional.preco),
+    dono: "Sim, desde a entrega",
+    hospedagem: "Sim (1º ano)",
+    nosso: true,
+  },
+  {
+    opcao: "Site por assinatura comum no mercado (R$ 300 + R$ 129,90/mês)",
+    custo: brl(300 + 129.9 * 12),
+    dono: "Não: cancelou, perdeu o site",
+    hospedagem: "Sim",
+    nosso: false,
+  },
+  {
+    opcao: "Site próprio sem hospedagem (R$ 1.800)",
+    custo: `${brl(1800)} + hospedagem`,
+    dono: "Sim",
+    hospedagem: "Não",
+    nosso: false,
+  },
+]
+---
+
+<Section id="comparativo-12-meses" border>
+  <SectionHeading
+    kicker="12 meses na ponta do lápis"
+    title="Quanto você gasta em um ano"
+    sub="Comparação com os modelos mais comuns no mercado, com valores de referência pesquisados em setembro de 2026."
+  />
+  <div
+    data-reveal
+    class="overflow-x-auto rounded-2xl border border-line"
+    tabindex="0"
+    role="region"
+    aria-label="Custo de 12 meses por modelo de contratação"
+  >
+    <table class="w-full min-w-[640px] border-collapse text-left text-[14.5px]">
+      <caption class="sr-only">
+        Custo em 12 meses, propriedade do site e hospedagem em cada modelo
+      </caption>
+      <thead>
+        <tr class="bg-surface-2 font-mono text-xs text-label uppercase">
+          <th scope="col" class="p-4 font-normal">
+            Opção
+          </th>
+          <th scope="col" class="p-4 font-normal">
+            Custo em 12 meses
+          </th>
+          <th scope="col" class="p-4 font-normal">
+            O site é seu?
+          </th>
+          <th scope="col" class="p-4 font-normal">
+            Hospedagem inclusa?
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {linhas.map((l) => (
+          <tr class="border-t border-line-soft">
+            <th
+              scope="row"
+              class:list={["p-4 font-semibold", l.nosso && "text-accent"]}
+            >
+              {l.opcao}
+            </th>
+            <td class="p-4 font-mono">{l.custo}</td>
+            <td class="p-4 text-soft">{l.dono}</td>
+            <td class="p-4 text-soft">{l.hospedagem}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Section>

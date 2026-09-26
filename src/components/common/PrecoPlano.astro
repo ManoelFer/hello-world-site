@@ -1,0 +1,25 @@
+---
+import { type Package, parcelado } from "@data/packages"
+import { brl } from "@lib/format"
+
+interface Props {
+  plano: Package
+}
+
+const { plano: p } = Astro.props
+---
+
+<div>
+  <p>
+    <span class="block font-mono text-xs text-label uppercase">
+      {p.aPartirDe ? "a partir de" : "à vista"}
+    </span>
+    <span class="font-mono text-[26px] font-bold">{brl(p.preco)}</span>
+    <span class="block font-mono text-xs text-label">
+      {`ou ${parcelado(p)}`}
+    </span>
+  </p>
+  <p class="mt-2 font-mono text-xs text-accent">
+    pronto em até {p.prazoDiasUteis} dias úteis
+  </p>
+</div>

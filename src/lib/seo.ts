@@ -1,5 +1,7 @@
 import { credentials } from "@data/credenciais"
+import { packages, precosPath } from "@data/packages"
 import { cities, site } from "@data/site"
+import { brl } from "@lib/format"
 
 const ORG_ID = `${site.url}/#empresa`
 const WEBSITE_ID = `${site.url}/#site`
@@ -9,6 +11,12 @@ export function absoluteUrl(path: string): string {
 }
 
 type Node = Record<string, unknown>
+
+/** "R$ 597 – R$ 3.997": do plano mais barato ao mais caro. */
+function priceRange(): string {
+  const precos = packages.map((p) => p.preco)
+  return `${brl(Math.round(Math.min(...precos)))} – ${brl(Math.round(Math.max(...precos)))}`
+}
 
 function areaServed(): Node[] {
   return cities.map((c) => ({
@@ -38,6 +46,7 @@ export function organizationNode(): Node {
       addressCountry: site.address.country,
     },
     areaServed: areaServed(),
+    priceRange: priceRange(),
     founder: {
       "@type": "Person",
       name: site.founder.name,
@@ -86,6 +95,7 @@ export function serviceNode(service: {
   name: string
   serviceType: string
   description: string
+  offers?: Node[]
 }): Node {
   return {
     "@type": "Service",
@@ -96,7 +106,27 @@ export function serviceNode(service: {
     url: absoluteUrl(service.path),
     provider: { "@id": ORG_ID },
     areaServed: areaServed(),
+    ...(service.offers ? { offers: service.offers } : {}),
   }
+}
+
+/** Uma Offer por plano de packages.ts, como aparecem em /planos-e-precos/. */
+export function planOffers(): Node[] {
+  return packages.map((p) => ({
+    "@type": "Offer",
+    name: p.nome,
+    url: absoluteUrl(precosPath),
+    priceCurrency: "BRL",
+    ...(p.aPartirDe
+      ? {
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            minPrice: p.preco.toFixed(2),
+            priceCurrency: "BRL",
+          },
+        }
+      : { price: p.preco.toFixed(2) }),
+  }))
 }
 
 /** Artigo do blog, com o fundador como autor (E-E-A-T). */
