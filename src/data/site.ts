@@ -1,5 +1,5 @@
 // Fonte ÚNICA de NAP (nome, endereço, telefone) e dados da empresa.
-// Canal de contato do site: SÓ WhatsApp. O e-mail pessoal foi retirado a pedido (caixa poluída, mensagens se perdem).
+// Canal principal de contato: WhatsApp (número comercial). E-mail profissional no domínio como canal secundário.
 // Footer, JSON-LD, links de WhatsApp e páginas de contato/privacidade leem daqui.
 // O Google Business Profile, o Instagram e o WhatsApp Business precisam usar exatamente os mesmos dados.
 
@@ -11,9 +11,10 @@ export const site = {
   foundingDate: "2020",
   cnpj: "37.461.150/0001-02",
   whatsapp: {
-    e164: "+5564999690099",
-    display: "(64) 99969-0099",
+    e164: "+5562999397121",
+    display: "(62) 99939-7121",
   },
+  email: "contato@helloworldestudio.com.br",
   // Negócio de área de atendimento: só cidade/UF, sem rua.
   address: {
     locality: "Aparecida de Goiânia",

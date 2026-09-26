@@ -5,4 +5,5 @@ Tecnologia: Astro, TypeScript, Tailwind CSS, Cloudflare Workers
 
 /* DESENVOLVIMENTO */
 Estúdio: Hello World, estúdio de software
-Contato: https://wa.me/5564999690099
+Contato: https://wa.me/5562999397121
+E-mail: contato@helloworldestudio.com.br

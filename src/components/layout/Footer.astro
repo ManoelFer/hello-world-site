@@ -62,6 +62,18 @@ const location =
           {site.whatsapp.display}
         </a>
       </div>
+      <div>
+        E-mail:{" "}
+        <a
+          href={`mailto:${site.email}`}
+          class="break-words text-accent hover:text-accent-hover"
+          data-umami-event="email_click"
+          data-umami-event-placement="footer"
+          data-umami-event-page={Astro.url.pathname}
+        >
+          {site.email}
+        </a>
+      </div>
     </address>
   </div>
 

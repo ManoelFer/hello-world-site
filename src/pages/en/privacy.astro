@@ -47,20 +47,20 @@ const dataRequest = waLink(
       {site.founder.name}, founder, on WhatsApp at{" "}
       <a href={dataRequest} target="_blank" rel="noopener">
         {site.whatsapp.display}
-      </a>
-      .
+      </a>{" "}
+      or by email at <a href={`mailto:${site.email}`}>{site.email}</a>.
     </p>
 
     <h2>What data we process and why</h2>
     <ul>
       <li>
-        <strong>WhatsApp contact.</strong> When you reach out, we receive the
-        data you choose to send, such as your name, phone number and a
-        description of your project. We use it to reply, prepare proposals and,
-        if we work together, deliver the service. Legal basis: pre-contractual
-        steps and performance of a contract (LGPD, art. 7, V). WhatsApp is a
-        Meta service, which processes conversation data under its own privacy
-        policy.
+        <strong>WhatsApp or email contact.</strong> When you reach out, we
+        receive the data you choose to send, such as your name, phone number and
+        a description of your project. We use it to reply, prepare proposals
+        and, if we work together, deliver the service. Legal basis:
+        pre-contractual steps and performance of a contract (LGPD, art. 7, V).
+        WhatsApp is a Meta service, which processes conversation data under its
+        own privacy policy.
       </li>
       {analytics ? (
         <li>
@@ -172,10 +172,11 @@ const dataRequest = waLink(
       Just message us on WhatsApp at{" "}
       <a href={dataRequest} target="_blank" rel="noopener">
         {site.whatsapp.display}
-      </a>
-      . We may ask you to confirm your identity first, to protect your data, and
-      we reply within 15 days. If you are not satisfied, you may also file a
-      complaint with Brazil's{" "}
+      </a>{" "}
+      or by email at <a href={`mailto:${site.email}`}>{site.email}</a>. We may
+      ask you to confirm your identity first, to protect your data, and we reply
+      within 15 days. If you are not satisfied, you may also file a complaint
+      with Brazil's{" "}
       <a
         href="https://www.gov.br/anpd/pt-br"
         target="_blank"

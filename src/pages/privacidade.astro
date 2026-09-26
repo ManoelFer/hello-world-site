@@ -9,7 +9,7 @@ const analytics = Boolean(site.umamiWebsiteId)
 const controller = site.legalName
   ? `${site.name} (${site.legalName})`
   : site.name
-// Canal para pedidos do titular (LGPD): WhatsApp, o único canal de contato do site.
+// Canal para pedidos do titular (LGPD): WhatsApp (principal) ou e-mail.
 const dataRequest = waLink(
   "Olá! Tenho uma solicitação sobre os meus dados pessoais (LGPD).",
 )
@@ -46,16 +46,16 @@ const dataRequest = waLink(
       {site.founder.name}, fundador, pelo WhatsApp{" "}
       <a href={dataRequest} target="_blank" rel="noopener">
         {site.whatsapp.display}
-      </a>
-      .
+      </a>{" "}
+      ou pelo e-mail <a href={`mailto:${site.email}`}>{site.email}</a>.
     </p>
 
     <h2>Quais dados tratamos e por quê</h2>
     <ul>
       <li>
-        <strong>Contato por WhatsApp.</strong> Quando você fala com a gente,
-        recebemos os dados que você decide enviar, como nome, telefone e a
-        descrição do seu projeto. Usamos esses dados para responder, preparar
+        <strong>Contato por WhatsApp ou e-mail.</strong> Quando você fala com a
+        gente, recebemos os dados que você decide enviar, como nome, telefone e
+        a descrição do seu projeto. Usamos esses dados para responder, preparar
         propostas e, se fecharmos negócio, prestar o serviço. Base legal:
         procedimentos preliminares e execução de contrato (art. 7º, V, da LGPD).
         O WhatsApp é um serviço da Meta, que trata os dados das conversas
@@ -171,10 +171,11 @@ const dataRequest = waLink(
       Basta enviar uma mensagem pelo WhatsApp{" "}
       <a href={dataRequest} target="_blank" rel="noopener">
         {site.whatsapp.display}
-      </a>
-      . Podemos pedir uma confirmação de identidade antes de atender, para
-      proteger os seus dados, e respondemos em até 15 dias. Se não ficar
-      satisfeito, você também pode reclamar à{" "}
+      </a>{" "}
+      ou pelo e-mail <a href={`mailto:${site.email}`}>{site.email}</a>. Podemos
+      pedir uma confirmação de identidade antes de atender, para proteger os
+      seus dados, e respondemos em até 15 dias. Se não ficar satisfeito, você
+      também pode reclamar à{" "}
       <a
         href="https://www.gov.br/anpd/pt-br"
         target="_blank"

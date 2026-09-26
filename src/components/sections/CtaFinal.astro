@@ -15,7 +15,7 @@ interface Props {
 const { lang } = Astro.props
 const message = Astro.props.message ?? t(lang).waDefault
 
-// "Fale conosco": canal único é o WhatsApp (sem e-mail, a pedido do usuário).
+// "Fale conosco": o WhatsApp é o canal principal; o e-mail aparece como alternativa.
 const pt = {
   id: "contato",
   kicker: "fale conosco",
@@ -79,7 +79,16 @@ const c = {
         )}
       </div>
       <p class="mt-[22px] font-mono text-[13.5px] leading-relaxed text-label">
-        WhatsApp {site.whatsapp.display}
+        WhatsApp {site.whatsapp.display} ·{" "}
+        <a
+          href={`mailto:${site.email}`}
+          class="break-words underline-offset-4 hover:text-accent hover:underline"
+          data-umami-event="email_click"
+          data-umami-event-placement="cta-final"
+          data-umami-event-page={Astro.url.pathname}
+        >
+          {site.email}
+        </a>
       </p>
     </div>
   </div>

@@ -1,6 +1,7 @@
 # Contato para relatar falhas de segurança neste site (RFC 9116).
 # Renove o campo Expires antes da data: depois dela o arquivo deixa de valer.
-Contact: https://wa.me/5564999690099
+Contact: mailto:contato@helloworldestudio.com.br
+Contact: https://wa.me/5562999397121
 Expires: 2027-09-24T00:00:00.000Z
 Preferred-Languages: pt, en
 Canonical: https://helloworldestudio.com.br/.well-known/security.txt

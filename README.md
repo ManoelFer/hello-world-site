@@ -84,5 +84,6 @@ Depois disso, cada push na `main` publica o site.
 
 ## Contato
 
-- WhatsApp: (64) 99969-0099
+- WhatsApp: (62) 99939-7121
+- E-mail: contato@helloworldestudio.com.br
 - LinkedIn: https://www.linkedin.com/in/manoel-fernandes-neto-988192177/

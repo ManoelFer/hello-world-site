@@ -37,6 +37,7 @@ export function organizationNode(): Node {
     logo: absoluteUrl("/logo-512.png"),
     image: absoluteUrl("/og/default.jpg"),
     telephone: site.whatsapp.e164,
+    email: site.email,
     foundingDate: site.foundingDate,
     taxID: site.cnpj,
     address: {
