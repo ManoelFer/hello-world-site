@@ -1,0 +1,73 @@
+---
+import ButtonLink from "@components/common/ButtonLink.astro"
+import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+
+interface Props {
+  /** Nome da página na trilha "Início › ...", igual ao BreadcrumbList do JSON-LD. */
+  crumb: string
+  kicker: string
+  title: string
+  /** Mensagem do WhatsApp desta página. */
+  message: string
+  placement: string
+  secondary?: { label: string; href: string }
+}
+
+const { crumb, kicker, title, message, placement, secondary } = Astro.props
+---
+
+<!-- Hero de página interna (só PT). É o LCP: nada aqui leva data-reveal. -->
+<section id="topo" class="relative overflow-hidden">
+  <div
+    class="dot-grid pointer-events-none absolute inset-0"
+    aria-hidden="true"
+  ></div>
+  <div class="relative mx-auto max-w-6xl px-5 pt-7 pb-[52px] desk:px-10 desk:pt-12 desk:pb-[78px]">
+    <nav
+      aria-label="Você está em"
+      class="mb-8 font-mono text-[12.5px] text-label"
+    >
+      <ol class="flex flex-wrap items-center gap-2">
+        <li>
+          <a
+            href="/"
+            class="inline-flex min-h-11 items-center hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Início
+          </a>
+        </li>
+        <li aria-hidden="true">›</li>
+        <li aria-current="page" class="text-muted">
+          {crumb}
+        </li>
+      </ol>
+    </nav>
+    <p class="mb-[26px] inline-flex items-center gap-[9px] rounded-full border border-accent/20 bg-accent/8 px-[13px] py-[7px] font-mono text-[12.5px] text-accent">
+      <span
+        class="size-[7px] rounded-full bg-accent shadow-[0_0_9px_var(--color-accent)]"
+        aria-hidden="true"
+      ></span>
+      {kicker}
+    </p>
+    <h1 class="mb-[22px] max-w-[22ch] text-[34px] leading-[1.08] font-bold tracking-[-0.025em] desk:text-[52px] desk:leading-[1.05]">
+      {title}
+    </h1>
+    <div class="mb-[34px] flex max-w-[60ch] flex-col gap-4 text-[17px] leading-[1.62] text-soft desk:text-lg">
+      <slot />
+    </div>
+    <div class="flex flex-wrap gap-3.5">
+      <WhatsAppButton
+        size="lg"
+        arrow
+        message={message}
+        placement={placement}
+        label="Conversar no WhatsApp"
+      />
+      {secondary && (
+        <ButtonLink variant="ghost" size="lg" href={secondary.href}>
+          {secondary.label}
+        </ButtonLink>
+      )}
+    </div>
+  </div>
+</section>

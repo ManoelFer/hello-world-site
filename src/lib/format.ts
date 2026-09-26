@@ -1,11 +1,17 @@
-const brlFormatter = new Intl.NumberFormat("pt-BR", {
+const brlInteiro = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
   maximumFractionDigits: 0,
 })
+const brlCentavos = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+  minimumFractionDigits: 2,
+})
 
+/** "R$ 597" para valor inteiro, "R$ 109,90" quando tem centavos. */
 export function brl(value: number): string {
-  return brlFormatter.format(value)
+  return (Number.isInteger(value) ? brlInteiro : brlCentavos).format(value)
 }
 
 const dateFormatter = new Intl.DateTimeFormat("pt-BR", {

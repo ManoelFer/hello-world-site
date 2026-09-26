@@ -1,0 +1,87 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import {
+  adicionais,
+  garantiaDias,
+  naoIncluso,
+  pagamentoPix,
+  parcelasSemJuros,
+} from "@data/packages"
+import { brl } from "@lib/format"
+
+const cuidado = adicionais[0]
+
+const regras = [
+  {
+    titulo: `Garantia de ${garantiaDias} dias`,
+    texto: `Desistiu em até ${garantiaDias} dias corridos depois de contratar? Devolvemos 100% do valor pago, sem precisar explicar o motivo.`,
+  },
+  {
+    titulo: "Formas de pagamento",
+    texto: `No Pix, ${pagamentoPix}: você só paga o resto quando vê o site pronto. No cartão, em até ${parcelasSemJuros}x sem juros, pelo mesmo preço.`,
+  },
+  {
+    titulo: "Prazo por escrito",
+    texto:
+      "O prazo em dias úteis vai na proposta e começa a contar quando recebemos o seu material (logo, textos e fotos).",
+  },
+  {
+    titulo: "Domínio no seu nome",
+    texto:
+      "O endereço do site (seunegocio.com.br) é registrado no seu CPF ou CNPJ, em todos os planos. Ninguém fica refém de ninguém.",
+  },
+  {
+    titulo: "Sem fidelidade, sem assinatura",
+    texto: `Você paga o site uma vez (no Pix ou em até ${parcelasSemJuros}x sem juros no cartão) e ele é seu. Depois do 1º ano, contrata o ${cuidado.nome} por ${brl(cuidado.valor)}/mês se quiser, ou leva o site para outra hospedagem.`,
+  },
+]
+---
+
+<Section id="regras" border>
+  <SectionHeading
+    kicker="regras claras"
+    title="Garantia, prazos e o que não está incluso"
+    sub="Tudo o que costuma virar surpresa no meio do projeto, dito antes de você fechar."
+  />
+  <div class="grid gap-[18px] desk:grid-cols-2">
+    {regras.map((r) => (
+      <div data-reveal class="rounded-2xl border border-line bg-surface-2 p-7">
+        <h3 class="text-lg font-bold">{r.titulo}</h3>
+        <p class="mt-2 text-[15.5px] leading-relaxed text-soft">{r.texto}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-12 grid gap-10 desk:grid-cols-2">
+    <div data-reveal>
+      <h3 class="text-xl font-bold">O que não está incluso</h3>
+      <ul class="mt-4 flex flex-col gap-3 text-[15.5px] leading-relaxed text-soft">
+        {naoIncluso.map((item) => (
+          <li class="flex gap-3">
+            <span class="font-mono text-warn" aria-hidden="true">
+              ✕
+            </span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div data-reveal>
+      <h3 class="text-xl font-bold">Adicionais mensais (opcionais)</h3>
+      <ul class="mt-4 flex flex-col gap-4">
+        {adicionais.map((a) => (
+          <li class="rounded-2xl border border-line p-5">
+            <p class="flex flex-wrap items-baseline justify-between gap-2">
+              <span class="font-semibold">{a.nome}</span>
+              <span class="font-mono text-accent">{brl(a.valor)}/mês</span>
+            </p>
+            <p class="mt-1.5 text-[15px] leading-relaxed text-soft">
+              {a.descricao}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</Section>

@@ -1,18 +1,26 @@
 ---
+import PrecoPlano from "@components/common/PrecoPlano.astro"
 import Section from "@components/common/Section.astro"
 import SectionHeading from "@components/common/SectionHeading.astro"
 import WhatsAppButton from "@components/common/WhatsAppButton.astro"
-import { packages } from "@data/packages"
-import { brl } from "@lib/format"
+import {
+  garantiaDias,
+  packages,
+  pagamentoPix,
+  parcelasSemJuros,
+  planoSobMedida as sm,
+  precosPath,
+} from "@data/packages"
+import { softwarePath } from "@data/software"
 ---
 
 <Section id="pacotes" border>
   <SectionHeading
-    kicker="pacotes"
-    title="Escolha o ponto de partida"
-    sub="Três formatos para começar. Cada proposta é ajustada ao que o seu negócio precisa, com preço fechado."
+    kicker="planos e preços"
+    title="Preço aberto, prazo por escrito"
+    sub="Três planos com preço aberto e um sob medida. Em todos os planos o domínio fica no seu nome e o site é seu."
   />
-  <ul class="grid gap-[18px] desk:grid-cols-3">
+  <ul class="grid gap-[18px] desk:grid-cols-2">
     {packages.map((p) => (
       <li
         data-reveal
@@ -23,33 +31,17 @@ import { brl } from "@lib/format"
             : "border-line",
         ]}
       >
+        {p.selo && (
+          <p class="mb-3 self-start rounded-full border border-accent/25 bg-accent/8 px-3 py-1 font-mono text-xs text-accent">
+            {p.selo}
+          </p>
+        )}
         <h3 class="text-[21px] font-bold">{p.nome}</h3>
         <p class="mt-2 text-[14.5px] leading-relaxed text-muted">
           {p.idealPara}
         </p>
         <div class="mt-6 border-t border-line-soft pt-5">
-          {p.precoAPartirDe !== null ? (
-            <p>
-              <span class="block font-mono text-xs text-label uppercase">
-                a partir de
-              </span>
-              <span class="font-mono text-[26px] font-bold">
-                {brl(p.precoAPartirDe)}
-              </span>
-            </p>
-          ) : (
-            <p>
-              <span class="block font-mono text-xs text-label uppercase">
-                investimento
-              </span>
-              <span class="font-mono text-[22px] font-bold">Sob consulta</span>
-            </p>
-          )}
-          {p.prazoDias !== null && (
-            <p class="mt-1 font-mono text-xs text-label">
-              pronto em até {p.prazoDias} dias
-            </p>
-          )}
+          <PrecoPlano plano={p} />
         </div>
         <ul class="mt-5 mb-7 flex flex-col gap-2.5 text-[14.5px] leading-snug text-point">
           {p.inclui.map((item) => (
@@ -66,9 +58,80 @@ import { brl } from "@lib/format"
           variant={p.destaque ? "primary" : "ghost"}
           message={p.msgWhatsApp}
           placement={`pacote-${p.id}`}
-          label="Quero este pacote"
+          label="Quero este plano"
         />
       </li>
     ))}
+    <li
+      data-reveal
+      class="flex flex-col rounded-2xl border border-line bg-surface-2 p-7"
+    >
+      <p class="mb-3 self-start rounded-full border border-accent/25 bg-accent/8 px-3 py-1 font-mono text-xs text-accent">
+        {sm.selo}
+      </p>
+      <h3 class="text-[21px] font-bold">{sm.nome}</h3>
+      <p class="mt-2 text-[14.5px] leading-relaxed text-muted">
+        {sm.idealPara}
+      </p>
+      <div class="mt-6 border-t border-line-soft pt-5">
+        <p>
+          <span class="block font-mono text-xs text-label uppercase">
+            investimento
+          </span>
+          <span class="font-mono text-[26px] font-bold">Sob consulta</span>
+          <span class="block font-mono text-xs text-label">
+            preço fechado depois do diagnóstico
+          </span>
+        </p>
+      </div>
+      <ul class="mt-5 mb-7 flex flex-col gap-2.5 text-[14.5px] leading-snug text-point">
+        {sm.inclui.map((item) => (
+          <li class="flex gap-3">
+            <span class="font-mono text-accent" aria-hidden="true">
+              ✓
+            </span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-auto flex flex-col gap-3">
+        <WhatsAppButton
+          class="w-full"
+          variant="ghost"
+          message={sm.msgWhatsApp}
+          placement="pacote-software"
+          label="Agendar diagnóstico"
+        />
+        <a
+          href={softwarePath}
+          class="inline-flex min-h-11 items-center justify-center text-sm text-accent underline underline-offset-4 hover:text-accent-hover"
+        >
+          Conheça o desenvolvimento de software sob medida
+        </a>
+      </div>
+    </li>
   </ul>
+  <div
+    data-reveal
+    class="mt-8 flex flex-col gap-3 text-[15px] leading-relaxed text-soft"
+  >
+    <p>
+      <span class="font-mono text-accent" aria-hidden="true">
+        ›
+      </span>{" "}
+      {`Garantia de ${garantiaDias} dias: desistiu, devolvemos 100% do valor.`}{" "}
+      <a
+        href={precosPath}
+        class="text-accent underline underline-offset-4 hover:text-accent-hover"
+      >
+        Compare os planos e veja o que está incluso
+      </a>
+    </p>
+    <p>
+      <span class="font-mono text-accent" aria-hidden="true">
+        ›
+      </span>{" "}
+      {`Pague no Pix (${pagamentoPix}) ou em até ${parcelasSemJuros}x sem juros no cartão.`}
+    </p>
+  </div>
 </Section>

@@ -1,0 +1,67 @@
+---
+import AreaAtendimento from "@components/sections/AreaAtendimento.astro"
+import Comparativo12Meses from "@components/sections/Comparativo12Meses.astro"
+import CtaFinal from "@components/sections/CtaFinal.astro"
+import Faq from "@components/sections/Faq.astro"
+import PageHero from "@components/sections/PageHero.astro"
+import RegrasPlanos from "@components/sections/RegrasPlanos.astro"
+import TabelaPlanos from "@components/sections/TabelaPlanos.astro"
+import { precosFaq } from "@data/faq"
+import { garantiaDias, planoEntrada, precosPath } from "@data/packages"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { brl } from "@lib/format"
+import { breadcrumbNode, planOffers, serviceNode } from "@lib/seo"
+
+// Página só PT (sem par em routes.ts): mira "preço de site em Goiânia".
+// É o destino dos anúncios; a home fica com "criação de sites em Goiânia".
+const description = `Planos de site em Goiânia com preço aberto: landing page por ${brl(planoEntrada.preco)}, site institucional e loja virtual. Garantia de ${garantiaDias} dias.`
+const waMessage =
+  "Olá! Vi a página de planos e preços e quero tirar uma dúvida."
+const intro = `Quanto custa um site? A resposta sem rodeio: de ${brl(planoEntrada.preco)} por uma landing page pronta em ${planoEntrada.prazoDiasUteis} dias úteis até a loja virtual completa, com o preço, o prazo e o que está incluso em cada plano.`
+const confianca = `Em todos os planos o domínio fica no seu nome e o site é seu. Você fala direto com quem desenvolve, 100% online, e tem ${garantiaDias} dias de garantia.`
+---
+
+<BaseLayout
+  lang="pt"
+  title="Preço de Site em Goiânia: Planos e Valores | Hello World"
+  description={description}
+  waMessage={waMessage}
+  jsonLd={[
+    serviceNode({
+      path: precosPath,
+      name: "Criação de sites em Goiânia",
+      serviceType: "Criação de sites",
+      description,
+      offers: planOffers(),
+    }),
+    breadcrumbNode([
+      { name: "Início", path: "/" },
+      { name: "Planos e preços", path: precosPath },
+    ]),
+  ]}
+>
+  <PageHero
+    crumb="Planos e preços"
+    kicker="Preço aberto, sem 'sob consulta'"
+    title="Planos e preços para criar o seu site em Goiânia"
+    message={waMessage}
+    placement="precos-hero"
+    secondary={{ label: "Comparar os planos", href: "#comparativo" }}
+  >
+    <p>{intro}</p>
+    <p class="text-base text-muted">{confianca}</p>
+  </PageHero>
+  <TabelaPlanos />
+  <Comparativo12Meses />
+  <RegrasPlanos />
+  <AreaAtendimento
+    title="Sites para Goiânia, Aparecida de Goiânia, Trindade e região"
+    body="A Hello World é de Aparecida de Goiânia e cria sites para empresas de toda a região metropolitana. O atendimento é 100% online, pelo WhatsApp e por videochamada, e os preços desta página valem para qualquer cidade."
+  />
+  <Faq items={precosFaq} title="Dúvidas sobre preços e pagamento" />
+  <CtaFinal
+    lang="pt"
+    title="Escolheu o plano? Vamos conversar."
+    message={waMessage}
+  />
+</BaseLayout>

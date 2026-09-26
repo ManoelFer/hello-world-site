@@ -10,7 +10,7 @@ const pt = {
   skip: "Pular para o conteúdo",
   // Todo link termina em `/` ou numa âncora da home (trailingSlash: 'always').
   nav: [
-    { label: "Pacotes", href: "/#pacotes" },
+    { label: "Preços", href: "/planos-e-precos/" },
     { label: "Software", href: "/desenvolvimento-de-software-goiania/" },
     { label: "Como funciona", href: "/#como-funciona" },
     { label: "Sobre", href: "/#sobre" },
@@ -28,6 +28,7 @@ const pt = {
   /** Páginas de serviço linkadas no rodapé (reforça os links internos de SEO). */
   footerLinks: [
     { label: "Criação de sites em Goiânia", href: "/" },
+    { label: "Preço de site: planos e valores", href: "/planos-e-precos/" },
     {
       label: "Desenvolvimento de software em Goiânia",
       href: "/desenvolvimento-de-software-goiania/",
