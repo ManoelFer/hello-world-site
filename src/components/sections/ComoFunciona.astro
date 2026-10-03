@@ -1,6 +1,4 @@
 ---
-import Section from "@components/common/Section.astro"
-import SectionHeading from "@components/common/SectionHeading.astro"
 import { type Step, steps as defaultSteps } from "@data/process"
 import type { Lang } from "@i18n/ui"
 
@@ -19,34 +17,271 @@ const pt = {
   kicker: "como funciona",
   title: "Do primeiro contato ao site no ar",
   sub: "Um processo simples, com você por dentro de cada etapa.",
+  brief: [
+    "Objetivo: mais clientes",
+    "Quem é o público?",
+    "Referências que você gosta",
+  ],
+  layerH1: "Seu negócio",
+  layerH2: "no ar",
+  cta: "Orçamento",
+  seo: [
+    "Meta tags e títulos",
+    "Sitemap e indexação",
+    "Imagens otimizadas",
+    "Core Web Vitals",
+  ],
+  online: "online · seusite.com.br",
+  url: "seusite.com.br",
 }
 const en: typeof pt = {
   id: "process",
   kicker: "how we work",
   title: "From first call to production",
   sub: "A simple process, with you in the loop at every step.",
+  brief: ["Goal: more clients", "Who is the audience?", "References you like"],
+  layerH1: "Your product",
+  layerH2: "live",
+  cta: "Contact",
+  seo: [
+    "Meta tags & titles",
+    "Sitemap & indexing",
+    "Optimized images",
+    "Core Web Vitals",
+  ],
+  online: "online · yourproduct.com",
+  url: "yourproduct.com",
 }
 const c = {
   ...{ pt, en }[lang],
   ...(Astro.props.title && { title: Astro.props.title }),
   ...(Astro.props.sub && { sub: Astro.props.sub }),
 }
+
+// O mockup tem 6 estados (briefing → wireframe → design → código → SEO → no ar).
+// Cada etapa aponta para um deles, distribuídos igualmente entre a primeira e a última.
+const n = steps.length
+const stateOf = (i: number) => (n > 1 ? Math.round((i * 5) / (n - 1)) : 0)
+const total = String(n).padStart(2, "0")
+const layer =
+  "absolute inset-0 opacity-0 motion-safe:transition-[opacity,transform] motion-safe:duration-500"
 ---
 
-<Section id={c.id} border>
-  <SectionHeading kicker={c.kicker} title={c.title} sub={c.sub} />
-  <ol class="grid gap-[18px] sm:grid-cols-2 desk:grid-cols-4">
-    {steps.map((s, i) => (
-      <li
-        data-reveal
-        class="rounded-[14px] border border-line bg-surface-2 px-[26px] py-7"
+<section id={c.id} class="border-t border-line-soft">
+  <div class="mx-auto max-w-7xl px-5 pt-[72px] pb-10 desk:px-12 desk:pt-[100px] desk:pb-14">
+    <div data-reveal class="mb-5">
+      <p class="mb-4 font-mono text-[13px] text-accent">// {c.kicker}</p>
+      <h2 class="mb-4 max-w-[18ch] text-[32px] leading-none font-bold tracking-[-0.035em] text-balance desk:text-[56px]">
+        {c.title}
+      </h2>
+      {c.sub && (
+        <p class="max-w-[42ch] text-base leading-relaxed text-muted">{c.sub}</p>
+      )}
+    </div>
+
+    <div
+      data-processo
+      data-s="0"
+      class="group/p desk:grid desk:grid-cols-[1.1fr_1fr] desk:items-start desk:gap-16"
+    >
+      <!-- Visual decorativo: as etapas em texto ao lado já contam tudo. -->
+      <div
+        aria-hidden="true"
+        class="sticky top-16 z-[3] flex flex-col justify-center gap-4 bg-bg pt-3.5 pb-4 desk:top-20 desk:h-[calc(100svh-6rem)] desk:bg-transparent desk:p-0"
       >
-        <div class="mb-[18px] font-mono text-[13px] text-accent">
-          {String(i + 1).padStart(2, "0")} {i < steps.length - 1 ? "->" : "✓"}
+        <div class="flex items-center gap-3.5 font-mono text-[13px] text-muted">
+          <span data-count class="font-bold text-accent">
+            01
+          </span>
+          <span>/ {total}</span>
+          <span class="relative h-0.5 flex-1 overflow-hidden bg-accent/15">
+            <span
+              data-bar
+              class="absolute inset-y-0 left-0 bg-accent shadow-[0_0_12px_var(--color-accent)] motion-safe:transition-[width] motion-safe:duration-500"
+              style={`width:${100 / n}%`}
+            ></span>
+          </span>
         </div>
-        <h3 class="mb-2.5 text-[19px] font-semibold">{s.t[lang]}</h3>
-        <p class="text-[14.5px] leading-relaxed text-muted">{s.d[lang]}</p>
-      </li>
-    ))}
-  </ol>
-</Section>
+        <div class="@container w-full max-w-[340px] overflow-hidden rounded-[18px] border border-accent/22 bg-surface-2 shadow-[0_40px_100px_-40px_rgb(0_0_0/.9),0_0_70px_-40px_rgb(61_255_176/.5)] desk:max-w-[620px]">
+          <div class="flex items-center gap-[7px] border-b border-line bg-[#0d1412] px-4 py-3">
+            <span class="size-2.5 rounded-full bg-danger"></span>
+            <span class="size-2.5 rounded-full bg-warn"></span>
+            <span class="size-2.5 rounded-full bg-accent"></span>
+            <span class="ml-2.5 font-mono text-xs text-label">{c.url}</span>
+          </div>
+          <div class="relative aspect-[16/11]">
+            <div class:list={[layer, "group-data-[s=0]/p:opacity-100"]}>
+              {c.brief.map((b, i) => (
+                <div
+                  class:list={[
+                    "absolute rounded p-[3.4cqi] text-[max(11px,2.6cqi)] leading-snug font-semibold shadow-[0_20px_40px_-20px_#000]",
+                    i === 0 &&
+                      "top-[12%] left-[8%] w-[38%] -rotate-5 bg-warn text-[#2a1f00]",
+                    i === 1 &&
+                      "top-[20%] right-[8%] w-[36%] rotate-4 bg-accent text-on-accent",
+                    i === 2 &&
+                      "bottom-[10%] left-[28%] w-[40%] -rotate-2 bg-text text-surface-2",
+                  ]}
+                >
+                  {b}
+                </div>
+              ))}
+            </div>
+
+            <div
+              class:list={[
+                layer,
+                "flex flex-col gap-[4%] p-[5%] group-data-[s=1]/p:opacity-100",
+              ]}
+            >
+              <div class="h-[8%] rounded-md border-[1.5px] border-dashed border-text/30"></div>
+              <div class="grid flex-[1.4] grid-cols-2 gap-[4%]">
+                <div class="flex flex-col justify-center gap-[10%] rounded-md border-[1.5px] border-dashed border-text/30 p-[8%]">
+                  <span class="h-[12%] w-[90%] border-[1.5px] border-dashed border-text/30"></span>
+                  <span class="h-[8%] w-[70%] border-[1.5px] border-dashed border-text/30"></span>
+                  <span class="h-[12%] w-[40%] rounded-full border-[1.5px] border-dashed border-text/30"></span>
+                </div>
+                <div class="rounded-md border-[1.5px] border-dashed border-text/30 bg-[linear-gradient(to_top_right,transparent_calc(50%-1px),rgb(234_242_238/.2)_50%,transparent_calc(50%+1px))]"></div>
+              </div>
+              <div class="grid flex-1 grid-cols-3 gap-[4%]">
+                <span class="rounded-md border-[1.5px] border-dashed border-text/30"></span>
+                <span class="rounded-md border-[1.5px] border-dashed border-text/30"></span>
+                <span class="rounded-md border-[1.5px] border-dashed border-text/30"></span>
+              </div>
+            </div>
+
+            <div
+              class:list={[
+                layer,
+                "flex flex-col gap-[4%] p-[5%] group-data-[s=2]/p:opacity-100 group-data-[s=3]/p:opacity-100 group-data-[s=4]/p:opacity-100 group-data-[s=5]/p:opacity-100",
+              ]}
+            >
+              <div class="flex h-[8%] items-center justify-between">
+                <span class="h-1/2 w-[18%] rounded bg-text"></span>
+                <span class="h-4/5 w-[16%] rounded-full bg-accent"></span>
+              </div>
+              <div class="grid flex-[1.4] grid-cols-2 gap-[4%]">
+                <div class="flex flex-col justify-center gap-[9%]">
+                  <span class="text-[max(14px,4.4cqi)] leading-none font-bold tracking-[-0.03em]">
+                    {c.layerH1} <span class="text-accent">{c.layerH2}</span>
+                  </span>
+                  <span class="h-[6%] w-4/5 rounded bg-text/18"></span>
+                  <span class="h-[14%] w-[42%] rounded-full bg-accent"></span>
+                </div>
+                <div class="relative overflow-hidden rounded-[10px] bg-linear-160 from-[#1e2b26] to-[#0c1210]">
+                  <div class="absolute inset-x-0 bottom-0 h-1/2 bg-[radial-gradient(60%_100%_at_50%_100%,rgb(61_255_176/.4),transparent)]"></div>
+                </div>
+              </div>
+              <div class="grid flex-1 grid-cols-3 gap-[4%]">
+                <span class="rounded-[10px] border border-accent/20 bg-[#111a17]"></span>
+                <span class="rounded-[10px] border border-accent/20 bg-[#111a17]"></span>
+                <span class="rounded-[10px] border border-accent/20 bg-[#111a17]"></span>
+              </div>
+            </div>
+
+            <div class="absolute top-[6%] right-[6%] w-[62%] translate-y-3 rounded-[10px] border border-accent/30 bg-bg/94 p-[4%] font-mono text-[max(10px,2.1cqi)] leading-[1.8] whitespace-pre text-soft opacity-0 shadow-[0_30px_60px_-20px_#000] group-data-[s=3]/p:translate-y-0 group-data-[s=3]/p:opacity-100 motion-safe:transition-[opacity,transform] motion-safe:duration-500">
+              <div>
+                <span class="text-accent">&lt;section</span> class=
+                <span class="text-warn">"hero"</span>
+                <span class="text-accent">&gt;</span>
+              </div>
+              <div>
+                <span class="text-accent">&lt;h1&gt;</span>
+                {c.layerH1} {c.layerH2}
+                <span class="text-accent">&lt;/h1&gt;</span>
+              </div>
+              <div>
+                <span class="text-accent">&lt;a</span> href=
+                <span class="text-warn">"/contato/"</span>
+                <span class="text-accent">&gt;</span>
+                {c.cta}
+                <span class="text-accent">&lt;/a&gt;</span>
+              </div>
+              <div>
+                <span class="text-accent">&lt;/section&gt;</span>
+              </div>
+            </div>
+
+            <div class="absolute bottom-[8%] left-[6%] flex w-[56%] translate-y-3 flex-col gap-[9px] rounded-xl border border-accent/30 bg-bg/94 p-[4.5%] opacity-0 shadow-[0_30px_60px_-20px_#000] group-data-[s=4]/p:translate-y-0 group-data-[s=4]/p:opacity-100 motion-safe:transition-[opacity,transform] motion-safe:duration-500">
+              {c.seo.map((s) => (
+                <div class="flex items-center gap-2.5 text-[max(11px,2.3cqi)] text-point">
+                  <span class="inline-flex size-[18px] flex-none items-center justify-center rounded-full bg-accent text-[11px] font-bold text-on-accent">
+                    ✓
+                  </span>
+                  {s}
+                </div>
+              ))}
+            </div>
+
+            <div class="absolute inset-0 flex scale-95 items-center justify-center opacity-0 group-data-[s=5]/p:scale-100 group-data-[s=5]/p:opacity-100 motion-safe:transition-[opacity,transform] motion-safe:duration-500">
+              <div class="flex items-center gap-3 rounded-full border border-accent bg-bg/94 px-6 py-3.5 font-mono text-[max(12px,2.6cqi)] font-bold text-accent shadow-[0_0_60px_-10px_rgb(61_255_176/.7)]">
+                <span class="size-2.5 animate-pulse-ring rounded-full bg-accent motion-reduce:animate-none"></span>
+                {c.online}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ol>
+        {steps.map((s, i) => (
+          <li
+            data-step
+            data-state={stateOf(i)}
+            data-active={i === 0 ? "" : undefined}
+            class="flex min-h-[58vh] flex-col justify-center in-[.js]:opacity-30 data-active:opacity-100 motion-safe:transition-opacity motion-safe:duration-500 desk:min-h-[72vh]"
+          >
+            <span
+              class="mb-5 font-mono text-[48px] leading-none font-extrabold text-transparent [-webkit-text-stroke:1.5px_var(--color-accent)] desk:text-[80px]"
+              aria-hidden="true"
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h3 class="mb-3.5 text-2xl font-bold tracking-[-0.025em] desk:text-4xl">
+              {s.t[lang]}
+            </h3>
+            <p class="max-w-[40ch] text-[17px] leading-[1.65] text-muted">
+              {s.d[lang]}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Etapa ativa = última cujo topo passou de 60% da tela. Atualiza o mockup, o contador e a barra.
+  for (const root of document.querySelectorAll<HTMLElement>(
+    "[data-processo]",
+  )) {
+    const steps = [...root.querySelectorAll<HTMLElement>("[data-step]")]
+    const count = root.querySelector<HTMLElement>("[data-count]")
+    const bar = root.querySelector<HTMLElement>("[data-bar]")
+    let current = -1
+    let ticking = false
+    const update = () => {
+      ticking = false
+      const line = window.innerHeight * 0.6
+      let active = 0
+      steps.forEach((el, i) => {
+        if (el.getBoundingClientRect().top < line) active = i
+      })
+      if (active === current) return
+      current = active
+      steps.forEach((el, i) => el.toggleAttribute("data-active", i === active))
+      root.dataset.s = steps[active].dataset.state
+      if (count) count.textContent = String(active + 1).padStart(2, "0")
+      if (bar) bar.style.width = `${((active + 1) / steps.length) * 100}%`
+    }
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true
+        requestAnimationFrame(update)
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
+    update()
+  }
+</script>

@@ -1,8 +1,9 @@
 ---
-import ButtonLink from "@components/common/ButtonLink.astro"
 import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+import { packages } from "@data/packages"
 import { site } from "@data/site"
 import { type Lang, t } from "@i18n/ui"
+import { waLink } from "@lib/whatsapp"
 
 interface Props {
   lang: Lang
@@ -10,19 +11,33 @@ interface Props {
   message?: string
   title?: string
   sub?: string
+  /** Opções do campo "tipo de projeto" do formulário. */
+  options?: string[]
 }
 
 const { lang } = Astro.props
 const message = Astro.props.message ?? t(lang).waDefault
 
-// "Fale conosco": o WhatsApp é o canal principal; o e-mail aparece como alternativa.
+// WhatsApp é o canal principal (botão + formulário que abre a conversa pronta); e-mail é a alternativa.
 const pt = {
   id: "contato",
   kicker: "fale conosco",
   title: "Vamos tirar o seu site do papel?",
   sub: "Conte sua ideia pelo WhatsApp. Respondo pessoalmente, geralmente no mesmo dia.",
   whatsapp: "Chamar no WhatsApp",
-  linkedin: "",
+  orEmail: "Prefere e-mail?",
+  fName: "Seu nome",
+  fType: "Tipo de projeto",
+  fMsg: "Conte sobre o projeto",
+  fSend: "Enviar pelo WhatsApp",
+  fNote: "Abre o WhatsApp com a sua mensagem pronta.",
+  waName: "Meu nome é",
+  waType: "Tenho interesse em",
+  options: [
+    ...packages.map((p) => p.nome),
+    "Software sob medida",
+    "Ainda não sei",
+  ],
 }
 const en: typeof pt = {
   id: "contact",
@@ -30,66 +45,147 @@ const en: typeof pt = {
   title: "Let’s build something together?",
   sub: "Tell me about your idea on WhatsApp. I answer personally, usually the same day.",
   whatsapp: "Message us on WhatsApp",
-  linkedin: "View LinkedIn",
+  orEmail: "Prefer e-mail?",
+  fName: "Your name",
+  fType: "Project type",
+  fMsg: "Tell us about the project",
+  fSend: "Send via WhatsApp",
+  fNote: "Opens WhatsApp with your message ready.",
+  waName: "My name is",
+  waType: "I'm interested in",
+  options: [
+    "Website",
+    "Web app",
+    "Mobile app",
+    "Backend & APIs",
+    "Not sure yet",
+  ],
 }
 const c = {
   ...{ pt, en }[lang],
   ...(Astro.props.title && { title: Astro.props.title }),
   ...(Astro.props.sub && { sub: Astro.props.sub }),
+  ...(Astro.props.options && { options: Astro.props.options }),
 }
+
+const field =
+  "rounded-xl border border-accent/20 bg-surface-2 px-3.5 py-[13px] text-[15px] text-text outline-none focus:border-accent"
 ---
 
 <section
   id={c.id}
-  class="mx-auto max-w-6xl px-5 py-[72px] desk:px-10 desk:py-24"
+  class="mx-auto max-w-7xl px-5 py-[72px] desk:px-12 desk:pt-16 desk:pb-28"
 >
   <div
     data-reveal
-    class="relative overflow-hidden rounded-[22px] border border-accent/22 bg-linear-135 from-[#10201a] to-[#0d1210] px-[22px] py-10 text-center desk:px-12 desk:py-[58px]"
+    class="relative overflow-hidden rounded-[28px] border border-accent/25 bg-linear-150 from-[#0d1a15] to-[#060a09] to-60% px-5 py-8 desk:px-14 desk:py-16"
   >
     <div
-      class="dot-grid pointer-events-none absolute inset-0 [background-size:24px_24px]"
+      class="line-grid pointer-events-none absolute inset-0 bg-size-[48px_48px] opacity-80"
       aria-hidden="true"
     ></div>
-    <div class="relative">
-      <p class="mb-4 font-mono text-[13px] text-accent">$ {c.kicker}</p>
-      <h2 class="mx-auto mb-4 max-w-[20ch] text-[26px] font-bold tracking-[-0.02em] desk:text-[40px]">
-        {c.title}
-      </h2>
-      <p class="mx-auto max-w-[46ch] text-[17px] leading-relaxed text-soft">
-        {c.sub}
-      </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-3.5">
+    <div class="relative grid items-center gap-10 desk:grid-cols-2 desk:gap-14">
+      <div>
+        <p class="mb-4 font-mono text-[13px] text-accent">$ {c.kicker}</p>
+        <h2 class="mb-[18px] text-[32px] leading-none font-bold tracking-[-0.035em] text-balance desk:text-[52px]">
+          {c.title}
+        </h2>
+        <p class="mb-8 max-w-[40ch] text-[17px] leading-relaxed text-soft">
+          {c.sub}
+        </p>
         <WhatsAppButton
           size="lg"
           message={message}
           placement="cta-final"
           label={c.whatsapp}
+          class="rounded-full shadow-[0_18px_50px_-18px_rgb(61_255_176/.8)]"
         />
-        {c.linkedin && (
-          <ButtonLink
-            variant="ghost"
-            size="lg"
-            href={site.founder.linkedin}
-            target="_blank"
-            rel="noopener"
+        <p class="mt-[22px] font-mono text-[13.5px] leading-relaxed text-label">
+          WhatsApp {site.whatsapp.display} · {c.orEmail}{" "}
+          <a
+            href={`mailto:${site.email}`}
+            class="break-words text-accent underline-offset-4 hover:text-accent-hover hover:underline"
+            data-umami-event="email_click"
+            data-umami-event-placement="cta-final"
+            data-umami-event-page={Astro.url.pathname}
           >
-            {c.linkedin}
-          </ButtonLink>
-        )}
+            {site.email}
+          </a>
+        </p>
       </div>
-      <p class="mt-[22px] font-mono text-[13.5px] leading-relaxed text-label">
-        WhatsApp {site.whatsapp.display} ·{" "}
-        <a
-          href={`mailto:${site.email}`}
-          class="break-words underline-offset-4 hover:text-accent hover:underline"
-          data-umami-event="email_click"
-          data-umami-event-placement="cta-final"
+
+      <!-- Sem JS, o formulário abre o WhatsApp com a mensagem padrão (campo "text"). -->
+      <form
+        data-wa-form
+        action={waLink(message)}
+        method="get"
+        target="_blank"
+        data-hello={message}
+        data-name-label={c.waName}
+        data-type-label={c.waType}
+        class="flex flex-col gap-3.5 rounded-[20px] border border-accent/16 bg-bg/70 p-6 backdrop-blur-sm desk:p-7"
+      >
+        <input type="hidden" name="text" value={message} />
+        <label class="flex flex-col gap-[7px] text-[13px] text-muted">
+          {c.fName}
+          <input data-f="nome" required autocomplete="name" class={field} />
+        </label>
+        <label class="flex flex-col gap-[7px] text-[13px] text-muted">
+          {c.fType}
+          <select data-f="tipo" class={field}>
+            {c.options.map((o) => (
+              <option>{o}</option>
+            ))}
+          </select>
+        </label>
+        <label class="flex flex-col gap-[7px] text-[13px] text-muted">
+          {c.fMsg}
+          <textarea
+            data-f="msg"
+            rows="4"
+            class:list={[field, "resize-y"]}
+          ></textarea>
+        </label>
+        <button
+          type="submit"
+          class="mt-1 cursor-pointer rounded-full bg-accent px-[22px] py-[15px] text-[15px] font-bold text-on-accent transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          data-umami-event="whatsapp_click"
+          data-umami-event-placement="cta-final-form"
           data-umami-event-page={Astro.url.pathname}
         >
-          {site.email}
-        </a>
-      </p>
+          {c.fSend}{" "}
+          <span class="font-mono" aria-hidden="true">
+            -&gt;
+          </span>
+        </button>
+        <p class="text-center text-[12.5px] text-subtle">{c.fNote}</p>
+      </form>
     </div>
   </div>
 </section>
+
+<script>
+  // Monta a mensagem com os campos e abre o WhatsApp (o action já tem o número).
+  for (const form of document.querySelectorAll<HTMLFormElement>(
+    "[data-wa-form]",
+  )) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault()
+      const get = (k: string) =>
+        form.querySelector<HTMLInputElement>(`[data-f="${k}"]`)?.value.trim() ??
+        ""
+      const { hello, nameLabel, typeLabel } = form.dataset
+      const text = [
+        hello,
+        `${nameLabel} ${get("nome")}.`,
+        `${typeLabel}: ${get("tipo")}.`,
+        get("msg") && `\n${get("msg")}`,
+      ]
+        .filter(Boolean)
+        .join("\n")
+      const url = new URL(form.action)
+      url.searchParams.set("text", text)
+      window.open(url, "_blank", "noopener")
+    })
+  }
+</script>

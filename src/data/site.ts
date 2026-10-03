@@ -30,21 +30,3 @@ export const site = {
   /** ID do site no Umami Cloud. Vazio = analytics desligado. */
   umamiWebsiteId: "c85a969f-109a-4de3-ba48-155639ffe528",
 } as const
-
-export const cities = [
-  {
-    id: "goiania",
-    name: "Goiânia",
-    wikipedia: "https://pt.wikipedia.org/wiki/Goi%C3%A2nia",
-  },
-  {
-    id: "aparecida-de-goiania",
-    name: "Aparecida de Goiânia",
-    wikipedia: "https://pt.wikipedia.org/wiki/Aparecida_de_Goi%C3%A2nia",
-  },
-  {
-    id: "trindade",
-    name: "Trindade",
-    wikipedia: "https://pt.wikipedia.org/wiki/Trindade_(Goi%C3%A1s)",
-  },
-] as const

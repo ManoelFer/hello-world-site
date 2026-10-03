@@ -103,7 +103,7 @@ export const packages: Package[] = [
 /**
  * 4º plano, sem preço público: apps, APIs e sistemas para uma empresa específica.
  * O preço sai do diagnóstico (proposta com escopo, prazo e preço fechados, paga por etapas)
- * e o conteúdo completo fica em /desenvolvimento-de-software-goiania/.
+ * e o conteúdo completo fica em /desenvolvimento-de-software/.
  */
 export const planoSobMedida = {
   id: "software",

@@ -1,6 +1,4 @@
 ---
-import Section from "@components/common/Section.astro"
-import SectionHeading from "@components/common/SectionHeading.astro"
 import { services } from "@data/services"
 import type { Lang } from "@i18n/ui"
 
@@ -25,20 +23,27 @@ const en: typeof pt = {
 const c = { pt, en }[lang]
 ---
 
-<Section id={c.id} border>
-  <SectionHeading kicker={c.kicker} title={c.title} sub={c.sub} />
-  <ul class="grid gap-[18px] sm:grid-cols-2 desk:grid-cols-3">
-    {services.map((s, i) => (
-      <li
-        data-reveal
-        class="rounded-[14px] border border-line bg-surface-2 px-[26px] py-7 transition-colors hover:border-accent/45"
-      >
-        <div class="mb-[18px] font-mono text-[13px] text-accent">
-          // {String(i + 1).padStart(2, "0")}
-        </div>
-        <h3 class="mb-2.5 text-[19px] font-semibold">{s.t[lang]}</h3>
-        <p class="text-[14.5px] leading-relaxed text-muted">{s.d[lang]}</p>
-      </li>
-    ))}
-  </ul>
-</Section>
+<section id={c.id} class="border-t border-line-soft">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-[72px] desk:grid-cols-[.9fr_1.6fr] desk:gap-14 desk:px-12 desk:py-[100px]">
+    <div data-reveal>
+      <p class="mb-4 font-mono text-[13px] text-accent">// {c.kicker}</p>
+      <h2 class="mb-4 text-[28px] leading-[1.05] font-bold tracking-[-0.03em] text-balance desk:text-[42px]">
+        {c.title}
+      </h2>
+      <p class="max-w-[36ch] text-base leading-relaxed text-muted">{c.sub}</p>
+    </div>
+    <ul class="grid border-t border-line sm:grid-cols-2 sm:gap-x-8">
+      {services.map((s, i) => (
+        <li data-reveal class="flex gap-4 border-b border-line py-[22px] pr-1">
+          <span class="pt-1 font-mono text-xs text-accent" aria-hidden="true">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <div>
+            <h3 class="mb-1.5 text-[17px] font-semibold">{s.t[lang]}</h3>
+            <p class="text-[14.5px] leading-normal text-label">{s.d[lang]}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

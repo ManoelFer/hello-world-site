@@ -1,11 +1,11 @@
 import type { FaqItem } from "@data/faq"
 import type { Step } from "@data/process"
 
-// Conteúdo da página /desenvolvimento-de-software-goiania/ (só PT).
+// Conteúdo da página /desenvolvimento-de-software/ (só PT).
 // As etapas têm EN porque usam o tipo `Step` de process.ts; a página em si é só PT.
 // Sem promessas que o estúdio ainda não confirmou (preço, prazo, propriedade do código).
 
-export const softwarePath = "/desenvolvimento-de-software-goiania/"
+export const softwarePath = "/desenvolvimento-de-software/"
 
 /** Situações em que um software sob medida costuma valer a pena. */
 export const softwareSignals: string[] = [
@@ -73,7 +73,7 @@ export const softwareFaq: FaqItem[] = [
     a: "Na maioria dos casos, sim. Se o sistema atual oferece uma API ou uma forma de exportar dados, dá para conectar os dois e acabar com a digitação em dobro. Isso é avaliado no diagnóstico.",
   },
   {
-    q: "Vocês atendem só empresas de Goiânia?",
-    a: "Atendemos Goiânia, Aparecida de Goiânia, Trindade e toda a região metropolitana. O atendimento é 100% online, pelo WhatsApp e por videochamada, então empresas de outras cidades são atendidas do mesmo jeito.",
+    q: "Vocês atendem empresas de outras cidades?",
+    a: "Sim, de qualquer lugar do Brasil. O atendimento é 100% online, pelo WhatsApp e por videochamada, então o processo é o mesmo em qualquer cidade.",
   },
 ]

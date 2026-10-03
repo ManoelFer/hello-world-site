@@ -38,7 +38,7 @@ export const faq: FaqItem[] = [
   },
   {
     q: "O site vai aparecer no Google?",
-    a: "Todo site sai com a base técnica de SEO: carregamento rápido, títulos e textos pensados para as buscas da sua região, sitemap e cadastro no Google Search Console. No Site Institucional, entregamos também um guia para aparecer melhor no Google e criamos o Perfil da Empresa.",
+    a: "Todo site sai com a base técnica de SEO: carregamento rápido, títulos e textos pensados para as buscas do seu público, sitemap e cadastro no Google Search Console. No Site Institucional, entregamos também um guia para aparecer melhor no Google e criamos o Perfil da Empresa.",
   },
   {
     q: "O site funciona bem no celular?",
@@ -49,8 +49,8 @@ export const faq: FaqItem[] = [
     a: "Você não fica sozinho. Ajustes, atualizações de conteúdo e novas páginas continuam com quem construiu o site, combinados de acordo com a sua necessidade.",
   },
   {
-    q: "Vocês atendem só em Goiânia?",
-    a: "Atendemos Goiânia, Aparecida de Goiânia, Trindade e toda a região metropolitana. Todo o atendimento é online, pelo WhatsApp e por videochamada, então projetos de outras cidades são atendidos do mesmo jeito.",
+    q: "Vocês atendem empresas de outras cidades?",
+    a: "Sim, atendemos o Brasil inteiro. Todo o atendimento é online, pelo WhatsApp e por videochamada, e o processo é o mesmo em qualquer cidade.",
   },
 ]
 

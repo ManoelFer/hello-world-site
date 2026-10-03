@@ -73,11 +73,11 @@ import { softwarePath } from "@data/software"
           {packages.map((p) => (
             <td class="p-4">
               <WhatsAppButton
-                class="w-full"
+                class="w-full whitespace-nowrap"
                 variant={p.destaque ? "primary" : "ghost"}
                 message={p.msgWhatsApp}
                 placement={`precos-tabela-${p.id}`}
-                label="Quero este plano"
+                label="Quero este"
               />
             </td>
           ))}

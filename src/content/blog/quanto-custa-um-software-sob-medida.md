@@ -1,5 +1,5 @@
 ---
-title: "Quanto custa um software sob medida em Goiânia?"
+title: "Quanto custa um software sob medida?"
 description: "O que faz o preço de um sistema sob medida subir ou cair, como começar por uma primeira versão menor e o que pedir na proposta antes de fechar."
 date: 2026-09-24
 draft: true
@@ -12,7 +12,7 @@ RASCUNHO GERADO POR IA: revisar antes de trocar `draft` para `false`.
 - Trocar `date` para o dia da publicação.
 -->
 
-A resposta curta é que depende do tamanho do problema que o sistema precisa resolver, e não do tamanho da empresa. Um sistema simples para controlar pedidos de uma loja de Aparecida de Goiânia custa bem menos que uma plataforma com app, painel administrativo e integração com o ERP de uma distribuidora de Goiânia. Mas dá para entender o que pesa no preço antes de pedir o orçamento.
+A resposta curta é que depende do tamanho do problema que o sistema precisa resolver, e não do tamanho da empresa. Um sistema simples para controlar pedidos de uma loja custa bem menos que uma plataforma com app, painel administrativo e integração com o ERP de uma distribuidora. Mas dá para entender o que pesa no preço antes de pedir o orçamento.
 
 ## O que faz o preço subir ou cair
 
@@ -28,7 +28,7 @@ O jeito mais seguro de investir em software é começar pelo que resolve a dor p
 
 ## O que pedir na proposta
 
-Antes de fechar com qualquer empresa de software, em Goiânia ou fora, peça por escrito:
+Antes de fechar com qualquer empresa de software, onde quer que ela fique, peça por escrito:
 
 - o **escopo**: o que está incluído e, principalmente, o que não está;
 - o **prazo** de cada etapa, e não só a data final;

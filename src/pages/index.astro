@@ -8,6 +8,7 @@ import Hero from "@components/sections/Hero.astro"
 import MissaoVisaoValores from "@components/sections/MissaoVisaoValores.astro"
 import Pacotes from "@components/sections/Pacotes.astro"
 import Portfolio from "@components/sections/Portfolio.astro"
+import SiteVoa from "@components/sections/SiteVoa.astro"
 import Sobre from "@components/sections/Sobre.astro"
 import SoftwareTeaser from "@components/sections/SoftwareTeaser.astro"
 import { garantiaDias, planoEntrada } from "@data/packages"
@@ -16,20 +17,21 @@ import { brl } from "@lib/format"
 
 // Preço no title e na description: no Google, quem mostra valor ganha o clique.
 const preco = brl(planoEntrada.preco)
-const title = `Criação de Sites em Goiânia a partir de ${preco} | Hello World`
-const description = `Sites profissionais para empresas de Goiânia, Aparecida e Trindade a partir de ${preco}, prontos em ${planoEntrada.prazoDiasUteis} dias úteis e com garantia de ${garantiaDias} dias. Fale no WhatsApp.`
+const title = `Criação de Sites a partir de ${preco} | Hello World`
+const description = `Sites profissionais para empresas de todo o Brasil a partir de ${preco}, prontos em ${planoEntrada.prazoDiasUteis} dias úteis e com garantia de ${garantiaDias} dias. Fale no WhatsApp.`
 ---
 
 <BaseLayout lang="pt" routeKey="home" title={title} description={description}>
   <Hero lang="pt" />
   <Diferenciais />
-  <Pacotes />
+  <SiteVoa />
   <Portfolio lang="pt" />
   <ComoFunciona lang="pt" />
   <AreaAtendimento />
   <SoftwareTeaser />
   <Sobre lang="pt" />
   <MissaoVisaoValores lang="pt" />
+  <Pacotes />
   <Faq />
   <CtaFinal lang="pt" />
 </BaseLayout>

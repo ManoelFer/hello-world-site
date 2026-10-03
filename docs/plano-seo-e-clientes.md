@@ -60,7 +60,7 @@ Meta em 90 dias: top 3 em "criação de sites Aparecida de Goiânia", top 10 em 
        - integração com ERP ou emissão de nota fiscal, que vão para o orçamento de software.
 
    - **Plano Mensal retirado (26/09/2026):** custava menos em 12 meses (R$ 1.467,80) que o Institucional à vista (R$ 1.497), trazendo mais serviço, e canibalizava o Institucional. Quem não quer pagar de uma vez parcela o Institucional em 12x.
-   - Software continua "sob consulta" e aponta para `/desenvolvimento-de-software-goiania/`.
+   - Software continua "sob consulta" e aponta para `/desenvolvimento-de-software/`.
    - Adicionais: Cuidado do site por R$ 49,90/mês e SEO local por R$ 297/mês.
    - A mensagem de WhatsApp e o `placement` continuam específicos de cada plano.
 2. **`Pacotes.astro` na home.**

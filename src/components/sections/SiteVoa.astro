@@ -1,0 +1,117 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+
+// Só PT. Sem preço: o que cada site leva para carregar rápido, aparecer no Google e gerar contato.
+const cards = [
+  {
+    t: "Carrega em segundos",
+    d: "Site estático, entregue por CDN e com imagens otimizadas. Sem plugin pesado e sem peso desnecessário.",
+  },
+  {
+    t: "Celular primeiro",
+    d: "A maior parte das visitas vem do celular. Cada página nasce nele e depois cresce para o desktop.",
+  },
+  {
+    t: "Pronto para o Google",
+    d: "Títulos, descrições, sitemap, dados estruturados e Search Console configurados desde o primeiro dia.",
+  },
+  {
+    t: "Feito para gerar contato",
+    d: "Botão de WhatsApp em todas as telas, com mensagem pronta. Medimos os cliques, sem cookies.",
+  },
+  {
+    t: "Seguro e no ar",
+    d: "HTTPS, cabeçalhos de segurança e hospedagem global. O site não cai nem avisa “não seguro”.",
+  },
+]
+
+// Metas que a nossa pipeline trava no Lighthouse (celular): são o piso, não o resultado de cada site.
+const metas = [
+  { nome: "Desempenho", valor: "90+", barra: "w-[90%]" },
+  { nome: "Acessibilidade", valor: "95+", barra: "w-[95%]" },
+  { nome: "Boas práticas", valor: "95+", barra: "w-[95%]" },
+  { nome: "SEO", valor: "100", barra: "w-full" },
+]
+---
+
+<Section id="site-voa" border>
+  <SectionHeading
+    kicker="O que entregamos"
+    title="Tudo que seu site precisa para vender."
+    sub="Não é só um layout bonito. Cada site sai com a parte técnica que faz diferença na hora de aparecer e de converter."
+  />
+  <div class="grid gap-10 desk:grid-cols-[1.1fr_1fr] desk:items-center desk:gap-14">
+    <ol class="grid gap-3.5">
+      {cards.map((card, i) => (
+        <li
+          data-reveal
+          class="flex items-start gap-4 rounded-[14px] border border-line bg-surface-2 px-5 py-5 transition-colors hover:border-line-strong"
+        >
+          <span
+            class="inline-flex size-[38px] flex-none items-center justify-center rounded-full border-[1.5px] border-accent font-mono text-xs font-bold text-accent"
+            aria-hidden="true"
+          >
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <div>
+            <h3 class="mb-1.5 text-[17px] font-semibold">{card.t}</h3>
+            <p class="text-[15px] leading-relaxed text-muted">{card.d}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div
+      class="relative mx-auto w-full max-w-[520px] pb-10 desk:pb-0"
+      aria-hidden="true"
+    >
+      <div class="@container rounded-xl border border-line-strong bg-surface shadow-[0_34px_70px_-30px_rgb(0_0_0/.95),0_0_60px_-30px_rgb(61_255_176/.35)]">
+        <div class="flex items-center gap-2 border-b border-line px-4 py-3">
+          <span class="size-2.5 rounded-full bg-danger"></span>
+          <span class="size-2.5 rounded-full bg-warn"></span>
+          <span class="size-2.5 rounded-full bg-accent"></span>
+          <span class="ml-3 flex-1 rounded-full bg-bg px-3 py-1 font-mono text-[11px] text-label">
+            seusite.com.br
+          </span>
+        </div>
+        <div class="grid gap-3 bg-[#090d0c] px-5 py-6">
+          <span class="font-mono text-[11px] font-bold">
+            seu<span class="text-accent">.negócio</span>
+          </span>
+          <span class="h-3 w-3/4 rounded bg-line-strong"></span>
+          <span class="h-3 w-1/2 rounded bg-line"></span>
+          <span class="mt-2 inline-flex self-start rounded-full bg-accent px-3 py-1.5 font-mono text-[10px] font-bold text-on-accent">
+            Chamar no WhatsApp →
+          </span>
+          <div class="mt-3 grid grid-cols-3 gap-2">
+            <span class="h-14 rounded-lg bg-line"></span>
+            <span class="h-14 rounded-lg bg-accent/40"></span>
+            <span class="h-14 rounded-lg bg-line"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute right-[-2%] bottom-0 w-[62%] animate-float rounded-[14px] border border-accent/30 bg-[#121917] px-4 py-3.5 shadow-[0_24px_50px_-20px_rgb(0_0_0/.95),0_0_40px_-16px_rgb(61_255_176/.4)] motion-reduce:animate-none desk:right-[-6%] desk:bottom-[-8%]">
+        <p class="mb-2.5 font-mono text-[11px] text-accent">
+          &gt;_ metas de qualidade
+        </p>
+        <ul class="grid gap-2.5">
+          {metas.map((m) => (
+            <li>
+              <div class="mb-1 flex justify-between font-mono text-[11px]">
+                <span class="text-soft">{m.nome}</span>
+                <span class="font-bold text-accent">{m.valor}</span>
+              </div>
+              <span class="block h-1.5 rounded-full bg-line">
+                <span
+                  class:list={["block h-full rounded-full bg-accent", m.barra]}
+                ></span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</Section>

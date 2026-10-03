@@ -1,6 +1,6 @@
 import { credentials } from "@data/credenciais"
 import { packages, precosPath } from "@data/packages"
-import { cities, site } from "@data/site"
+import { site } from "@data/site"
 import { brl } from "@lib/format"
 
 const ORG_ID = `${site.url}/#empresa`
@@ -18,12 +18,15 @@ function priceRange(): string {
   return `${brl(Math.round(Math.min(...precos)))} – ${brl(Math.round(Math.max(...precos)))}`
 }
 
+/** Atendimento 100% online: a área atendida é o país todo, não uma região. */
 function areaServed(): Node[] {
-  return cities.map((c) => ({
-    "@type": "City",
-    name: c.name,
-    sameAs: c.wikipedia,
-  }))
+  return [
+    {
+      "@type": "Country",
+      name: "Brasil",
+      sameAs: "https://pt.wikipedia.org/wiki/Brasil",
+    },
+  ]
 }
 
 /** LocalBusiness (não ProfessionalService, obsoleto no schema.org). Sem AggregateRating: avaliação do próprio site não gera estrela. */

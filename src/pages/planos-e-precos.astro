@@ -12,9 +12,9 @@ import BaseLayout from "@layouts/BaseLayout.astro"
 import { brl } from "@lib/format"
 import { breadcrumbNode, planOffers, serviceNode } from "@lib/seo"
 
-// Página só PT (sem par em routes.ts): mira "preço de site em Goiânia".
-// É o destino dos anúncios; a home fica com "criação de sites em Goiânia".
-const description = `Planos de site em Goiânia com preço aberto: landing page por ${brl(planoEntrada.preco)}, site institucional, Google Ads e loja virtual. Garantia de ${garantiaDias} dias.`
+// Página só PT (sem par em routes.ts): mira "preço de site".
+// É o destino dos anúncios; a home fica com "criação de sites".
+const description = `Planos de site com preço aberto: landing page por ${brl(planoEntrada.preco)}, site institucional, Google Ads e loja virtual. Garantia de ${garantiaDias} dias.`
 const waMessage =
   "Olá! Vi a página de planos e preços e quero tirar uma dúvida."
 const intro = `Quanto custa um site? A resposta sem rodeio: de ${brl(planoEntrada.preco)} por uma landing page pronta em ${planoEntrada.prazoDiasUteis} dias úteis até a loja virtual completa, com o preço, o prazo e o que está incluso em cada plano.`
@@ -23,13 +23,13 @@ const confianca = `Em todos os planos o domínio fica no seu nome e o site é se
 
 <BaseLayout
   lang="pt"
-  title="Preço de Site em Goiânia: Planos e Valores | Hello World"
+  title="Preço de Site: Planos e Valores | Hello World"
   description={description}
   waMessage={waMessage}
   jsonLd={[
     serviceNode({
       path: precosPath,
-      name: "Criação de sites em Goiânia",
+      name: "Criação de sites",
       serviceType: "Criação de sites",
       description,
       offers: planOffers(),
@@ -43,7 +43,7 @@ const confianca = `Em todos os planos o domínio fica no seu nome e o site é se
   <PageHero
     crumb="Planos e preços"
     kicker="Preço aberto, sem 'sob consulta'"
-    title="Planos e preços para criar o seu site em Goiânia"
+    title="Planos e preços para criar o seu site"
     message={waMessage}
     placement="precos-hero"
     secondary={{ label: "Comparar os planos", href: "#comparativo" }}
@@ -55,8 +55,8 @@ const confianca = `Em todos os planos o domínio fica no seu nome e o site é se
   <Comparativo12Meses />
   <RegrasPlanos />
   <AreaAtendimento
-    title="Sites para Goiânia, Aparecida de Goiânia, Trindade e região"
-    body="A Hello World é de Aparecida de Goiânia e cria sites para empresas de toda a região metropolitana. O atendimento é 100% online, pelo WhatsApp e por videochamada, e os preços desta página valem para qualquer cidade."
+    title="Sites para empresas de qualquer cidade do Brasil"
+    body="O atendimento é 100% online, pelo WhatsApp e por videochamada, e os preços desta página valem para qualquer cidade do Brasil."
   />
   <Faq items={precosFaq} title="Dúvidas sobre preços e pagamento" />
   <CtaFinal

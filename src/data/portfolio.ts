@@ -20,7 +20,7 @@ export const cases: Case[] = [
     id: "edith-santos",
     name: "Edith Santos Advocacia",
     kind: {
-      pt: "Site · Advocacia previdenciária · Goiás",
+      pt: "Site · Advocacia previdenciária",
       en: "Website · Social security law · Brazil",
     },
     d: {

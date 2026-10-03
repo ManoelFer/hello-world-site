@@ -11,7 +11,7 @@ const pt = {
   // Todo link termina em `/` ou numa âncora da home (trailingSlash: 'always').
   nav: [
     { label: "Preços", href: "/planos-e-precos/" },
-    { label: "Software", href: "/desenvolvimento-de-software-goiania/" },
+    { label: "Software", href: "/desenvolvimento-de-software/" },
     { label: "Como funciona", href: "/#como-funciona" },
     { label: "Sobre", href: "/#sobre" },
     { label: "FAQ", href: "/#faq" },
@@ -24,14 +24,14 @@ const pt = {
   waDefault: "Olá! Vim pelo site da Hello World e quero um orçamento de site.",
   footerTagline: "Estúdio de software · Aparecida de Goiânia, GO",
   footerServes:
-    "Criação de sites e software sob medida para Goiânia, Aparecida de Goiânia, Trindade e região.",
+    "Criação de sites e software sob medida para empresas de todo o Brasil, com atendimento 100% online.",
   /** Páginas de serviço linkadas no rodapé (reforça os links internos de SEO). */
   footerLinks: [
-    { label: "Criação de sites em Goiânia", href: "/" },
+    { label: "Criação de sites profissionais", href: "/" },
     { label: "Preço de site: planos e valores", href: "/planos-e-precos/" },
     {
-      label: "Desenvolvimento de software em Goiânia",
-      href: "/desenvolvimento-de-software-goiania/",
+      label: "Desenvolvimento de software sob medida",
+      href: "/desenvolvimento-de-software/",
     },
   ],
   footerRights: "Todos os direitos reservados.",

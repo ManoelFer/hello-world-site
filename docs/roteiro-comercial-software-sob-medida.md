@@ -2,7 +2,7 @@
 
 Como vender e conduzir o 4º plano do site ("Software sob medida": apps, APIs e sistemas para uma empresa específica). O plano não mostra preço no site: o valor sai do diagnóstico. Levantamento feito em 26/09/2026.
 
-No site, o card fica em `src/data/packages.ts` (`planoSobMedida`) e aponta para `/desenvolvimento-de-software-goiania/`. O card promete duas coisas que este roteiro precisa cumprir:
+No site, o card fica em `src/data/packages.ts` (`planoSobMedida`) e aponta para `/desenvolvimento-de-software/`. O card promete duas coisas que este roteiro precisa cumprir:
 
 - diagnóstico gratuito por videochamada;
 - pagamento por etapas entregues.

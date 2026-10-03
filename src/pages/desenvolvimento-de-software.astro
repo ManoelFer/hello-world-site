@@ -14,23 +14,23 @@ import { softwareFaq, softwarePath, softwareSteps } from "@data/software"
 import BaseLayout from "@layouts/BaseLayout.astro"
 import { breadcrumbNode, serviceNode } from "@lib/seo"
 
-// Página só PT (sem par em routes.ts): mira "desenvolvimento de software em Goiânia".
+// Página só PT (sem par em routes.ts): mira "desenvolvimento de software".
 // A home fica com "criação de sites", para as duas não disputarem o mesmo termo.
 const description =
-  "Software sob medida, sistemas web, apps e integrações para empresas de Goiânia, Aparecida de Goiânia e Trindade. Preço fechado e orçamento no WhatsApp."
+  "Software sob medida, sistemas web, apps e integrações para empresas de todo o Brasil. Preço fechado e orçamento no WhatsApp."
 const waMessage =
   "Olá! Vi a página de desenvolvimento de software e quero conversar sobre um sistema sob medida."
 ---
 
 <BaseLayout
   lang="pt"
-  title="Desenvolvimento de Software em Goiânia | Hello World Estúdio"
+  title="Desenvolvimento de Software Sob Medida | Hello World Estúdio"
   description={description}
   waMessage={waMessage}
   jsonLd={[
     serviceNode({
       path: softwarePath,
-      name: "Desenvolvimento de software sob medida em Goiânia",
+      name: "Desenvolvimento de software sob medida",
       serviceType: "Desenvolvimento de software sob medida",
       description,
     }),
@@ -52,8 +52,8 @@ const waMessage =
   />
   <Tech lang="pt" />
   <AreaAtendimento
-    title="Desenvolvimento de software em Goiânia, Aparecida de Goiânia e Trindade"
-    body="A Hello World é de Aparecida de Goiânia e desenvolve software para empresas de toda a região metropolitana de Goiânia. O atendimento é 100% online, e a manutenção do sistema continua com quem o construiu."
+    title="Desenvolvimento de software para empresas de todo o Brasil"
+    body="O atendimento é 100% online, pelo WhatsApp e por videochamada, e a manutenção do sistema continua com quem o construiu."
   />
   <Sobre lang="pt" />
   <ArtigosRelacionados />
