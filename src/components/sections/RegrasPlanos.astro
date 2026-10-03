@@ -10,7 +10,8 @@ import {
 } from "@data/packages"
 import { brl } from "@lib/format"
 
-const cuidado = adicionais[0]
+const cuidado = adicionais.find((a) => a.nome === "Cuidado do site")
+if (!cuidado) throw new Error("Adicional Cuidado do site inexistente")
 
 const regras = [
   {
@@ -33,7 +34,7 @@ const regras = [
   },
   {
     titulo: "Sem fidelidade, sem assinatura",
-    texto: `Você paga o site uma vez (no Pix ou em até ${parcelasSemJuros}x sem juros no cartão) e ele é seu. Depois do 1º ano, contrata o ${cuidado.nome} por ${brl(cuidado.valor)}/mês se quiser, ou leva o site para outra hospedagem.`,
+    texto: `Você paga o site uma vez (no Pix ou em até ${parcelasSemJuros}x sem juros no cartão) e ele é seu. A hospedagem fica na sua conta, e você pode contratar o ${cuidado.nome} por ${brl(cuidado.valor)}/mês se quiser que cuidemos de segurança, backup e alterações.`,
   },
 ]
 ---

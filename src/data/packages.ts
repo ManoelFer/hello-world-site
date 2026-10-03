@@ -1,8 +1,12 @@
 // Planos de site com preço público (só PT: valores em BRL e público local).
 // Fonte única dos preços: home (Pacotes), /planos-e-precos/, Hero, FAQ e JSON-LD leem daqui.
-// Valores definidos em 25/09/2026 a partir do plano de ação em docs/. A Loja Virtual foi
-// posicionada logo abaixo da faixa de entrada das agências (R$ 4 mil a 7 mil) por ser o projeto
-// mais trabalhoso (pagamento, frete e cadastro de produtos).
+// Valores reajustados em 03/10/2026 após nova pesquisa: freelancer intermediário cobra landing de
+// R$ 900 a 2.500 e site institucional a partir de ~R$ 3 mil; agência pequena, landing de R$ 4 a 8 mil.
+// O estúdio vende qualidade, então fica acima do freelancer iniciante e abaixo das agências.
+// A Loja Virtual fica na entrada das agências (R$ 4 mil a 7 mil) por ser o projeto mais
+// trabalhoso (pagamento, frete e cadastro de produtos). O plano "Site + Google Ads" é o recomendado:
+// vale o Institucional + setup de Ads (conta, campanha, conversões) + 1 mês de acompanhamento.
+// A verba de anúncios é paga direto ao Google; a gestão contínua é o adicional "Gestão de Google Ads".
 // Sem plano "site por assinatura": custava menos que o Institucional com mais serviço e o
 // canibalizava. Quem não quer pagar de uma vez parcela o Institucional; manutenção é o Cuidado do site.
 // Prazos em dias úteis: só publicar prazo que seja cumprido de verdade.
@@ -12,7 +16,7 @@ import { brl } from "@lib/format"
 export const precosPath = "/planos-e-precos/"
 
 export interface Package {
-  id: "landing" | "institucional" | "loja"
+  id: "landing" | "institucional" | "ads" | "loja"
   nome: string
   /** Frase curta abaixo do nome. */
   selo?: string
@@ -39,27 +43,44 @@ export const packages: Package[] = [
       "SEO básico para aparecer no Google",
       "Hospedagem inclusa por 12 meses",
     ],
-    preco: 597,
+    preco: 897,
     prazoDiasUteis: 5,
-    msgWhatsApp: "Olá! Tenho interesse na Landing Page de R$ 597.",
+    msgWhatsApp: "Olá! Tenho interesse na Landing Page de R$ 897.",
   },
   {
     id: "institucional",
     nome: "Site Institucional",
-    selo: "recomendado",
     idealPara:
       "Clínicas, escritórios e comércio local que precisam de presença completa.",
     inclui: [
       "Até 6 páginas (serviços, sobre, contato...)",
       "SEO local para buscas da sua cidade",
       "Criação do Perfil da Empresa no Google",
-      "Hospedagem inclusa por 12 meses",
+      "Guia para o seu site aparecer melhor no Google (Search Console, Perfil da Empresa e sitemap)",
+      "Publicação do site no ar, na hospedagem que você contrata",
       "30 dias de ajustes depois da entrega",
     ],
-    preco: 1497,
+    preco: 1897,
     prazoDiasUteis: 10,
+    msgWhatsApp: "Olá! Tenho interesse no Site Institucional de R$ 1.897.",
+  },
+  {
+    id: "ads",
+    nome: "Site + Google Ads",
+    selo: "recomendado",
+    idealPara:
+      "Quem quer o site pronto e já aparecer para quem está procurando o seu serviço agora.",
+    inclui: [
+      "Tudo do Site Institucional (até 6 páginas, SEO local e Perfil da Empresa)",
+      "Criação e configuração da conta do Google Ads",
+      "Campanha inicial na rede de pesquisa, com palavras-chave da sua cidade",
+      "Conversões e rastreamento configurados: cliques no WhatsApp, ligações e formulário",
+      "30 dias de acompanhamento e ajustes da campanha",
+    ],
+    preco: 2997,
+    prazoDiasUteis: 15,
     destaque: true,
-    msgWhatsApp: "Olá! Tenho interesse no Site Institucional de R$ 1.497.",
+    msgWhatsApp: "Olá! Tenho interesse no Site + Google Ads de R$ 2.997.",
   },
   {
     id: "loja",
@@ -72,10 +93,10 @@ export const packages: Package[] = [
       "Cadastro de até 30 produtos",
       "Treinamento para usar o painel",
     ],
-    preco: 3997,
+    preco: 4497,
     aPartirDe: true,
     prazoDiasUteis: 25,
-    msgWhatsApp: "Olá! Tenho interesse na Loja Virtual a partir de R$ 3.997.",
+    msgWhatsApp: "Olá! Tenho interesse na Loja Virtual a partir de R$ 4.497.",
   },
 ]
 
@@ -133,6 +154,7 @@ export const comparativo: {
     valores: {
       landing: "1",
       institucional: "Até 6",
+      ads: "Até 6",
       loja: "Loja completa",
     },
   },
@@ -140,7 +162,8 @@ export const comparativo: {
     item: "Hospedagem",
     valores: {
       landing: "12 meses",
-      institucional: "12 meses",
+      institucional: "Você contrata, nós publicamos",
+      ads: "Você contrata, nós publicamos",
       loja: "Na plataforma da loja",
     },
   },
@@ -149,7 +172,17 @@ export const comparativo: {
     valores: {
       landing: "Básico",
       institucional: "Local",
+      ads: "Local",
       loja: "Básico",
+    },
+  },
+  {
+    item: "Guia para aparecer melhor no Google",
+    valores: {
+      landing: "—",
+      institucional: "Sim",
+      ads: "Sim",
+      loja: "—",
     },
   },
   {
@@ -157,6 +190,16 @@ export const comparativo: {
     valores: {
       landing: "—",
       institucional: "Criado por nós",
+      ads: "Criado por nós",
+      loja: "—",
+    },
+  },
+  {
+    item: "Google Ads (conta, campanha e conversões)",
+    valores: {
+      landing: "—",
+      institucional: "—",
+      ads: "Incluso",
       loja: "—",
     },
   },
@@ -165,6 +208,7 @@ export const comparativo: {
     valores: {
       landing: "Ajustes na entrega",
       institucional: "30 dias de ajustes",
+      ads: "30 dias de ajustes e de acompanhamento",
       loja: "30 dias de ajustes",
     },
   },
@@ -173,6 +217,7 @@ export const comparativo: {
     valores: {
       landing: "Sim",
       institucional: "Sim",
+      ads: "Sim",
       loja: "Sim",
     },
   },
@@ -181,6 +226,7 @@ export const comparativo: {
     valores: {
       landing: "Desde a entrega",
       institucional: "Desde a entrega",
+      ads: "Desde a entrega",
       loja: "Desde a entrega",
     },
   },
@@ -191,6 +237,8 @@ export const naoIncluso: string[] = [
   "Registro do domínio .com.br (cerca de R$ 40 por ano, pago direto no Registro.br e em seu nome)",
   "Textos longos, como artigos e descrições detalhadas de cada serviço (você envia ou contratamos à parte)",
   "Fotos profissionais (usamos as suas ou imagens de banco com licença)",
+  "No Site + Google Ads: a verba dos anúncios, paga direto ao Google (você define o valor; o estúdio não fica com nada dela)",
+  "Hospedagem do Site Institucional e do Site + Google Ads: você contrata (existe opção gratuita, como a Cloudflare), nós publicamos e ensinamos",
   "Na Loja Virtual: mensalidade da plataforma, taxas de pagamento e de frete, produtos além de 30 e integração com sistema de gestão ou nota fiscal",
 ]
 
@@ -201,7 +249,13 @@ export const adicionais: { nome: string; valor: number; descricao: string }[] =
       nome: "Cuidado do site",
       valor: 49.9,
       descricao:
-        "Hospedagem depois do 1º ano, certificado de segurança (HTTPS), backup e 1 alteração por mês.",
+        "Hospedagem depois do 1º ano (Landing Page), certificado de segurança (HTTPS), backup e 1 alteração por mês.",
+    },
+    {
+      nome: "Gestão de Google Ads",
+      valor: 897,
+      descricao:
+        "Acompanhamento e otimização da campanha depois do 1º mês, relatório mensal de cliques e contatos. Para verba de até cerca de R$ 3 mil por mês, paga direto ao Google.",
     },
     {
       nome: "SEO local",

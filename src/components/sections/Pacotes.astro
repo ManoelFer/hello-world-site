@@ -18,33 +18,81 @@ import { softwarePath } from "@data/software"
   <SectionHeading
     kicker="planos e preços"
     title="Preço aberto, prazo por escrito"
-    sub="Três planos com preço aberto e um sob medida. Em todos os planos o domínio fica no seu nome e o site é seu."
+    sub="Quatro planos com preço aberto e um sob medida. Em todos os planos o domínio fica no seu nome e o site é seu."
   />
-  <ul class="grid gap-[18px] desk:grid-cols-2">
-    {packages.map((p) => (
-      <li
-        data-reveal
-        class:list={[
-          "flex flex-col rounded-2xl border bg-surface-2 p-7",
-          p.destaque
-            ? "border-accent/45 shadow-[0_24px_70px_-40px_rgba(110,231,160,.45)]"
-            : "border-line",
-        ]}
-      >
-        {p.selo && (
-          <p class="mb-3 self-start rounded-full border border-accent/25 bg-accent/8 px-3 py-1 font-mono text-xs text-accent">
-            {p.selo}
+  <div data-reveal class="relative">
+    <ul
+      data-carrossel
+      tabindex="0"
+      aria-label="Planos de site"
+      class="-my-6 flex snap-x snap-mandatory gap-[18px] overflow-x-auto py-6 [scrollbar-width:none] desk:cursor-grab data-arrastando:cursor-grabbing data-arrastando:select-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+    >
+      {packages.map((p) => (
+        <li
+          data-slide
+          class:list={[
+            "flex flex-col rounded-2xl border bg-surface-2 p-7 motion-safe:transition-[opacity,scale] motion-safe:duration-500 data-fora:opacity-50 data-fora:scale-97",
+            "w-5/6 flex-none snap-start sm:w-88 desk:w-[calc((100%-54px)/3.3)]",
+            p.destaque
+              ? "border-accent/45 shadow-[0_10px_26px_-12px_rgba(110,231,160,.5)]"
+              : "border-line",
+          ]}
+        >
+          {p.selo && (
+            <p class="mb-3 self-start rounded-full border border-accent/25 bg-accent/8 px-3 py-1 font-mono text-xs text-accent">
+              {p.selo}
+            </p>
+          )}
+          <h3 class="text-[21px] font-bold">{p.nome}</h3>
+          <p class="mt-2 text-[14.5px] leading-relaxed text-muted">
+            {p.idealPara}
           </p>
-        )}
-        <h3 class="text-[21px] font-bold">{p.nome}</h3>
+          <div class="mt-6 border-t border-line-soft pt-5">
+            <PrecoPlano plano={p} />
+          </div>
+          <ul class="mt-5 mb-7 flex flex-col gap-2.5 text-[14.5px] leading-snug text-point">
+            {p.inclui.map((item) => (
+              <li class="flex gap-3">
+                <span class="font-mono text-accent" aria-hidden="true">
+                  ✓
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <WhatsAppButton
+            class="mt-auto w-full"
+            variant={p.destaque ? "primary" : "ghost"}
+            message={p.msgWhatsApp}
+            placement={`pacote-${p.id}`}
+            label="Quero este plano"
+          />
+        </li>
+      ))}
+      <li
+        data-slide
+        class="w-5/6 flex-none snap-start sm:w-88 desk:w-[calc((100%-54px)/3.3)] flex flex-col rounded-2xl border border-line bg-surface-2 p-7 motion-safe:transition-[opacity,scale] motion-safe:duration-500 data-fora:opacity-50 data-fora:scale-97"
+      >
+        <p class="mb-3 self-start rounded-full border border-accent/25 bg-accent/8 px-3 py-1 font-mono text-xs text-accent">
+          {sm.selo}
+        </p>
+        <h3 class="text-[21px] font-bold">{sm.nome}</h3>
         <p class="mt-2 text-[14.5px] leading-relaxed text-muted">
-          {p.idealPara}
+          {sm.idealPara}
         </p>
         <div class="mt-6 border-t border-line-soft pt-5">
-          <PrecoPlano plano={p} />
+          <p>
+            <span class="block font-mono text-xs text-label uppercase">
+              investimento
+            </span>
+            <span class="font-mono text-[26px] font-bold">Sob consulta</span>
+            <span class="block font-mono text-xs text-label">
+              preço fechado depois do diagnóstico
+            </span>
+          </p>
         </div>
         <ul class="mt-5 mb-7 flex flex-col gap-2.5 text-[14.5px] leading-snug text-point">
-          {p.inclui.map((item) => (
+          {sm.inclui.map((item) => (
             <li class="flex gap-3">
               <span class="font-mono text-accent" aria-hidden="true">
                 ✓
@@ -53,64 +101,41 @@ import { softwarePath } from "@data/software"
             </li>
           ))}
         </ul>
-        <WhatsAppButton
-          class="mt-auto w-full"
-          variant={p.destaque ? "primary" : "ghost"}
-          message={p.msgWhatsApp}
-          placement={`pacote-${p.id}`}
-          label="Quero este plano"
-        />
+        <div class="mt-auto flex flex-col gap-3">
+          <WhatsAppButton
+            class="w-full"
+            variant="ghost"
+            message={sm.msgWhatsApp}
+            placement="pacote-software"
+            label="Agendar diagnóstico"
+          />
+          <a
+            href={softwarePath}
+            class="inline-flex min-h-11 items-center justify-center text-sm text-accent underline underline-offset-4 hover:text-accent-hover"
+          >
+            Conheça o desenvolvimento de software sob medida
+          </a>
+        </div>
       </li>
-    ))}
-    <li
-      data-reveal
-      class="flex flex-col rounded-2xl border border-line bg-surface-2 p-7"
+    </ul>
+    <div
+      class="mt-4 hidden flex-wrap items-center justify-center"
+      data-pontos
+      role="group"
+      aria-label="Escolher plano"
     >
-      <p class="mb-3 self-start rounded-full border border-accent/25 bg-accent/8 px-3 py-1 font-mono text-xs text-accent">
-        {sm.selo}
-      </p>
-      <h3 class="text-[21px] font-bold">{sm.nome}</h3>
-      <p class="mt-2 text-[14.5px] leading-relaxed text-muted">
-        {sm.idealPara}
-      </p>
-      <div class="mt-6 border-t border-line-soft pt-5">
-        <p>
-          <span class="block font-mono text-xs text-label uppercase">
-            investimento
-          </span>
-          <span class="font-mono text-[26px] font-bold">Sob consulta</span>
-          <span class="block font-mono text-xs text-label">
-            preço fechado depois do diagnóstico
-          </span>
-        </p>
-      </div>
-      <ul class="mt-5 mb-7 flex flex-col gap-2.5 text-[14.5px] leading-snug text-point">
-        {sm.inclui.map((item) => (
-          <li class="flex gap-3">
-            <span class="font-mono text-accent" aria-hidden="true">
-              ✓
-            </span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-      <div class="mt-auto flex flex-col gap-3">
-        <WhatsAppButton
-          class="w-full"
-          variant="ghost"
-          message={sm.msgWhatsApp}
-          placement="pacote-software"
-          label="Agendar diagnóstico"
-        />
-        <a
-          href={softwarePath}
-          class="inline-flex min-h-11 items-center justify-center text-sm text-accent underline underline-offset-4 hover:text-accent-hover"
+      {[...packages.map((p) => p.nome), sm.nome].map((nome, i, todos) => (
+        <button
+          type="button"
+          data-ponto
+          aria-label={`Ir para o plano ${i + 1} de ${todos.length}: ${nome}`}
+          class="group flex size-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          Conheça o desenvolvimento de software sob medida
-        </a>
-      </div>
-    </li>
-  </ul>
+          <span class="block h-2 w-2 rounded-full bg-line transition-all duration-300 group-hover:bg-muted group-aria-[current=true]:w-6 group-aria-[current=true]:bg-accent" />
+        </button>
+      ))}
+    </div>
+  </div>
   <div
     data-reveal
     class="mt-8 flex flex-col gap-3 text-[15px] leading-relaxed text-soft"
@@ -135,3 +160,166 @@ import { softwarePath } from "@data/software"
     </p>
   </div>
 </Section>
+
+<script>
+  const lista = document.querySelector<HTMLElement>("[data-carrossel]")
+  const pontos = document.querySelector<HTMLElement>("[data-pontos]")
+
+  if (lista && pontos) {
+    const itens = Array.from(lista.children) as HTMLElement[]
+    const botoes = Array.from(
+      pontos.querySelectorAll<HTMLButtonElement>("[data-ponto]"),
+    )
+
+    // Paradas: posições de rolagem alcançáveis. Os últimos cards não chegam ao início
+    // da lista (a rolagem acaba antes), então viram uma parada só e sobra um ponto por parada.
+    let paradas: { i: number; alvo: number }[] = []
+    const calcularParadas = () => {
+      const maximo = lista.scrollWidth - lista.clientWidth
+      paradas = []
+      itens.forEach((item, i) => {
+        const alvo = Math.min(item.offsetLeft - lista.offsetLeft, maximo)
+        if (!paradas.length || alvo > paradas[paradas.length - 1].alvo + 1) {
+          paradas.push({ i, alvo })
+        }
+      })
+    }
+    const paradaAtual = () => {
+      let atual = 0
+      let menor = Infinity
+      paradas.forEach(({ alvo }, k) => {
+        const distancia = Math.abs(alvo - lista.scrollLeft)
+        if (distancia < menor) {
+          menor = distancia
+          atual = k
+        }
+      })
+      return atual
+    }
+
+    const atualizar = () => {
+      const { scrollWidth, clientWidth } = lista
+      const transborda = scrollWidth > clientWidth + 1
+      calcularParadas()
+      pontos.classList.toggle("hidden", !transborda)
+      pontos.classList.toggle("flex", transborda)
+
+      const atual = paradaAtual()
+      botoes.forEach((botao, k) => {
+        const existe = k < paradas.length
+        botao.classList.toggle("hidden", !existe)
+        botao.classList.toggle("flex", existe)
+        botao.setAttribute(
+          "aria-label",
+          `Ir para o grupo de planos ${k + 1} de ${paradas.length}`,
+        )
+        if (k === atual) botao.setAttribute("aria-current", "true")
+        else botao.removeAttribute("aria-current")
+      })
+    }
+
+    // Rolagem com easing próprio (easeInOutCubic), mais suave que o `behavior: smooth`.
+    // Desliga o encaixe só durante o movimento.
+    const reduzido = matchMedia("(prefers-reduced-motion: reduce)")
+    let quadro = 0
+    const irPara = (alvo: number) => {
+      cancelAnimationFrame(quadro)
+      const maximo = lista.scrollWidth - lista.clientWidth
+      const destino = Math.min(Math.max(alvo, 0), maximo)
+      if (reduzido.matches) {
+        lista.scrollTo({ left: destino })
+        return
+      }
+      const inicio = lista.scrollLeft
+      const duracao = Math.min(900, 450 + Math.abs(destino - inicio) * 0.25)
+      const t0 = performance.now()
+      lista.style.scrollSnapType = "none"
+      const passo = (agora: number) => {
+        const t = Math.min((agora - t0) / duracao, 1)
+        const ease = t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2
+        lista.scrollLeft = inicio + (destino - inicio) * ease
+        if (t < 1) quadro = requestAnimationFrame(passo)
+        else lista.style.scrollSnapType = ""
+      }
+      quadro = requestAnimationFrame(passo)
+    }
+    // Se a pessoa tocar ou rolar no meio da animação, ela cede o controle
+    for (const evento of ["touchstart", "wheel", "pointerdown"]) {
+      lista.addEventListener(
+        evento,
+        () => {
+          cancelAnimationFrame(quadro)
+          lista.style.scrollSnapType = ""
+        },
+        { passive: true },
+      )
+    }
+
+    botoes.forEach((botao, k) =>
+      botao.addEventListener("click", () => {
+        if (paradas[k]) irPara(paradas[k].alvo)
+      }),
+    )
+
+    // Arrastar com o mouse. No toque a rolagem nativa já funciona; aqui só o mouse
+    let arrastando = false
+    let moveu = false
+    let xInicial = 0
+    let scrollInicial = 0
+    lista.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return
+      arrastando = true
+      moveu = false
+      xInicial = e.clientX
+      scrollInicial = lista.scrollLeft
+    })
+    lista.addEventListener("pointermove", (e) => {
+      if (!arrastando) return
+      const dx = e.clientX - xInicial
+      if (!moveu && Math.abs(dx) < 5) return
+      if (!moveu) {
+        moveu = true
+        lista.setPointerCapture(e.pointerId)
+        lista.toggleAttribute("data-arrastando", true)
+        lista.style.scrollSnapType = "none"
+      }
+      lista.scrollLeft = scrollInicial - dx
+    })
+    const soltar = () => {
+      if (!arrastando) return
+      arrastando = false
+      lista.toggleAttribute("data-arrastando", false)
+      if (moveu) irPara(paradas[paradaAtual()].alvo)
+    }
+    lista.addEventListener("pointerup", soltar)
+    lista.addEventListener("pointercancel", soltar)
+    // Arrastar não pode disparar o clique de links e botões dentro do card
+    lista.addEventListener(
+      "click",
+      (e) => {
+        if (moveu) {
+          e.preventDefault()
+          e.stopPropagation()
+          moveu = false
+        }
+      },
+      true,
+    )
+    lista.addEventListener("dragstart", (e) => e.preventDefault())
+    lista.addEventListener("scroll", atualizar, { passive: true })
+    new ResizeObserver(atualizar).observe(lista)
+
+    // Card visível (pelo menos 60%) fica em destaque; os demais ficam discretos
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const { target, isIntersecting } of entradas) {
+          target.toggleAttribute("data-fora", !isIntersecting)
+        }
+      },
+      { root: lista, threshold: 0.6 },
+    )
+    itens.forEach((item) => observador.observe(item))
+
+    atualizar()
+  }
+</script>

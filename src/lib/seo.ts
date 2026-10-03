@@ -12,7 +12,7 @@ export function absoluteUrl(path: string): string {
 
 type Node = Record<string, unknown>
 
-/** "R$ 597 – R$ 3.997": do plano mais barato ao mais caro. */
+/** "R$ 897 – R$ 4.497": do plano mais barato ao mais caro. */
 function priceRange(): string {
   const precos = packages.map((p) => p.preco)
   return `${brl(Math.round(Math.min(...precos)))} – ${brl(Math.round(Math.max(...precos)))}`
