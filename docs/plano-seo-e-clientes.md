@@ -34,9 +34,10 @@ Meta em 90 dias: top 3 em "criação de sites Aparecida de Goiânia", top 10 em 
 
      | Plano | Preço | Prazo |
      | --- | --- | --- |
-     | Landing | R$ 597 | 5 dias úteis |
-     | Institucional (destaque) | R$ 1.497 | 10 dias úteis |
-     | Loja | **a partir de R$ 3.997** (12x) | 25 dias úteis |
+     | Landing | R$ 897 | 5 dias úteis |
+     | Institucional | R$ 1.897 | 10 dias úteis |
+     | Site + Google Ads (destaque) | R$ 2.997 | 15 dias úteis |
+     | Loja | **a partir de R$ 4.497** (12x) | 25 dias úteis |
 
    - **Por que a Loja subiu de R$ 2.997 para R$ 3.997** (pesquisa de 25/09/2026):
      - **Faixas de mercado** para loja com pagamento e frete integrados:
@@ -78,9 +79,9 @@ Meta em 90 dias: top 3 em "criação de sites Aparecida de Goiânia", top 10 em 
    - É o destino do Google Ads.
    - Links para a página: menu (`ui.ts` nav), rodapé (`footerLinks`) e o card de pacotes.
 4. **Home.**
-   - Title: `Criação de Sites em Goiânia a partir de R$ 597 | Hello World`, com exatamente 60 caracteres. Validar no `verificar-seo.mjs`.
+   - Title: `Criação de Sites em Goiânia a partir de R$ 897 | Hello World`, com exatamente 60 caracteres. Validar no `verificar-seo.mjs`.
    - Description com preço e garantia.
-   - Linha de preço no `Hero.astro`: "a partir de R$ 597 · pronto em 5 dias úteis · garantia de 7 dias".
+   - Linha de preço no `Hero.astro`: "a partir de R$ 897 · pronto em 5 dias úteis · garantia de 7 dias".
 5. **`src/data/faq.ts`.** Reescrever "Quanto custa?" e "Em quanto tempo?" com os valores reais. Adicionar perguntas sobre garantia, domínio e "o site é meu?".
 6. **`src/lib/seo.ts`.**
    - `priceRange` no `organizationNode`.
