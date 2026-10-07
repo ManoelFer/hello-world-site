@@ -20,10 +20,7 @@ const dataRequest = waLink(
   title="Privacy Policy | Hello World Estúdio"
   description="How the Hello World Estúdio website handles personal data: WhatsApp contact, cookieless usage metrics and your rights under Brazil's LGPD."
 >
-  <LegalArticle
-    title="Privacy Policy"
-    updated="Last updated: September 24, 2026"
-  >
+  <LegalArticle title="Privacy Policy" updated="Last updated: October 7, 2026">
     <p>
       This policy explains, in plain language, what personal data this website
       processes, why, for how long and how you can exercise your rights under
@@ -84,9 +81,69 @@ const dataRequest = waLink(
       </li>
     </ul>
     <p>
-      The website has no forms, sign-up or login area, and we never ask for
-      sensitive data (health, religion, biometrics, etc.). We also do not make
-      automated decisions about you based on your data.
+      The website has no forms or sign-up, the only login area is the blog panel
+      described above, and we never ask for sensitive data (health, religion,
+      biometrics, etc.). We also do not make automated decisions about you based
+      on your data.
+    </p>
+
+    <h2>Blog panel (for clients who subscribe to the blog)</h2>
+    <p>
+      Clients who subscribe to a blog plan write and publish articles through a
+      panel at <strong>cms.helloworldestudio.com.br</strong>. In it, we process:
+    </p>
+    <ul>
+      <li>
+        <strong>Email and name (optional)</strong> of the people who use the
+        panel, registered by the studio, to identify who signs in and to send
+        notices.
+      </li>
+      <li>
+        <strong>6-digit login code</strong>, sent by email. We store only its
+        hash, it is valid for 10 minutes and is removed from the database after
+        it expires.
+      </li>
+      <li>
+        <strong>IP address</strong>, to limit login attempts (security) and for
+        the anti-bot check. It is stored with the login code and deleted with
+        it.
+      </li>
+      <li>
+        <strong>Activity log</strong> (published, unpublished, deleted an
+        article, changed details, exported a copy), linked to the email of the
+        person who acted, for security and to give the studio and the client a
+        history.
+      </li>
+      <li>
+        <strong>Uploaded articles and images</strong>, to publish the client's
+        blog. The content belongs to the client.
+      </li>
+      <li>
+        <strong>Payment record</strong> (date, period and agreed amount), to
+        calculate the plan's due date. Payment happens outside the system, over
+        WhatsApp: the panel receives no card or bank account data.
+      </li>
+    </ul>
+    <p>
+      Legal basis: contract performance (art. 7, V, LGPD) and, for the IP
+      address and activity log, legitimate interest in security (art. 7, IX). We
+      are the controller of login and billing data of the people who use the
+      panel. The content of the articles, and data about people the client
+      mentions in them, is the client's responsibility (controller), and we act
+      as processor. Clients in regulated fields, such as law, are responsible
+      for the professional secrecy of what they publish.
+    </p>
+    <p>
+      <strong>Who reads the blog:</strong> the panel installs no cookies or
+      trackers on the client's website and does not collect visitor data. The
+      blog is generated as static pages. Access statistics, if any, come from
+      the tools declared in that website's own policy.
+    </p>
+    <p>
+      The panel uses the providers <strong>Cloudflare</strong> (hosting of the
+      panel and API, database, image storage and anti-bot check at login) and{" "}
+      <strong>Resend</strong> (sending the login code, welcome and due-date
+      emails).
     </p>
 
     <h2>Data in client projects</h2>
@@ -104,6 +161,14 @@ const dataRequest = waLink(
       consent banner. Cloudflare may set strictly necessary cookies for
       security.
     </p>
+    <p>
+      The blog panel (<strong>cms.helloworldestudio.com.br</strong>) uses a
+      single cookie, <code>hwcms_session</code>, strictly necessary to keep you
+      signed in: without it there is no login. It only exists after login, lasts
+      30 days, is <code>HttpOnly</code>, <code>Secure</code> and{" "}
+      <code>SameSite=Lax</code>, does not track you or serve ads, and therefore
+      needs no consent. The panel uses no analytics or advertising cookies.
+    </p>
 
     <h2>Sharing</h2>
     <p>
@@ -114,7 +179,7 @@ const dataRequest = waLink(
 
     <h2>International transfers</h2>
     <p>
-      Some of these providers (Cloudflare and Meta
+      Some of these providers (Cloudflare, Resend and Meta
       {analytics && ", as well as Umami"}) may process data on servers outside
       Brazil. These transfers follow article 33 of the LGPD and rely on the
       contractual data protection safeguards each provider offers.
@@ -130,6 +195,14 @@ const dataRequest = waLink(
       <li>
         <strong>Clients:</strong> for the length of the contract and, after it,
         for the period required by legal and tax obligations (usually 5 years).
+      </li>
+      <li>
+        <strong>Blog panel:</strong> login and billing data are kept while the
+        plan is active and during the 30 days after it expires, when the panel
+        stays open only to download a copy of the articles and images. After
+        that, only for the period required by law or contract. Removing a person
+        from the panel disables their access immediately, and the activity log
+        is kept as history.
       </li>
       <li>
         <strong>Technical access data:</strong> for each provider's retention
@@ -161,7 +234,10 @@ const dataRequest = waLink(
         anonymization, blocking or deletion of unnecessary data or data
         processed in breach of the law;
       </li>
-      <li>portability of your data to another provider;</li>
+      <li>
+        portability of your data to another provider (blog clients download a
+        copy of their articles and images, as a ZIP, from the panel itself);
+      </li>
       <li>information about who we share your data with;</li>
       <li>
         objection to processing based on legitimate interest, and withdrawal of

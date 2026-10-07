@@ -23,7 +23,7 @@ const dataRequest = waLink(
 >
   <LegalArticle
     title="Política de Privacidade"
-    updated="Última atualização: 24 de setembro de 2026"
+    updated="Última atualização: 7 de outubro de 2026"
   >
     <p>
       Esta política explica, em linguagem simples, quais dados pessoais este
@@ -83,9 +83,68 @@ const dataRequest = waLink(
       </li>
     </ul>
     <p>
-      O site não tem formulário, cadastro nem área de login, e não pedimos dados
-      sensíveis (saúde, religião, biometria etc.) em nenhum momento. Também não
-      tomamos decisões automatizadas sobre você com base nos seus dados.
+      O site não tem formulário nem cadastro, a única área de login é o painel
+      do blog descrito acima, e não pedimos dados sensíveis (saúde, religião,
+      biometria etc.) em nenhum momento. Também não tomamos decisões
+      automatizadas sobre você com base nos seus dados.
+    </p>
+
+    <h2>Painel do blog (para clientes que contratam o blog)</h2>
+    <p>
+      Quem contrata o plano de blog escreve e publica artigos por um painel em{" "}
+      <strong>cms.helloworldestudio.com.br</strong>. Nele, tratamos:
+    </p>
+    <ul>
+      <li>
+        <strong>E-mail e nome (opcional)</strong> de quem usa o painel,
+        cadastrados pelo estúdio, para identificar quem entra e enviar avisos.
+      </li>
+      <li>
+        <strong>Código de login de 6 dígitos</strong>, enviado por e-mail.
+        Guardamos só o hash dele, ele vale 10 minutos e some do banco depois de
+        vencer.
+      </li>
+      <li>
+        <strong>Endereço IP</strong>, para limitar tentativas de login
+        (segurança) e para a verificação anti-robô. Fica guardado junto do
+        código de login e é apagado com ele.
+      </li>
+      <li>
+        <strong>Registro de atividades</strong> (publicou, despublicou, excluiu
+        artigo, trocou dados, exportou cópia), ligado ao e-mail de quem fez a
+        ação, para segurança e para dar histórico ao estúdio e ao cliente.
+      </li>
+      <li>
+        <strong>Artigos e imagens enviados</strong>, para publicar o blog do
+        cliente. O conteúdo é do cliente.
+      </li>
+      <li>
+        <strong>Registro de pagamento</strong> (data, período e valor
+        combinado), para calcular o vencimento do plano. O pagamento acontece
+        fora do sistema, pelo WhatsApp: o painel não recebe dados de cartão nem
+        de conta bancária.
+      </li>
+    </ul>
+    <p>
+      Base legal: execução de contrato (art. 7º, V, da LGPD) e, para IP e
+      registro de atividades, legítimo interesse em segurança (art. 7º, IX).
+      Para o dado de login e de cobrança de quem usa o painel, somos
+      controladores. O conteúdo dos artigos e os dados de pessoas que o cliente
+      citar nos textos são de responsabilidade do cliente (controlador), e nós
+      atuamos como operadores. Clientes de áreas reguladas, como a advocacia,
+      respondem pelo sigilo profissional do que publicam.
+    </p>
+    <p>
+      <strong>Quem lê o blog:</strong> o painel não instala cookies nem
+      rastreadores no site do cliente e não coleta dados dos visitantes. O blog
+      é gerado como páginas estáticas. Estatísticas de acesso, se houver, vêm
+      das ferramentas declaradas na política do próprio site.
+    </p>
+    <p>
+      O painel usa os fornecedores <strong>Cloudflare</strong> (hospedagem do
+      painel e da API, banco de dados, armazenamento das imagens e verificação
+      anti-robô no login) e <strong>Resend</strong> (envio dos e-mails de código
+      de login, boas-vindas e avisos de vencimento).
     </p>
 
     <h2>Dados dos projetos de clientes</h2>
@@ -103,6 +162,15 @@ const dataRequest = waLink(
       exibe banner de consentimento. A Cloudflare pode usar cookies estritamente
       necessários para a segurança do site.
     </p>
+    <p>
+      O painel do blog (<strong>cms.helloworldestudio.com.br</strong>) usa um
+      único cookie, o <code>hwcms_session</code>, estritamente necessário para
+      manter você logado: sem ele não há login. Ele só existe depois do login,
+      dura 30 dias, é <code>HttpOnly</code>, <code>Secure</code> e{" "}
+      <code>SameSite=Lax</code>, não rastreia nem faz publicidade e por isso não
+      precisa de consentimento. O painel não usa cookies de análise nem de
+      publicidade.
+    </p>
 
     <h2>Compartilhamento</h2>
     <p>
@@ -114,7 +182,7 @@ const dataRequest = waLink(
 
     <h2>Transferência internacional</h2>
     <p>
-      Alguns desses fornecedores (Cloudflare e Meta
+      Alguns desses fornecedores (Cloudflare, Resend e Meta
       {analytics && ", além do Umami"}) podem processar dados em servidores fora
       do Brasil. Essas transferências seguem o art. 33 da LGPD e contam com as
       garantias contratuais que cada fornecedor oferece para a proteção de
@@ -131,6 +199,14 @@ const dataRequest = waLink(
       <li>
         <strong>Clientes:</strong> enquanto durar o contrato e, depois dele,
         pelo prazo exigido por obrigações legais e fiscais (em geral, 5 anos).
+      </li>
+      <li>
+        <strong>Painel do blog:</strong> os dados de login e de cobrança ficam
+        enquanto o plano estiver ativo e durante os 30 dias seguintes ao
+        vencimento, em que o painel fica aberto só para baixar a cópia dos
+        artigos e das imagens. Depois, só pelo prazo exigido por lei ou pelo
+        contrato. Remover uma pessoa do painel desativa o acesso na hora, e os
+        registros de atividade ficam para histórico.
       </li>
       <li>
         <strong>Dados técnicos de acesso:</strong> pelo prazo de retenção de
@@ -160,7 +236,10 @@ const dataRequest = waLink(
         anonimização, bloqueio ou eliminação de dados desnecessários ou tratados
         em desconformidade com a lei;
       </li>
-      <li>portabilidade dos dados a outro fornecedor;</li>
+      <li>
+        portabilidade dos dados a outro fornecedor (quem tem blog baixa a cópia
+        dos artigos e das imagens, em ZIP, pelo próprio painel);
+      </li>
       <li>informação sobre com quem compartilhamos os seus dados;</li>
       <li>
         oposição a um tratamento baseado em legítimo interesse e revogação de

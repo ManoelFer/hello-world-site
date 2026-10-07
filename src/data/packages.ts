@@ -264,3 +264,61 @@ export const adicionais: { nome: string; valor: number; descricao: string }[] =
         "Posts no Perfil da Empresa no Google, 2 artigos por mês no seu blog e relatório mensal de resultados.",
     },
   ]
+
+// Blog para o seu site (produto do hello-world-cms): painel próprio, cobrança manual pelo WhatsApp.
+// Valores são hipótese do plano comercial do CMS, ainda sem validação de mercado: o dono confirma
+// antes de publicar. Não prometer "ilimitado", prazo de SEO nem posição no Google.
+// Não é "site por assinatura": o site continua do cliente, e o blog é um adicional mensal.
+export interface PlanoBlog {
+  nome: string
+  mensal: number
+  anual: number
+  inclui: string[]
+  msgWhatsApp: string
+}
+
+export const planosBlog: PlanoBlog[] = [
+  {
+    nome: "Blog Essencial",
+    mensal: 29.9,
+    anual: 299,
+    inclui: ["Até 4 artigos publicados por mês", "Até 60 artigos no ar"],
+    msgWhatsApp: "Olá! Tenho interesse no Blog Essencial para o meu site.",
+  },
+  {
+    nome: "Blog Pro",
+    mensal: 49.9,
+    anual: 499,
+    inclui: [
+      "Até 12 artigos publicados por mês",
+      "Até 200 artigos no ar",
+      "Revisão de SEO e pauta mensal",
+    ],
+    msgWhatsApp: "Olá! Tenho interesse no Blog Pro para o meu site.",
+  },
+]
+
+/** Equivalente mensal do plano anual, arredondado ("cerca de R$ 25/mês"). */
+export function blogAnualPorMes(p: PlanoBlog): number {
+  return Math.round(p.anual / 12)
+}
+
+export const blogTodosIncluem: string[] = [
+  "Painel simples para escrever, publicar e tirar artigos do ar, no celular ou no computador",
+  "Login por código enviado ao seu e-mail, sem senha para lembrar",
+  "Upload de imagens e capa do artigo",
+  "Aviso na hora de publicar quando falta título, descrição ou texto, para o artigo sair bem no Google",
+  "Cópia de todos os seus artigos e imagens (ZIP) quando você quiser",
+]
+
+export const blogCobranca: string[] = [
+  "O pagamento é combinado direto pelo WhatsApp. Não há cartão guardado nem renovação automática.",
+  "O plano vale até a data de vencimento. Pagando antes de vencer, o novo período soma ao atual: você não perde dias.",
+  "Três dias antes do vencimento, você e o estúdio recebem um aviso por e-mail.",
+]
+
+export const blogCancelamento: string[] = [
+  "Cancelar ou deixar vencer tira o blog do ar no dia seguinte ao vencimento. As páginas dos artigos deixam de existir no site, e o Google deixa de encontrá-los.",
+  "Depois do vencimento, o painel fica aberto por 30 dias só para você baixar a cópia dos artigos e das imagens. Nesse período não dá para editar nem publicar.",
+  "Pagando, mesmo depois de vencido, o blog volta ao ar com os seus artigos.",
+]
