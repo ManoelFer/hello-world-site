@@ -3,6 +3,7 @@ import { Font } from "astro:assets"
 
 import FloatingWhatsApp from "@components/layout/FloatingWhatsApp.astro"
 import Footer from "@components/layout/Footer.astro"
+import GoogleAds from "@components/layout/GoogleAds.astro"
 import Header from "@components/layout/Header.astro"
 import JsonLd from "@components/layout/JsonLd.astro"
 import Seo from "@components/layout/Seo.astro"
@@ -65,6 +66,7 @@ const waMessage = Astro.props.waMessage ?? t(lang).waDefault
     <Font cssVariable="--font-space-grotesk" preload />
     <Font cssVariable="--font-jetbrains-mono" preload />
     <JsonLd data={graph([organizationNode(), websiteNode(), ...jsonLd])} />
+    <GoogleAds />
     {site.umamiWebsiteId && (
       <script
         is:inline

@@ -1,0 +1,60 @@
+---
+import { site } from "@data/site"
+
+const { tagId, whatsappConversionLabel } = site.googleAds
+const sendTo = `${tagId}/${whatsappConversionLabel}`
+// Só em produção: o `astro dev` não gera conversões falsas.
+const enabled = Boolean(tagId) && import.meta.env.PROD
+---
+
+{enabled && (
+  <>
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${tagId}`}
+    ></script>
+    <script is:inline define:vars={{ tagId, sendTo }}>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        // gtag.js exige o objeto `arguments`, não um array.
+        // eslint-disable-next-line prefer-rest-params
+        dataLayer.push(arguments)
+      }
+      gtag("js", new Date())
+      gtag("config", tagId)
+
+      // Conversão "Clique no WhatsApp": qualquer link para o WhatsApp ou elemento com data-whatsapp.
+      function isWhatsApp(href) {
+        if (!href) return false
+        if (/^whatsapp:/i.test(href)) return true
+        try {
+          const host = new URL(href, location.href).hostname.toLowerCase()
+          return (
+            host === "wa.me" ||
+            host === "whatsapp.com" ||
+            host.endsWith(".whatsapp.com")
+          )
+        } catch {
+          return false
+        }
+      }
+      window.trackWhatsApp = () =>
+        gtag("event", "conversion", {
+          send_to: sendTo,
+          transport_type: "beacon",
+        })
+      const onClick = (e) => {
+        const el = e.target.closest?.("a[href], [data-whatsapp]")
+        if (!el) return
+        if (
+          el.hasAttribute("data-whatsapp") ||
+          isWhatsApp(el.getAttribute("href"))
+        )
+          window.trackWhatsApp()
+      }
+      document.addEventListener("click", onClick, true)
+      document.addEventListener("auxclick", onClick, true)
+    </script>
+  </>
+)}

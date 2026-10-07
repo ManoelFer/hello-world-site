@@ -6,6 +6,7 @@ import { waLink } from "@lib/whatsapp"
 
 // O texto se ajusta sozinho ao que o site realmente usa (ex.: Umami só aparece se estiver configurado).
 const analytics = Boolean(site.umamiWebsiteId)
+const ads = Boolean(site.googleAds.tagId)
 const controller = site.legalName
   ? `${site.name} (${site.legalName})`
   : site.name
@@ -157,11 +158,30 @@ const dataRequest = waLink(
     </p>
 
     <h2>Cookies</h2>
-    <p>
-      Este site não usa cookies de publicidade nem de rastreamento, por isso não
-      exibe banner de consentimento. A Cloudflare pode usar cookies estritamente
-      necessários para a segurança do site.
-    </p>
+    {ads ? (
+      <p>
+        Este site usa a tag do Google Ads apenas para medir se um anúncio nosso
+        levou a um contato pelo WhatsApp. Para isso, o Google pode gravar
+        cookies no seu navegador quando você chega por um anúncio. Não usamos
+        esses dados para remarketing nem para criar perfis. Você pode bloquear
+        ou apagar cookies nas configurações do navegador e gerenciar anúncios em{" "}
+        <a
+          href="https://adssettings.google.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          adssettings.google.com<span class="sr-only"> (abre em nova aba)</span>
+        </a>
+        . A Cloudflare também pode usar cookies estritamente necessários para a
+        segurança do site.
+      </p>
+    ) : (
+      <p>
+        Este site não usa cookies de publicidade nem de rastreamento, por isso
+        não exibe banner de consentimento. A Cloudflare pode usar cookies
+        estritamente necessários para a segurança do site.
+      </p>
+    )}
     <p>
       O painel do blog (<strong>cms.helloworldestudio.com.br</strong>) usa um
       único cookie, o <code>hwcms_session</code>, estritamente necessário para
@@ -183,8 +203,9 @@ const dataRequest = waLink(
     <h2>Transferência internacional</h2>
     <p>
       Alguns desses fornecedores (Cloudflare, Resend e Meta
-      {analytics && ", além do Umami"}) podem processar dados em servidores fora
-      do Brasil. Essas transferências seguem o art. 33 da LGPD e contam com as
+      {analytics && ", além do Umami"}
+      {ads && ", além do Google"}) podem processar dados em servidores fora do
+      Brasil. Essas transferências seguem o art. 33 da LGPD e contam com as
       garantias contratuais que cada fornecedor oferece para a proteção de
       dados.
     </p>

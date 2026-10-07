@@ -29,4 +29,9 @@ export const site = {
   sameAs: [] as string[],
   /** ID do site no Umami Cloud. Vazio = analytics desligado. */
   umamiWebsiteId: "c85a969f-109a-4de3-ba48-155639ffe528",
+  /** Google Ads: conversão "Clique no WhatsApp". `tagId` vazio = tag e conversão desligadas. */
+  googleAds: {
+    tagId: "AW-18499776329",
+    whatsappConversionLabel: "ADi7CI6H05QdEMnesPVE",
+  },
 } as const

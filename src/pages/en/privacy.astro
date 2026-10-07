@@ -6,6 +6,7 @@ import { waLink } from "@lib/whatsapp"
 
 // Mesmo conteúdo de /privacidade/, em inglês. Manter os dois em sincronia.
 const analytics = Boolean(site.umamiWebsiteId)
+const ads = Boolean(site.googleAds.tagId)
 const controller = site.legalName
   ? `${site.name} (${site.legalName})`
   : site.name
@@ -156,11 +157,30 @@ const dataRequest = waLink(
     </p>
 
     <h2>Cookies</h2>
-    <p>
-      This website does not use advertising or tracking cookies, so it shows no
-      consent banner. Cloudflare may set strictly necessary cookies for
-      security.
-    </p>
+    {ads ? (
+      <p>
+        This website uses the Google Ads tag only to measure whether one of our
+        ads led to a WhatsApp contact. Google may set cookies in your browser
+        when you arrive from an ad. We do not use this data for remarketing or
+        profiling. You can block or delete cookies in your browser settings and
+        manage ads at{" "}
+        <a
+          href="https://adssettings.google.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          adssettings.google.com
+          <span class="sr-only"> (opens in a new tab)</span>
+        </a>
+        . Cloudflare may also set strictly necessary cookies for security.
+      </p>
+    ) : (
+      <p>
+        This website does not use advertising or tracking cookies, so it shows
+        no consent banner. Cloudflare may set strictly necessary cookies for
+        security.
+      </p>
+    )}
     <p>
       The blog panel (<strong>cms.helloworldestudio.com.br</strong>) uses a
       single cookie, <code>hwcms_session</code>, strictly necessary to keep you
@@ -180,7 +200,8 @@ const dataRequest = waLink(
     <h2>International transfers</h2>
     <p>
       Some of these providers (Cloudflare, Resend and Meta
-      {analytics && ", as well as Umami"}) may process data on servers outside
+      {analytics && ", as well as Umami"}
+      {ads && ", as well as Google"}) may process data on servers outside
       Brazil. These transfers follow article 33 of the LGPD and rely on the
       contractual data protection safeguards each provider offers.
     </p>

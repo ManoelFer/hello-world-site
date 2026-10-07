@@ -185,6 +185,7 @@ const field =
         .join("\n")
       const url = new URL(form.action)
       url.searchParams.set("text", text)
+      ;(window as { trackWhatsApp?: () => void }).trackWhatsApp?.()
       window.open(url, "_blank", "noopener")
     })
   }
