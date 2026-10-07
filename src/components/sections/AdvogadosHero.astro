@@ -1,0 +1,147 @@
+---
+import { Image } from "astro:assets"
+
+import printEdith from "@assets/edith-santos-hero.webp"
+import ButtonLink from "@components/common/ButtonLink.astro"
+import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+import { casoEdith } from "@data/advogados"
+import { garantiaDias, parcelasSemJuros } from "@data/packages"
+
+interface Props {
+  message: string
+}
+
+const { message } = Astro.props
+const link = casoEdith.links[0]
+---
+
+<!-- Hero de /sites-para-advogados/. É o LCP: nada aqui leva data-reveal. -->
+<section id="topo" class="relative overflow-hidden">
+  <div
+    class="line-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(80%_70%_at_70%_40%,#000,transparent)]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute -top-[20%] -right-[10%] aspect-square w-[60%] rounded-full bg-[radial-gradient(circle,rgb(61_255_176/.15),transparent_65%)]"
+    aria-hidden="true"
+  ></div>
+  <div class="relative mx-auto grid max-w-7xl items-center gap-11 px-5 pt-10 pb-16 desk:grid-cols-[1fr_1.05fr] desk:gap-14 desk:px-12 desk:pt-20 desk:pb-24">
+    <div>
+      <p class="mb-6 inline-flex items-center gap-2.5 font-medium text-accent">
+        <span
+          class="inline-flex size-[26px] items-center justify-center rounded-full bg-accent text-sm font-bold text-on-accent"
+          aria-hidden="true"
+        >
+          §
+        </span>
+        Sites e landing pages para advogados
+      </p>
+      <h1 class="mb-6 text-[38px] leading-[.98] font-bold tracking-[-0.045em] text-balance desk:text-[clamp(48px,5.4vw,80px)]">
+        Quem procura advogado no Google{" "}
+        <span class="text-accent [text-shadow:0_0_40px_rgb(61_255_176/.35)]">
+          precisa encontrar você.
+        </span>
+      </h1>
+      <p class="mb-8 max-w-[46ch] text-[17px] leading-[1.55] text-pretty text-soft desk:text-[19px]">
+        Criamos o site do seu escritório pensado para uma coisa: transformar
+        visitas em conversas no WhatsApp. SEO por área de atuação, textos claros
+        para o cliente leigo e tudo dentro das regras de publicidade da OAB.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <WhatsAppButton
+          size="lg"
+          arrow
+          message={`${message} Quero um site para o meu escritório.`}
+          placement="advogados-hero"
+          label="Quero o site do meu escritório"
+          class="rounded-full shadow-[0_14px_40px_-14px_rgb(61_255_176/.7)]"
+        />
+        <ButtonLink
+          variant="ghost"
+          size="lg"
+          href="#planos"
+          class="rounded-full"
+        >
+          Ver planos e preços
+        </ButtonLink>
+      </div>
+      <ul class="mt-9 flex flex-wrap gap-x-[22px] gap-y-2.5 font-mono text-[12.5px] text-muted">
+        <li class="flex items-center gap-2">
+          <span class="text-accent" aria-hidden="true">
+            ✓
+          </span>
+          Pagamento único, o site é seu
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="text-accent" aria-hidden="true">
+            ✓
+          </span>
+          {parcelasSemJuros}x sem juros
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="text-accent" aria-hidden="true">
+            ✓
+          </span>
+          {garantiaDias} dias de garantia
+        </li>
+      </ul>
+    </div>
+
+    <figure class="relative">
+      <span class="absolute -top-4 -left-3.5 z-10 -rotate-4 rounded-full bg-accent px-3.5 py-2 text-[13px] font-bold text-on-accent shadow-[0_10px_30px_-8px_rgb(61_255_176/.6)]">
+        Caso real · site no ar
+      </span>
+      <div class="overflow-hidden rounded-[20px] border border-accent/25 bg-surface-2 shadow-[0_50px_120px_-40px_rgb(0_0_0/.95),0_0_80px_-30px_rgb(61_255_176/.35)]">
+        <div
+          class="flex items-center gap-2 border-b border-line bg-[#0d1412] px-4 py-3"
+          aria-hidden="true"
+        >
+          <span class="size-2.5 rounded-full bg-danger"></span>
+          <span class="size-2.5 rounded-full bg-warn"></span>
+          <span class="size-2.5 rounded-full bg-accent"></span>
+          <span class="ml-2.5 flex-1 rounded-full bg-accent/7 px-3.5 py-[5px] font-mono text-xs text-label">
+            edithsantos.adv.br
+          </span>
+        </div>
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block aspect-16/10 overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent"
+          data-umami-event="case_click"
+          data-umami-event-placement="advogados-hero"
+        >
+          <Image
+            src={printEdith}
+            alt="Início do site Edith Santos Advocacia"
+            widths={[560, 1120]}
+            sizes="(min-width: 801px) 50vw, 100vw"
+            loading="eager"
+            fetchpriority="high"
+            class="size-full object-cover object-top"
+          />
+          <span class="sr-only">(abre em nova aba)</span>
+        </a>
+        <figcaption class="flex flex-wrap items-center justify-between gap-4 border-t border-line px-5 py-[18px]">
+          <span class="flex flex-col gap-[3px]">
+            <span class="text-[17px] font-bold">{casoEdith.name}</span>
+            <span class="font-mono text-xs text-label">
+              Advocacia previdenciária · atendimento em todo o Brasil
+            </span>
+          </span>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-11 items-center gap-2 rounded-full border border-accent/35 px-4 text-sm font-bold text-accent transition-colors hover:bg-accent hover:text-on-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            data-umami-event="case_click"
+            data-umami-event-placement="advogados-hero-botao"
+          >
+            Abrir o site <span aria-hidden="true">↗</span>
+            <span class="sr-only">(abre em nova aba)</span>
+          </a>
+        </figcaption>
+      </div>
+    </figure>
+  </div>
+</section>

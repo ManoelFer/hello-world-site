@@ -1,0 +1,46 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import { destaques, motivos } from "@data/advogados"
+---
+
+<ul class="grid border-y border-line px-5 sm:grid-cols-2 desk:grid-cols-4 desk:px-12">
+  {destaques.map((d) => (
+    <li
+      data-reveal
+      class="flex items-center gap-4 border-b border-line-soft px-1 py-6 last:border-b-0 desk:border-r desk:border-b-0 desk:px-[22px] desk:py-7 desk:last:border-r-0"
+    >
+      <span
+        class="inline-flex size-[46px] flex-none items-center justify-center rounded-full border-[1.5px] border-accent font-mono text-sm font-bold text-accent"
+        aria-hidden="true"
+      >
+        {d.g}
+      </span>
+      <span class="text-[15.5px] leading-snug font-medium">{d.t}</span>
+    </li>
+  ))}
+</ul>
+
+<Section>
+  <SectionHeading
+    kicker="por que um site feito para advocacia"
+    title="Site de advogado tem regras e um cliente diferente."
+    sub="Um modelo genérico ignora as duas coisas. O seu site já nasce pensado para elas."
+  />
+  <ul class="grid gap-[18px] desk:grid-cols-2">
+    {motivos.map((m, i) => (
+      <li
+        data-reveal
+        class="rounded-[22px] border border-accent/14 bg-linear-160 from-surface to-surface-3 px-7 py-8"
+      >
+        <span class="font-mono text-[13px] text-accent" aria-hidden="true">
+          {String(i + 1).padStart(2, "0")}
+        </span>
+        <h3 class="mt-6 mb-2.5 text-[22px] font-bold tracking-[-0.02em] desk:text-2xl">
+          {m.t}
+        </h3>
+        <p class="leading-relaxed text-muted">{m.d}</p>
+      </li>
+    ))}
+  </ul>
+</Section>

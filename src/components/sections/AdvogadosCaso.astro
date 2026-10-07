@@ -1,0 +1,51 @@
+---
+import Section from "@components/common/Section.astro"
+import { casoEdith, entregasEdith } from "@data/advogados"
+
+const link = casoEdith.links[0]
+---
+
+<Section
+  id="caso"
+  border
+  innerClass="grid items-center gap-12 py-[72px] desk:grid-cols-2 desk:gap-14 desk:py-[92px]"
+>
+  <div data-reveal>
+    <p class="mb-3.5 font-mono text-[13px] text-accent">// caso real</p>
+    <h2 class="mb-5 text-[30px] leading-[1.04] font-bold tracking-[-0.035em] text-balance desk:text-[44px]">
+      {casoEdith.name}: atendimento online para todo o Brasil.
+    </h2>
+    <p class="mb-7 max-w-[52ch] text-[16.5px] leading-[1.7] text-soft">
+      {casoEdith.d.pt}
+    </p>
+    <a
+      href={link.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex min-h-11 items-center gap-2.5 rounded-full bg-accent px-[22px] py-3.5 text-[15px] font-bold text-on-accent transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      data-umami-event="case_click"
+      data-umami-event-placement="advogados-caso"
+    >
+      Ver o site da Edith <span aria-hidden="true">↗</span>
+      <span class="sr-only">(abre em nova aba)</span>
+    </a>
+  </div>
+  <div
+    data-reveal
+    class="overflow-hidden rounded-[20px] border border-accent/16 bg-surface-2"
+  >
+    <h3 class="border-b border-line-soft px-6 py-4 font-mono text-xs tracking-[.14em] text-label uppercase">
+      O que foi entregue
+    </h3>
+    <ul>
+      {entregasEdith.map((e) => (
+        <li class="flex gap-3.5 border-b border-line-soft px-6 py-[18px] leading-snug last:border-b-0">
+          <span class="text-accent" aria-hidden="true">
+            ✓
+          </span>
+          {e}
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>

@@ -22,7 +22,7 @@ export interface FaqItem {
 export const faq: FaqItem[] = [
   {
     q: "Quanto custa um site?",
-    a: `A ${planoEntrada.nome} sai por ${brl(planoEntrada.preco)} e o ${institucional.nome}, com até 6 páginas, por ${brl(institucional.preco)}. Todos saem pelo mesmo preço em até ${parcelasSemJuros}x sem juros no cartão. O ${ads.nome}, com campanha no Google Ads configurada, sai por ${brl(ads.preco)}. A ${loja.nome} começa em ${brl(loja.preco)}.`,
+    a: `A ${planoEntrada.nome} sai por ${brl(planoEntrada.preco)} e o ${institucional.nome}, com até 10 páginas, por ${brl(institucional.preco)}. Todos saem pelo mesmo preço em até ${parcelasSemJuros}x sem juros no cartão. O ${ads.nome}, com campanha no Google Ads configurada, sai por ${brl(ads.preco)}. A ${loja.nome} começa em ${brl(loja.preco)}.`,
   },
   {
     q: "Em quanto tempo o site fica pronto?",
@@ -57,7 +57,7 @@ export const faq: FaqItem[] = [
 export const precosFaq: FaqItem[] = [
   {
     q: "Vocês têm site por assinatura?",
-    a: `Não. No site por assinatura você paga todo mês e, se cancelar, fica sem o site. Aqui você paga uma vez, no Pix ou em até ${parcelasSemJuros}x sem juros, e o site é seu. A hospedagem do Site Institucional fica na sua conta, e existe opção gratuita.`,
+    a: `Não. No site por assinatura você paga todo mês e, se cancelar, fica sem o site. Aqui você paga uma vez, no Pix ou em até ${parcelasSemJuros}x sem juros, e o site é seu.`,
   },
   {
     q: "Como posso pagar?",
@@ -66,10 +66,6 @@ export const precosFaq: FaqItem[] = [
   {
     q: "Posso começar com a Landing Page e depois crescer?",
     a: `Pode. A Landing Page é aproveitada no ${institucional.nome}, e a proposta do novo plano considera o que já foi feito.`,
-  },
-  {
-    q: "Quem cuida da hospedagem?",
-    a: "Nos planos Site Institucional e Site + Google Ads, a hospedagem fica na sua conta, e existe opção gratuita. Nós publicamos o site no ar e ensinamos o básico. Se preferir não se preocupar, o Cuidado do site cobre segurança, backup e 1 alteração por mês.",
   },
   {
     q: "Como funciona o plano Site + Google Ads?",

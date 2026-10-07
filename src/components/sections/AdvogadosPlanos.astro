@@ -1,0 +1,110 @@
+---
+import PrecoPlano from "@components/common/PrecoPlano.astro"
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import WhatsAppButton from "@components/common/WhatsAppButton.astro"
+import { blogAdvogado, planosAdvogado } from "@data/advogados"
+import { blogAnualPorMes, pagamentoPix, parcelasSemJuros } from "@data/packages"
+import { brl } from "@lib/format"
+---
+
+<Section id="planos" border>
+  <SectionHeading
+    kicker="planos para advogados"
+    title="Preço fechado, prazo por escrito."
+    sub={`Pix com ${pagamentoPix}, ou cartão em até ${parcelasSemJuros}x sem juros. Paga uma vez e o site é seu.`}
+  />
+  <ul class="grid items-stretch gap-[18px] desk:grid-cols-3">
+    {planosAdvogado.map((p) => (
+      <li
+        data-reveal
+        class:list={[
+          "relative flex flex-col rounded-[22px] px-7 py-8",
+          p.destaque
+            ? "border border-accent bg-linear-160 from-[#0f1d18] to-surface-3 shadow-[0_30px_80px_-40px_rgb(61_255_176/.55)]"
+            : "border border-accent/14 bg-surface-2",
+        ]}
+      >
+        {p.destaque && (
+          <span class="absolute -top-3.5 left-7 rounded-full bg-accent px-3 py-1.5 text-xs font-bold text-on-accent">
+            recomendado para escritórios
+          </span>
+        )}
+        <p class="font-mono text-[13px] text-accent">{p.rotulo}</p>
+        <h3 class="mt-[18px] mb-2 text-[26px] font-bold tracking-[-0.02em]">
+          {p.titulo}
+        </h3>
+        <p class="mb-6 text-[15px] leading-normal text-muted">{p.idealPara}</p>
+        <PrecoPlano plano={p.plano} />
+        <ul class="mt-6 mb-7 flex flex-col gap-[11px] text-[15px] leading-snug">
+          {p.inclui.map((i) => (
+            <li class="flex gap-3">
+              <span class="text-accent" aria-hidden="true">
+                ✓
+              </span>
+              {i}
+            </li>
+          ))}
+        </ul>
+        <WhatsAppButton
+          class="mt-auto rounded-full"
+          variant={p.destaque ? "primary" : "ghost"}
+          message={p.msg}
+          placement={`advogados-plano-${p.plano.id}`}
+          label={p.cta}
+        />
+      </li>
+    ))}
+
+    <li
+      data-reveal
+      class="relative flex flex-col rounded-[22px] border border-accent/14 bg-surface-2 px-7 py-8"
+    >
+      <p class="font-mono text-[13px] text-accent">03 · Blog de artigos</p>
+      <h3 class="mt-[18px] mb-2 text-[26px] font-bold tracking-[-0.02em]">
+        Autoridade com conteúdo
+      </h3>
+      <p class="mb-6 text-[15px] leading-normal text-muted">
+        Adicional mensal para o seu site. Artigos que respondem as dúvidas dos
+        clientes trazem visitas do Google mês após mês.
+      </p>
+      <ul class="mb-6 flex flex-col gap-3">
+        {blogAdvogado.planos.map((b) => (
+          <li class="rounded-[14px] border border-accent/16 px-[18px] py-4">
+            <p class="flex items-baseline justify-between gap-2.5">
+              <span class="font-bold">{b.nome}</span>
+              <span class="font-mono text-xl font-bold">
+                {brl(b.mensal)}
+                <span class="text-[13px] font-medium text-label">/mês</span>
+              </span>
+            </p>
+            <p class="mt-1.5 text-sm leading-normal text-muted">
+              {`${b.inclui.join(" · ")} · ${brl(b.anual)} no plano anual (cerca de ${brl(blogAnualPorMes(b))}/mês)`}
+            </p>
+          </li>
+        ))}
+      </ul>
+      <ul class="mb-7 flex flex-col gap-2.5 text-[14.5px] leading-snug">
+        {blogAdvogado.inclui.map((i) => (
+          <li class="flex gap-3">
+            <span class="text-accent" aria-hidden="true">
+              ✓
+            </span>
+            {i}
+          </li>
+        ))}
+      </ul>
+      <WhatsAppButton
+        class="mt-auto rounded-full"
+        variant="ghost"
+        message={blogAdvogado.msg}
+        placement="advogados-plano-blog"
+        label="Quero um blog no meu site"
+      />
+    </li>
+  </ul>
+  <p data-reveal class="mt-[26px] text-sm leading-relaxed text-subtle">
+    Não incluso: registro do domínio .com.br (cerca de R$ 40 por ano, no seu
+    nome) e fotos profissionais.
+  </p>
+</Section>

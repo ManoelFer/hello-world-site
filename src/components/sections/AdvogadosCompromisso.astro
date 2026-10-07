@@ -1,0 +1,38 @@
+---
+import Section from "@components/common/Section.astro"
+import SectionHeading from "@components/common/SectionHeading.astro"
+import { compromissos, passos } from "@data/advogados"
+---
+
+<Section id="como-funciona" border>
+  <SectionHeading
+    kicker="como funciona"
+    title="Você cuida dos processos. A gente cuida do site."
+  />
+  <ol class="grid border-t border-accent/14 sm:grid-cols-2 desk:grid-cols-4">
+    {passos.map((p, i) => (
+      <li data-reveal class="pt-[30px] pr-[26px] pb-2.5">
+        <span
+          class="mb-5 block font-mono text-[56px] leading-none font-extrabold text-transparent [-webkit-text-stroke:1.5px_var(--color-accent)]"
+          aria-hidden="true"
+        >
+          {String(i + 1).padStart(2, "0")}
+        </span>
+        <h3 class="mb-2.5 text-[21px] font-bold tracking-[-0.02em]">{p.t}</h3>
+        <p class="text-[15.5px] leading-relaxed text-muted">{p.d}</p>
+      </li>
+    ))}
+  </ol>
+  <ul class="mt-16 grid gap-[18px] sm:grid-cols-2 desk:grid-cols-4">
+    {compromissos.map((c) => (
+      <li
+        data-reveal
+        class="rounded-[20px] border border-accent/14 bg-surface-2 px-6 py-[26px]"
+      >
+        <p class="mb-3.5 font-mono text-[13px] text-accent">{c.k}</p>
+        <h3 class="mb-2 text-lg font-bold">{c.t}</h3>
+        <p class="text-[14.5px] leading-normal text-muted">{c.d}</p>
+      </li>
+    ))}
+  </ul>
+</Section>

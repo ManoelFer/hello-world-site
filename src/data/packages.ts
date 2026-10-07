@@ -41,7 +41,7 @@ export const packages: Package[] = [
       "Uma página focada em conversão",
       "Botão de WhatsApp e formulário de contato",
       "SEO básico para aparecer no Google",
-      "Hospedagem inclusa por 12 meses",
+      "Seu site configurado, publicado e pronto para receber visitantes",
     ],
     preco: 897,
     prazoDiasUteis: 5,
@@ -53,11 +53,11 @@ export const packages: Package[] = [
     idealPara:
       "Clínicas, escritórios e comércio local que precisam de presença completa.",
     inclui: [
-      "Até 6 páginas (serviços, sobre, contato...)",
+      "Até 10 páginas (serviços, sobre, contato...)",
       "SEO local para buscas da sua cidade",
       "Criação do Perfil da Empresa no Google",
       "Guia para o seu site aparecer melhor no Google (Search Console, Perfil da Empresa e sitemap)",
-      "Publicação do site no ar, na hospedagem que você contrata",
+      "Seu site configurado, publicado e pronto para receber visitantes",
       "30 dias de ajustes depois da entrega",
     ],
     preco: 1897,
@@ -71,7 +71,7 @@ export const packages: Package[] = [
     idealPara:
       "Quem quer o site pronto e já aparecer para quem está procurando o seu serviço agora.",
     inclui: [
-      "Tudo do Site Institucional (até 6 páginas, SEO local e Perfil da Empresa)",
+      "Tudo do Site Institucional (até 10 páginas, SEO local e Perfil da Empresa)",
       "Criação e configuração da conta do Google Ads",
       "Campanha inicial na rede de pesquisa, com palavras-chave da sua cidade",
       "Conversões e rastreamento configurados: cliques no WhatsApp, ligações e formulário",
@@ -153,18 +153,9 @@ export const comparativo: {
     item: "Páginas",
     valores: {
       landing: "1",
-      institucional: "Até 6",
-      ads: "Até 6",
+      institucional: "Até 10",
+      ads: "Até 10",
       loja: "Loja completa",
-    },
-  },
-  {
-    item: "Hospedagem",
-    valores: {
-      landing: "12 meses",
-      institucional: "Você contrata, nós publicamos",
-      ads: "Você contrata, nós publicamos",
-      loja: "Na plataforma da loja",
     },
   },
   {
@@ -238,7 +229,6 @@ export const naoIncluso: string[] = [
   "Textos longos, como artigos e descrições detalhadas de cada serviço (você envia ou contratamos à parte)",
   "Fotos profissionais (usamos as suas ou imagens de banco com licença)",
   "No Site + Google Ads: a verba dos anúncios, paga direto ao Google (você define o valor; o estúdio não fica com nada dela)",
-  "Hospedagem do Site Institucional e do Site + Google Ads: você contrata (existe opção gratuita, como a Cloudflare), nós publicamos e ensinamos",
   "Na Loja Virtual: mensalidade da plataforma, taxas de pagamento e de frete, produtos além de 30 e integração com sistema de gestão ou nota fiscal",
 ]
 
@@ -249,7 +239,7 @@ export const adicionais: { nome: string; valor: number; descricao: string }[] =
       nome: "Cuidado do site",
       valor: 49.9,
       descricao:
-        "Hospedagem depois do 1º ano (Landing Page), certificado de segurança (HTTPS), backup e 1 alteração por mês.",
+        "Certificado de segurança (HTTPS), backup e 1 alteração por mês.",
     },
     {
       nome: "Gestão de Google Ads",

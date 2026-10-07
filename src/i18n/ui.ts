@@ -33,6 +33,7 @@ const pt = {
       label: "Desenvolvimento de software sob medida",
       href: "/desenvolvimento-de-software/",
     },
+    { label: "Sites para advogados", href: "/sites-para-advogados/" },
   ],
   footerRights: "Todos os direitos reservados.",
   privacy: "Privacidade",

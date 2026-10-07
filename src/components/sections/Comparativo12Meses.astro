@@ -13,21 +13,18 @@ const linhas = [
     opcao: `Hello World · ${institucional.nome} (à vista ou ${parcelasSemJuros}x sem juros)`,
     custo: brl(institucional.preco),
     dono: "Sim, desde a entrega",
-    hospedagem: "Não: você contrata (há opção gratuita) e nós publicamos",
     nosso: true,
   },
   {
     opcao: "Site por assinatura comum no mercado (R$ 300 + R$ 129,90/mês)",
     custo: brl(300 + 129.9 * 12),
     dono: "Não: cancelou, perdeu o site",
-    hospedagem: "Sim",
     nosso: false,
   },
   {
     opcao: "Site profissional de freelancer (a partir de R$ 3.000)",
-    custo: `${brl(3000)} + hospedagem`,
+    custo: brl(3000),
     dono: "Sim",
-    hospedagem: "Não",
     nosso: false,
   },
 ]
@@ -48,7 +45,7 @@ const linhas = [
   >
     <table class="w-full min-w-[640px] border-collapse text-left text-[14.5px]">
       <caption class="sr-only">
-        Custo em 12 meses, propriedade do site e hospedagem em cada modelo
+        Custo em 12 meses, propriedade do site em cada modelo
       </caption>
       <thead>
         <tr class="bg-surface-2 font-mono text-xs text-label uppercase">
@@ -60,9 +57,6 @@ const linhas = [
           </th>
           <th scope="col" class="p-4 font-normal">
             O site é seu?
-          </th>
-          <th scope="col" class="p-4 font-normal">
-            Hospedagem inclusa?
           </th>
         </tr>
       </thead>
@@ -77,7 +71,6 @@ const linhas = [
             </th>
             <td class="p-4 font-mono">{l.custo}</td>
             <td class="p-4 text-soft">{l.dono}</td>
-            <td class="p-4 text-soft">{l.hospedagem}</td>
           </tr>
         ))}
       </tbody>

@@ -1,0 +1,55 @@
+---
+import AdvogadosCaso from "@components/sections/AdvogadosCaso.astro"
+import AdvogadosCompromisso from "@components/sections/AdvogadosCompromisso.astro"
+import AdvogadosHero from "@components/sections/AdvogadosHero.astro"
+import AdvogadosMotivos from "@components/sections/AdvogadosMotivos.astro"
+import AdvogadosPlanos from "@components/sections/AdvogadosPlanos.astro"
+import CtaFinal from "@components/sections/CtaFinal.astro"
+import Faq from "@components/sections/Faq.astro"
+import Sobre from "@components/sections/Sobre.astro"
+import { advogadosPath, faqAdvogados, opcoesContato } from "@data/advogados"
+import { garantiaDias, planoEntrada } from "@data/packages"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { brl } from "@lib/format"
+import { breadcrumbNode, serviceNode } from "@lib/seo"
+
+// Página só PT (sem par em routes.ts): mira "site para advogados". Destino dos anúncios para advogados.
+const title = "Site para Advogados e Escritórios de Advocacia | Hello World"
+const description = `Criação de site e landing page para advogados, com SEO por área de atuação e dentro das regras da OAB. A partir de ${brl(planoEntrada.preco)}, com garantia de ${garantiaDias} dias.`
+const waMessage =
+  "Olá! Sou advogado(a) e vim pela página de sites para advogados."
+---
+
+<BaseLayout
+  lang="pt"
+  title={title}
+  description={description}
+  waMessage={waMessage}
+  jsonLd={[
+    serviceNode({
+      path: advogadosPath,
+      name: "Criação de sites para advogados",
+      serviceType: "Criação de sites",
+      description,
+    }),
+    breadcrumbNode([
+      { name: "Início", path: "/" },
+      { name: "Sites para advogados", path: advogadosPath },
+    ]),
+  ]}
+>
+  <AdvogadosHero message={waMessage} />
+  <AdvogadosMotivos />
+  <AdvogadosCaso />
+  <AdvogadosPlanos />
+  <AdvogadosCompromisso />
+  <Sobre lang="pt" />
+  <Faq items={faqAdvogados} title="Perguntas de advogados antes de fechar" />
+  <CtaFinal
+    lang="pt"
+    title="Vamos colocar o seu escritório no Google?"
+    sub="Conte suas áreas de atuação. Respondemos pessoalmente, geralmente no mesmo dia, com o plano que faz sentido para você."
+    message={waMessage}
+    options={opcoesContato}
+  />
+</BaseLayout>

@@ -1,0 +1,80 @@
+---
+import { Image } from "astro:assets"
+
+import printEdith from "@assets/edith-santos-hero.webp"
+import ButtonLink from "@components/common/ButtonLink.astro"
+import Section from "@components/common/Section.astro"
+import { advogadosPath, casoEdith } from "@data/advogados"
+
+// Seção da home para o visitante advogado: leva para /sites-para-advogados/.
+const pontos = [
+  "Publicidade dentro do Provimento 205/2021 da OAB",
+  "SEO por área de atuação e pronto para Google Ads",
+  "Textos claros para o cliente leigo, com WhatsApp a um toque",
+]
+---
+
+<Section id="advogados" border innerClass="py-[72px] desk:py-[92px]">
+  <div
+    data-reveal
+    class="relative grid items-center gap-10 overflow-hidden rounded-[28px] border border-accent/25 bg-linear-150 from-[#0d1a15] to-[#060a09] to-60% px-5 py-8 desk:grid-cols-[1.1fr_1fr] desk:gap-14 desk:px-14 desk:py-14"
+  >
+    <div
+      class="line-grid pointer-events-none absolute inset-0 bg-size-[48px_48px] opacity-80"
+      aria-hidden="true"
+    ></div>
+    <div class="relative">
+      <p class="mb-3.5 font-mono text-[13px] text-accent">// é advogado?</p>
+      <h2 class="mb-5 text-[30px] leading-[1.04] font-bold tracking-[-0.035em] text-balance desk:text-[44px]">
+        Sites e landing pages para advogados e escritórios.
+      </h2>
+      <p class="mb-6 max-w-[48ch] text-[16.5px] leading-[1.65] text-soft">
+        Temos uma página só para você: o que muda num site de advocacia, um caso
+        real no ar e os planos que fazem sentido para o seu escritório.
+      </p>
+      <ul class="mb-8 flex flex-col gap-3 text-[15.5px] leading-snug">
+        {pontos.map((p) => (
+          <li class="flex gap-3">
+            <span class="text-accent" aria-hidden="true">
+              ✓
+            </span>
+            {p}
+          </li>
+        ))}
+      </ul>
+      <ButtonLink href={advogadosPath} size="lg" class="rounded-full">
+        Ver sites para advogados{" "}
+        <span class="font-mono" aria-hidden="true">
+          -&gt;
+        </span>
+      </ButtonLink>
+    </div>
+    <a
+      href={advogadosPath}
+      class="relative block overflow-hidden rounded-[18px] border border-accent/25 bg-surface-2 shadow-[0_40px_100px_-40px_rgb(0_0_0/.9)] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      aria-label={`Sites para advogados: veja o caso ${casoEdith.name}`}
+    >
+      <div
+        class="flex items-center gap-2 border-b border-line bg-[#0d1412] px-4 py-3"
+        aria-hidden="true"
+      >
+        <span class="size-2.5 rounded-full bg-danger"></span>
+        <span class="size-2.5 rounded-full bg-warn"></span>
+        <span class="size-2.5 rounded-full bg-accent"></span>
+        <span class="ml-2.5 flex-1 rounded-full bg-accent/7 px-3.5 py-[5px] font-mono text-xs text-label">
+          edithsantos.adv.br
+        </span>
+      </div>
+      <Image
+        src={printEdith}
+        alt=""
+        widths={[480, 960]}
+        sizes="(min-width: 801px) 45vw, 100vw"
+        class="aspect-16/10 w-full object-cover object-top"
+      />
+      <span class="block border-t border-line px-5 py-3.5 font-mono text-xs text-label">
+        Caso real · {casoEdith.name}
+      </span>
+    </a>
+  </div>
+</Section>
